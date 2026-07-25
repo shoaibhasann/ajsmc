@@ -1,0 +1,216 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-heading: var(--font-sora);
+  --font-body: var(--font-jakarta);
+
+  --color-navy: #0c2e6e;
+  --color-navy-deep: #07204f;
+  --color-navy-mid: #123f9e;
+  --color-navy-dark: #0a2657;
+  --color-blue: #2e6bd6;
+  --color-green: #17c46b;
+  --color-green-deep: #0fa958;
+  --color-green-bright: #34d058;
+  --color-ink: #0e1b2e;
+  --color-body: #4a5b72;
+  --color-muted: #5c6b82;
+  --color-faint: #8794a7;
+  --color-bg: #f4f9fd;
+  --color-surface: #f7fafd;
+  --color-soft-green: #eaf6ef;
+  --color-soft-blue: #eaf1fb;
+  --color-tile-blue: #ddeaf6;
+  --color-tile-green: #d7eee2;
+
+  --animate-aj-float: aj-float 6s ease-in-out infinite;
+  --animate-aj-scan: aj-scan 3.6s ease-in-out infinite;
+
+  @keyframes aj-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes aj-scan {
+    0%,
+    100% {
+      opacity: 0.35;
+    }
+    50% {
+      opacity: 0.85;
+    }
+  }
+}
+
+/*
+ * Brand gradient — sampled straight off the 3D organ artwork (heart/brain):
+ * white highlight #F9FDFD → green #5CBF7D → teal #2277A0 → blue #2278DA.
+ * Use `.aj-brand-gradient` for a solid fill, or `var(--aj-scrim-hero)` for the
+ * same ramp thinned out so it can sit over photography.
+ */
+:root {
+  --aj-white: #f9fdfd;
+  --aj-green: #5cbf7d;
+  --aj-teal: #2277a0;
+  --aj-blue: #2278da;
+
+  --aj-gradient-brand: linear-gradient(
+    135deg,
+    var(--aj-white) 0%,
+    #d9f0e4 26%,
+    var(--aj-green) 54%,
+    var(--aj-teal) 78%,
+    var(--aj-blue) 100%
+  );
+
+  /* Opacity ramps up left→right so the artwork stays visible while the copy sits
+     on enough white. Measured against the hero image: these stops hold the h1 at
+     ~9:1 and the paragraph at ~4.8:1 (AA). Lowering the first two stops further
+     drops body copy below 4.5:1 — check before tuning. */
+  --aj-scrim-hero: radial-gradient(
+      70% 60% at 88% 18%,
+      rgba(92, 191, 125, 0.2) 0%,
+      rgba(92, 191, 125, 0) 60%
+    ),
+    radial-gradient(80% 80% at 6% 88%, rgba(34, 120, 218, 0.14) 0%, rgba(34, 120, 218, 0) 58%),
+    linear-gradient(
+      100deg,
+      rgba(249, 253, 253, 0.74) 0%,
+      rgba(246, 252, 250, 0.66) 34%,
+      rgba(217, 240, 228, 0.4) 60%,
+      rgba(92, 191, 125, 0.14) 78%,
+      rgba(34, 120, 218, 0.16) 100%
+    );
+}
+
+.aj-brand-gradient {
+  background-image: var(--aj-gradient-brand);
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Anchor jumps (#appointment, #specialties) must clear the fixed navbar pill. */
+  scroll-padding-top: 104px;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: var(--color-green);
+  color: #fff;
+}
+
+/*
+ * Wave-fill CTA. A skewed panel sweeps up from the bottom on hover/focus and the
+ * colours cross-fade with it — the label is never swapped out, so the button
+ * reads identically before, during and after the sweep.
+ *
+ * Children must be elements (wrap bare label text in a <span>): the sweep is an
+ * absolutely positioned ::after, so unwrapped text nodes would paint underneath it.
+ */
+.aj-cta-wave {
+  position: relative;
+  overflow: hidden;
+}
+
+.aj-cta-wave::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -50%;
+  width: 100%;
+  height: 100%;
+  background: var(--color-green-bright);
+  transform: skewY(9.3deg) scaleY(0);
+  transform-origin: bottom center;
+  transition: transform 600ms cubic-bezier(0.48, 0, 0.12, 1);
+}
+
+.aj-cta-wave:hover::after,
+.aj-cta-wave:focus-visible::after {
+  transform: skewY(9.3deg) scaleY(2);
+}
+
+.aj-cta-wave > * {
+  position: relative;
+  z-index: 1;
+  transition: color 600ms cubic-bezier(0.48, 0, 0.12, 1);
+}
+
+.aj-cta-wave:hover,
+.aj-cta-wave:focus-visible {
+  color: #083b20;
+}
+
+/* The trailing icon disc has to invert too, or it dissolves into the sweep. */
+.aj-cta-dot {
+  transition:
+    background-color 600ms cubic-bezier(0.48, 0, 0.12, 1),
+    color 600ms cubic-bezier(0.48, 0, 0.12, 1);
+}
+
+.aj-cta-wave:hover .aj-cta-dot,
+.aj-cta-wave:focus-visible .aj-cta-dot {
+  background-color: var(--color-navy);
+  color: #fff;
+}
+
+/* Light-on-dark CTAs (white pill on the navy band) sweep the other way. */
+.aj-cta-wave-invert::after {
+  background: var(--color-navy);
+}
+
+.aj-cta-wave-invert:hover,
+.aj-cta-wave-invert:focus-visible {
+  color: #fff;
+}
+
+.aj-cta-wave-invert:hover .aj-cta-dot,
+.aj-cta-wave-invert:focus-visible .aj-cta-dot {
+  background-color: var(--color-green-bright);
+  color: #083b20;
+}
+
+/* Keep the colour change, drop the motion. */
+@media (prefers-reduced-motion: reduce) {
+  .aj-cta-wave::after,
+  .aj-cta-wave > *,
+  .aj-cta-dot {
+    transition-duration: 1ms;
+  }
+}
+
+.aj-input {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid rgba(12, 46, 110, 0.16);
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-ink);
+  background: var(--color-surface);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.aj-input:focus {
+  border-color: var(--color-navy);
+  box-shadow: 0 0 0 3px rgba(12, 46, 110, 0.12);
+}
