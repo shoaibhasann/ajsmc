@@ -100,6 +100,17 @@ html {
 body {
   background: var(--color-bg);
   color: var(--color-ink);
+  /*
+   * `clip`, not `hidden`: hidden would turn the body into a scroll container,
+   * which kills the `scroll-behavior`/`scroll-padding-top` above and any sticky
+   * descendant. Clip just trims the overhang.
+   *
+   * Entrance animations start their subjects a few dozen px to the side, and a
+   * decorative blob or two sits past the right edge by design. Without this the
+   * overhang is real scrollable width: the phone shows a horizontal scrollbar
+   * for the length of every reveal and the page rubber-bands sideways.
+   */
+  overflow-x: clip;
 }
 
 h1,
@@ -115,6 +126,54 @@ h6 {
 ::selection {
   background: var(--color-green);
   color: #fff;
+}
+
+/*
+ * Hero copy entrance. CSS rather than a motion component because the direction has
+ * to change at `lg` and framer reads `initial` once, at mount — a breakpoint flag
+ * from an effect lands after that snapshot and would never apply on first load.
+ *
+ * Stacked, the copy is the full width of the screen, so it rises; from lg it is one
+ * of two columns with room beside it, so it slides in from the edge. Timing mirrors
+ * `heroTransition.leftColumn`, which still drives the artwork column.
+ */
+@keyframes aj-hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes aj-hero-slide {
+  from {
+    opacity: 0;
+    transform: translateX(-56px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.aj-hero-copy {
+  animation: aj-hero-rise 1.1s cubic-bezier(0.33, 1, 0.68, 1) 0.15s both;
+}
+
+@media (min-width: 1024px) {
+  .aj-hero-copy {
+    animation-name: aj-hero-slide;
+  }
+}
+
+/* MotionConfig covers the motion components; this one needs its own opt-out. */
+@media (prefers-reduced-motion: reduce) {
+  .aj-hero-copy {
+    animation: none;
+  }
 }
 
 /*

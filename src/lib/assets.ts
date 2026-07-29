@@ -155,10 +155,12 @@ export const assets = {
     width: 1122,
     height: 1402,
   },
-  doctorPortrait: {
-    // Background-free cutout — sits inside the hero's glass pill.
-    src: `${CLOUDINARY}/v1784895754/ajsmc/assets/gwibzmi5ia4zwon7aauu.png`,
-    alt: "AJSMC doctor in scrubs with a stethoscope",
+  heroDoctor: {
+    // Background-free cutout, so it sits straight on the hero gradient with no frame
+    // of its own. Exactly 3:4 (1086x1448) — the hero wrapper mirrors that ratio, so
+    // the portrait fills its box with nothing letterboxed and nothing cropped.
+    src: `${CLOUDINARY}/v1785248695/ajsmc/assets/k8rnvs79erjx22txim8v.png`,
+    alt: "AJSMC doctor in a white coat with a stethoscope",
     width: 1086,
     height: 1448,
   },

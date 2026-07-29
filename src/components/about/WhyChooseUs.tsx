@@ -25,7 +25,7 @@ export function WhyChooseUs() {
           Why families choose us
         </h2>
         <p className="mb-6.5 mt-4.5 max-w-[420px] font-body text-[15px] leading-[1.7] text-body">
-          Everything you need for your family&apos;s health &mdash; expert doctors, modern
+          What a family needs in a year, in one place: experienced doctors, modern
           facilities and fair pricing, close to home.
         </p>
         <Link

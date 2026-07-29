@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { FacebookIcon, InstagramIcon, XIcon } from "@/components/icons/SocialIcons";
+import { FacebookIcon, InstagramIcon } from "@/components/icons/SocialIcons";
 import { assets } from "@/lib/assets";
 import { siteConfig } from "@/lib/site";
 
@@ -47,7 +47,7 @@ export function Footer() {
             </span>
           </div>
           <p className="mb-5 max-w-[300px] font-body text-sm leading-relaxed text-white/65">
-            AJ Subaitha Medical Centre &mdash; trusted multi-specialty care in Egmore, Chennai. Every
+            A multi speciality hospital on Police Commissioner Office Road, Egmore, Chennai. Every
             specialist, one roof, affordable for all.
           </p>
           <div className="flex gap-2.5">
@@ -64,13 +64,6 @@ export function Footer() {
               className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-white/[0.08] text-white transition-colors hover:bg-green"
             >
               <InstagramIcon className="h-[17px] w-[17px]" />
-            </a>
-            <a
-              href={siteConfig.social.twitter}
-              aria-label="AJSMC on X"
-              className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-white/[0.08] text-white transition-colors hover:bg-green"
-            >
-              <XIcon className="h-[17px] w-[17px]" />
             </a>
           </div>
         </div>
@@ -119,7 +112,7 @@ export function Footer() {
             </span>
             <span className="flex items-center gap-2.5">
               <Clock className="h-[17px] w-[17px] shrink-0 text-green-bright" strokeWidth={2} />
-              {siteConfig.hoursShort} &middot; 24hr Emergency
+              {siteConfig.hoursShort} &middot; {siteConfig.roundTheClock}
             </span>
           </div>
         </div>

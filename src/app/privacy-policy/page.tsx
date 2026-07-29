@@ -23,9 +23,9 @@ export default function PrivacyPolicyPage() {
         <section>
           <h2 className="mb-2 font-heading text-xl font-bold text-navy">Information we collect</h2>
           <p>
-            When you use our appointment or contact forms, we collect the details you provide &mdash;
+            When you use our appointment or contact forms, we collect the details you provide,
             such as your name, phone number, email address and the department or message you
-            enter &mdash; solely to respond to your enquiry and schedule your visit.
+            enter, solely to respond to your enquiry and schedule your visit.
           </p>
         </section>
         <section>

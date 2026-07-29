@@ -10,8 +10,8 @@ import { breadcrumbSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Reach Us",
-  description: `Contact ${siteConfig.fullName} in Egmore, Chennai. Call ${siteConfig.phone}, WhatsApp ${siteConfig.mobile}, or book an appointment online. Open Mon–Sat, 10am–9pm, with 24-hour emergency care.`,
+  title: "Contact Us in Egmore, Chennai",
+  description: `AJSMC is at No.47 (31), Police Commissioner Office Road, Egmore, Chennai 600008. Call ${siteConfig.phone}, WhatsApp us, or book online. Consultations Monday to Saturday, 10am to 9pm.`,
   alternates: { canonical: "/contact" },
 };
 
@@ -27,8 +27,8 @@ export default function ContactPage() {
       <PageHero
         crumb="Reach Us"
         badge="WE'RE HERE TO HELP"
-        title="Get in touch with AJSMC"
-        description="Questions, appointments or emergencies — reach us by phone, WhatsApp or the form below. We're open six days a week, with 24-hour emergency care."
+        title="Reach AJSMC in Egmore, Chennai"
+        description="We are on Police Commissioner Office Road, a short walk from Egmore station. Call, WhatsApp or use the form below to book. Consultations run Monday to Saturday, 10am to 9pm, and our helpline answers around the clock."
         image={assets.aboutHeroBg}
         decoration={assets.contactHeroDecor}
         decorationClassName="!w-[150px] !bottom-5 lg:!w-[200px] lg:!bottom-8"

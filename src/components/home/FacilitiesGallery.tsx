@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionBadge } from "@/components/ui/SectionBadge";
 import { assets, type AssetKey } from "@/lib/assets";
 import { AJ_EASE } from "@/lib/motion";
+import { useIsCompact } from "@/lib/useIsCompact";
 
 // One big feature tile (Reception) + eight equal tiles. In a 4-column grid the
 // feature is 2x2 and the other eight are 1x1, so it tiles to an exact 4x3 block
@@ -26,6 +27,8 @@ const tiles: { name: string; asset: AssetKey; feature?: boolean; from: "left" | 
 ];
 
 export function FacilitiesGallery() {
+  const compact = useIsCompact();
+
   return (
     <Container as="section" id="facilities" className="py-16 pt-8">
       <div className="mb-9 flex flex-wrap items-end justify-between gap-6">
@@ -36,8 +39,8 @@ export function FacilitiesGallery() {
           </h2>
         </div>
         <p className="max-w-[360px] font-body text-[15px] leading-relaxed text-muted">
-          Modern, clean and comfortable spaces &mdash; consultation rooms, private wards,
-          imaging and cardiac diagnostics, all under one roof.
+          Consultation rooms, private wards, X-ray, ultrasound and cardiac testing, all in
+          the same building on Police Commissioner Office Road.
         </p>
       </div>
 
@@ -47,9 +50,15 @@ export function FacilitiesGallery() {
           return (
             <motion.div
               key={tile.asset}
-              initial={{ opacity: 0, x: tile.from === "left" ? -56 : 56 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
+              // `from` only means anything once the tiles sit in four columns; in the
+              // 2-column phone layout both halves would swing across the full width.
+              initial={
+                compact
+                  ? { opacity: 0, y: 20 }
+                  : { opacity: 0, x: tile.from === "left" ? -56 : 56 }
+              }
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.7, ease: AJ_EASE, delay: Math.min(i, 6) * 0.07 }}
               className={`group relative overflow-hidden rounded-[20px] bg-tile-blue shadow-[0_20px_40px_-30px_rgba(12,46,110,0.6)] ${
                 tile.feature ? "col-span-2 row-span-2" : ""

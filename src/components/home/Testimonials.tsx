@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Quote, Star } from "lucide-react";
+import { ArrowUpRight, Quote, Star } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionBadge } from "@/components/ui/SectionBadge";
 import { AJ_EASE } from "@/lib/motion";
@@ -17,14 +17,20 @@ export function Testimonials() {
             What our patients say
           </h2>
         </div>
-        <div className="flex items-center gap-3.5">
-          <div className="flex items-center gap-0.5 text-[#FFB020]">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} className="h-5 w-5" fill="currentColor" strokeWidth={0} />
-            ))}
-          </div>
-          <span className="font-heading text-lg font-extrabold text-navy">{siteConfig.rating.value} / 5</span>
-        </div>
+        {/* Points at the Google listing rather than printing a score. A star rating a
+            business writes about itself is unverifiable, and the number that used to sit
+            here did not match any listing AJSMC actually has. */}
+        <a
+          href={siteConfig.mapsHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2.5 font-body text-[15px] font-bold text-navy"
+        >
+          Read our reviews on Google
+          <span className="flex h-[34px] w-[34px] items-center justify-center rounded-full bg-navy text-white">
+            <ArrowUpRight className="h-[15px] w-[15px]" strokeWidth={2.6} />
+          </span>
+        </a>
       </div>
 
       <div className="grid grid-cols-1 gap-5.5 sm:grid-cols-2 lg:grid-cols-3">

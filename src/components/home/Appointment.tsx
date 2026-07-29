@@ -9,9 +9,11 @@ import { SectionBadge } from "@/components/ui/SectionBadge";
 import { assets } from "@/lib/assets";
 import { AJ_EASE } from "@/lib/motion";
 import { departments, siteConfig } from "@/lib/site";
+import { useIsCompact } from "@/lib/useIsCompact";
 
 export function Appointment() {
   const [sent, setSent] = useState(false);
+  const compact = useIsCompact();
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -22,9 +24,9 @@ export function Appointment() {
     <Container as="section" id="appointment" className="py-16 pb-[76px] pt-8">
       <div className="grid grid-cols-1 items-stretch gap-6.5 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
         <motion.div
-          initial={{ opacity: 0, x: -48 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
+          initial={compact ? { opacity: 0, y: 24 } : { opacity: 0, x: -48 }}
+          whileInView={{ opacity: 1, x: 0, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.75, ease: AJ_EASE }}
           className="relative overflow-hidden rounded-[26px] bg-navy-dark p-8 text-white sm:p-9"
         >
@@ -53,17 +55,17 @@ export function Appointment() {
           <div className="mt-6.5 flex items-center gap-3 rounded-2xl border border-green-bright/30 bg-[#0a2657]/40 px-[18px] py-4 backdrop-blur-[2px]">
             <span className="h-[9px] w-[9px] shrink-0 rounded-full bg-green-bright shadow-[0_0_0_4px_rgba(52,208,88,0.25)]" />
             <span className="font-body text-[13px] font-semibold leading-snug text-white">
-              Open Mon&ndash;Sat 10am&ndash;9pm &middot;{" "}
-              <span className="text-green-bright">24-hour emergency service</span>
+              Consultations Mon to Sat, 10am to 9pm &middot;{" "}
+              <span className="text-green-bright">helpline open 24 hours</span>
             </span>
           </div>
           </div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, x: 48 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
+          initial={compact ? { opacity: 0, y: 24 } : { opacity: 0, x: 48 }}
+          whileInView={{ opacity: 1, x: 0, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.75, ease: AJ_EASE, delay: 0.12 }}
           className="rounded-[26px] border border-navy/[0.08] bg-white p-8 shadow-[0_30px_60px_-40px_rgba(12,46,110,0.5)] sm:p-9"
         >
@@ -72,8 +74,8 @@ export function Appointment() {
             Request an Appointment
           </h2>
           <p className="mb-6.5 max-w-[460px] font-body text-[15px] leading-relaxed text-muted">
-            Affordable specialist care with no heavy charges. Tell us when, and our team will
-            confirm your slot.
+            Tell us the department and a time that suits you. Our team will call back to
+            confirm the slot, and you will know the consultation fee before you arrive.
           </p>
 
           {sent ? (

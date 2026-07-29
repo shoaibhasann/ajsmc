@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { BookCta } from "@/components/ui/BookCta";
 import { Container } from "@/components/ui/Container";
 import { DoctorCard } from "@/components/ui/DoctorCard";
-import { doctorSpecialtyFilters, doctors } from "@/lib/site";
+import { doctorSpecialtyFilters, listedDoctors } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export function DoctorsClient() {
@@ -16,12 +16,13 @@ export function DoctorsClient() {
     return defs
       .map((label) => ({
         label,
-        count: label === "All" ? doctors.length : doctors.filter((d) => d.specialty === label).length,
+        count:
+          label === "All" ? listedDoctors.length : listedDoctors.filter((d) => d.specialty === label).length,
       }))
       .filter((c) => c.count > 0 || c.label === "All");
   }, []);
 
-  const filtered = filter === "All" ? doctors : doctors.filter((d) => d.specialty === filter);
+  const filtered = filter === "All" ? listedDoctors : listedDoctors.filter((d) => d.specialty === filter);
 
   return (
     <Container as="section" className="py-16 pt-8">

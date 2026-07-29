@@ -1,4 +1,4 @@
-import { doctors, faqs, siteConfig, specialties } from "@/lib/site";
+import { faqs, listedDoctors, siteConfig, specialties } from "@/lib/site";
 
 export function organizationSchema() {
   return {
@@ -38,11 +38,11 @@ export function organizationSchema() {
     ],
     hasMap: siteConfig.mapsHref,
     sameAs: Object.values(siteConfig.social),
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: siteConfig.rating.value,
-      reviewCount: siteConfig.rating.count,
-    },
+    // No aggregateRating. Review markup has to be backed by reviews actually shown on
+    // this site, and self-serving ratings a business types about itself are against
+    // Google's review-snippet policy — the penalty for getting caught is a manual
+    // action on the whole domain, not just a lost star rating. If AJSMC wants stars in
+    // search, the route is a verified Google Business Profile, not this field.
     priceRange: "$$",
   };
 }
@@ -75,11 +75,16 @@ export function breadcrumbSchema(items: { name: string; path: string }[]) {
   };
 }
 
+/**
+ * Mirrors the /doctors page. Structured data is meant to describe what the page
+ * actually shows, so this reads the listed set rather than the full roster — marking
+ * up 28 physicians on a page that renders 17 is the kind of mismatch Google flags.
+ */
 export function physiciansSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    itemListElement: doctors.map((doc, i) => ({
+    itemListElement: listedDoctors.map((doc, i) => ({
       "@type": "ListItem",
       position: i + 1,
       item: {
