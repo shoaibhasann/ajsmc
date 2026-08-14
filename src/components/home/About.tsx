@@ -7,7 +7,7 @@ import { AJ_EASE } from "@/lib/motion";
 import { Container } from "@/components/ui/Container";
 import { SectionBadge } from "@/components/ui/SectionBadge";
 import { assets } from "@/lib/assets";
-import { aboutHighlights, siteConfig } from "@/lib/site";
+import { aboutHighlights, listedDoctors, siteConfig, specialties } from "@/lib/site";
 import { useIsCompact } from "@/lib/useIsCompact";
 
 export function About() {
@@ -77,8 +77,9 @@ export function About() {
         </h2>
         <p className="mt-5 max-w-[500px] font-body text-base leading-relaxed text-body">
           AJ Subaitha Medical Centre sits on Police Commissioner Office Road, minutes from
-          Egmore station. Seventeen consultants practise here across twelve departments,
-          alongside a day-care theatre, a sleep lab and our own laboratory. You see{" "}
+          Egmore station. {listedDoctors.length} consultants practise here across{" "}
+          {specialties.length} departments, alongside a day-care theatre, a sleep lab and our
+          own laboratory. You see{" "}
           <strong className="text-navy">every specialist under one roof</strong>, and you are
           told <strong className="text-navy">what it costs before it starts</strong>.
         </p>

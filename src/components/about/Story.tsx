@@ -43,8 +43,9 @@ export function Story() {
         <p className="mt-4.5 font-body text-[15px] leading-[1.75] text-body">
           AJ Subaitha Medical Centre was built around a simple idea: a family should not have
           to travel across Chennai, or pay heavily, to see a good specialist. So we put them
-          in one building. Today 17 consultants practise here across 12 departments, on
-          Police Commissioner Office Road in the heart of Egmore.
+          in one building. Today {listedDoctors.length} consultants practise here across{" "}
+          {specialties.length} departments, on Police Commissioner Office Road in the heart
+          of Egmore.
         </p>
         <p className="mt-3.5 font-body text-[15px] leading-[1.75] text-body">
           That covers most of what a family needs in a year. Everyday consultations and

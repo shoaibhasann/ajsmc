@@ -22,10 +22,12 @@ export default function HomePage() {
       <Specialties />
       <FacilitiesGallery />
       {/*
-        <Testimonials /> is pulled from the homepage, for two independent reasons.
+        There is no testimonials section here, for two independent reasons.
 
         The quotes were never real. Three invented patients with invented names were
-        being presented to people choosing where to take a sick relative.
+        being presented to people choosing where to take a sick relative. The component
+        and its data have now been deleted outright rather than left commented out, so
+        the invented version cannot be restored by uncommenting a line.
 
         And patient testimonials are not permitted to us in the first place. The Indian
         Medical Council (Professional Conduct, Etiquette and Ethics) Regulations 2002,
@@ -36,11 +38,14 @@ export default function HomePage() {
         rising to ₹50 lakh on repeat, and ASCI has already recorded ~190 upheld
         complaints against clinics and hospitals on exactly this ground.
 
-        The component and its data are left in the tree so this is one line to undo, but
-        real quotes would not make it lawful. What IS permitted, and is worth building
-        in its place, is a fee-transparency section: reg. 7.12 expressly allows a
-        hospital to publish "the fees", and cost queries are among the least served and
-        most cited in search.
+        So real quotes would not make an on-site testimonials section lawful either. The
+        route to visible social proof is the Google Business Profile, where reviews are
+        the patients' own and attributable — the Testimonials heading already linked
+        there instead of printing a self-reported score.
+
+        A fee-transparency section would be the other permitted trust signal under
+        reg. 7.12, but the client has asked that no fees or charges be published on this
+        site. Do not add one without that decision being reversed in writing.
       */}
       <Faq />
       <Appointment />

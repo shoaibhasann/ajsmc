@@ -1,4 +1,5 @@
-import { faqs, listedDoctors, siteConfig, specialties } from "@/lib/site";
+import { getReviewer, type BlogPost } from "@/lib/blog";
+import { faqs, listedDoctors, siteConfig, specialties, type Doctor } from "@/lib/site";
 
 export function organizationSchema() {
   return {
@@ -97,6 +98,131 @@ export function physiciansSchema() {
           name: siteConfig.fullName,
         },
       },
+    })),
+  };
+}
+
+/**
+ * A single consultant's page. The registration number is the part that matters: it is the
+ * one credential a reader (or a quality rater doing reputation research) can independently
+ * verify against the Tamil Nadu Medical Council register, so it goes in the markup and on
+ * the page itself rather than only in prose.
+ */
+export function physicianSchema(doctor: Doctor) {
+  const url = `${siteConfig.url}/doctors/${doctor.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Physician",
+    "@id": url,
+    url,
+    name: doctor.name,
+    medicalSpecialty: doctor.specialty,
+    jobTitle: doctor.role,
+    ...(doctor.degree && { hasCredential: doctor.degree }),
+    ...(doctor.reg && { identifier: doctor.reg }),
+    ...(doctor.image && { image: doctor.image }),
+    worksFor: { "@id": `${siteConfig.url}/#organization` },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: siteConfig.address.line1,
+      addressLocality: siteConfig.address.locality,
+      addressRegion: siteConfig.address.region,
+      postalCode: siteConfig.address.postalCode,
+      addressCountry: siteConfig.address.country,
+    },
+    telephone: siteConfig.phone,
+  };
+}
+
+/**
+ * Health articles are YMYL, so the markup leads with who stands behind the advice:
+ * `MedicalWebPage` with a named, credentialed `reviewedBy` physician and an explicit
+ * `lastReviewed` date. That pairing is what search and the AI engines look for to treat
+ * medical content as trustworthy — an article with no attributable reviewer reads as
+ * anonymous regardless of how good the prose is.
+ */
+export function articleSchema(post: BlogPost) {
+  const reviewer = getReviewer(post);
+  const url = `${siteConfig.url}/blog/${post.slug}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    "@id": url,
+    url,
+    name: post.title,
+    headline: post.title,
+    description: post.keyTakeaway ?? post.description,
+    inLanguage: "en-IN",
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt ?? post.publishedAt,
+    ...(reviewer && {
+      lastReviewed: post.updatedAt ?? post.publishedAt,
+      reviewedBy: {
+        "@type": "Physician",
+        name: reviewer.name,
+        medicalSpecialty: reviewer.specialty,
+        jobTitle: reviewer.role,
+        ...(reviewer.degree && { hasCredential: reviewer.degree }),
+        worksFor: { "@type": "Hospital", name: siteConfig.fullName },
+      },
+    }),
+    author: {
+      "@type": "Organization",
+      name: siteConfig.fullName,
+      url: siteConfig.url,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.fullName,
+      url: siteConfig.url,
+    },
+    about: { "@id": `${siteConfig.url}/#organization` },
+    isPartOf: { "@id": `${siteConfig.url}/#organization` },
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+        { "@type": "ListItem", position: 2, name: "Health Library", item: `${siteConfig.url}/blog` },
+        { "@type": "ListItem", position: 3, name: post.title, item: url },
+      ],
+    },
+  };
+}
+
+/** The /blog index — lets crawlers read the library as one collection. */
+export function blogListingSchema(posts: BlogPost[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${siteConfig.url}/blog`,
+    url: `${siteConfig.url}/blog`,
+    name: `Health Library | ${siteConfig.fullName}`,
+    inLanguage: "en-IN",
+    isPartOf: { "@id": `${siteConfig.url}/#organization` },
+    hasPart: posts.map((post) => ({
+      "@type": "MedicalWebPage",
+      "@id": `${siteConfig.url}/blog/${post.slug}`,
+      url: `${siteConfig.url}/blog/${post.slug}`,
+      name: post.title,
+      description: post.description,
+      datePublished: post.publishedAt,
+    })),
+  };
+}
+
+/**
+ * Q&A blocks inside an article. Kept separate from the site-wide FAQ schema so an
+ * article marks up only its own questions.
+ */
+export function articleFaqSchema(items: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
     })),
   };
 }

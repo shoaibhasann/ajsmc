@@ -137,9 +137,10 @@ export function Footer() {
                 href="https://zyntec.in"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Zyntec — visit zyntec.in (opens in a new tab)"
                 className="font-semibold text-white/70 transition-colors hover:text-green-bright"
               >
-                zyntec.in
+                Zyntec
               </a>
             </span>
           </div>

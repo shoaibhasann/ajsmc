@@ -6,7 +6,7 @@ import { ArrowUpRight, ChevronRight, Sparkles, Stethoscope } from "lucide-react"
 import { Container } from "@/components/ui/Container";
 import { assets } from "@/lib/assets";
 import { heroTransition } from "@/lib/motion";
-import { listedDoctors, siteConfig } from "@/lib/site";
+import { listedDoctors, siteConfig, specialties } from "@/lib/site";
 
 export function Hero() {
   return (
@@ -173,7 +173,7 @@ export function Hero() {
             <strong className="font-bold text-navy">
               {listedDoctors.length} specialist doctors
             </strong>
-            {" across 12 departments in "}
+            {` across ${specialties.length} departments in `}
             {siteConfig.address.locality}, {siteConfig.address.city}. Consultations, day-care
             surgery, sleep studies and lab tests in one building.{" "}
             <strong className="font-bold text-navy">Every price quoted upfront.</strong>
