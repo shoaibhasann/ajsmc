@@ -95,6 +95,22 @@ html {
   scroll-behavior: smooth;
   /* Anchor jumps (#appointment, #specialties) must clear the fixed navbar pill. */
   scroll-padding-top: 104px;
+  /*
+   * The same clip as on body, and it has to be on both.
+   *
+   * body{overflow-x:clip} trims what you SEE, but the layout viewport is derived
+   * from the root element. If anything overhangs the root even briefly — a reveal
+   * animation mid-flight, a decorative blob, a font swapping in wider — a mobile
+   * browser widens the layout viewport to fit it. `position: fixed` sizes against
+   * that layout viewport, not against the visible one, so the navbar renders wider
+   * than the screen and a right-anchored button lands off-screen. Both correct
+   * themselves on the next scroll, when the browser recomputes — which is exactly
+   * how the bug presents: broken until you scroll, fine afterwards.
+   *
+   * `clip` rather than `hidden` for the same reason as on body: hidden would make
+   * the root a scroll container and kill scroll-behavior and scroll-padding-top.
+   */
+  overflow-x: clip;
 }
 
 body {
