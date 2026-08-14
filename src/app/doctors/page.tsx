@@ -7,7 +7,7 @@ import { assets } from "@/lib/assets";
 import { breadcrumbSchema, physiciansSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Our Doctors in Egmore, Chennai",
+  title: "Our Doctors in Chennai",
   description: "Meet the specialist consultants at AJ Subaitha Medical Centre, Egmore, Chennai. Ophthalmology, Orthopedics, Pediatrics, Gynaecology, Diabetology, Dermatology, Urology and more, with qualifications and TNMC registration listed.",
   alternates: { canonical: "/doctors" },
 };

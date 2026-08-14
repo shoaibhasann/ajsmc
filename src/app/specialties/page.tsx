@@ -8,8 +8,8 @@ import { assets } from "@/lib/assets";
 import { listedDoctors, specialties } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Specialities and Departments",
-  description: "The 12 departments at AJSMC Egmore, Chennai: General Medicine, General Surgery, Ophthalmology, Dermatology, Pediatrics, Orthopedics, Urology, Obstetrics and Gynaecology, Diabetology, Reproductive Medicine, Psychology and Pathology.",
+  title: "Specialities and Departments in Chennai",
+  description: `The ${specialties.length} departments at AJSMC Egmore, Chennai: General Medicine, General Surgery, Ophthalmology, Dermatology, Pediatrics, Orthopedics, Urology, Obstetrics and Gynaecology, Diabetology, Reproductive Medicine, Psychology and Pathology.`,
   alternates: { canonical: "/specialties" },
 };
 
@@ -25,7 +25,7 @@ export default function SpecialtiesPage() {
       <PageHero
         crumb="Specialties"
         badge="CARE FOR EVERY PART OF YOU"
-        title="12 departments, one building in Egmore"
+        title={`${specialties.length} departments, one building in Egmore`}
         description={`${specialties.length} departments and ${listedDoctors.length} consultants, covering everyday illness through to day-care surgery. Costs are quoted before treatment starts.`}
         image={assets.aboutHeroBg}
         decoration={assets.specialtiesHeroDecor}

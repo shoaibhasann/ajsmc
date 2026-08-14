@@ -10,7 +10,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact Us in Egmore, Chennai",
+  title: "Contact Us in Chennai",
   description: `AJSMC is at No.47 (31), Police Commissioner Office Road, Egmore, Chennai 600008. Call ${siteConfig.phone}, WhatsApp us, or book online. Consultations Monday to Saturday, 10am to 9pm.`,
   alternates: { canonical: "/contact" },
 };

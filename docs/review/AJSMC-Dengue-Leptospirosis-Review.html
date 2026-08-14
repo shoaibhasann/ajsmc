@@ -1,0 +1,618 @@
+<title>Dengue and Leptospirosis Drafts</title>
+<style>
+  :root {
+    --paper:#F6F8FB; --card:#FFFFFF; --sunk:#EFF4FA;
+    --ink:#101C2E; --muted:#55657C; --faint:#8695AA;
+    --line:rgba(12,46,110,.14); --line-soft:rgba(12,46,110,.07);
+    --navy:#0C2E6E; --green:#0B8F4A; --amber:#8A6414; --amber-bg:#FBF2DE;
+    --shadow:0 1px 2px rgba(12,46,110,.05), 0 16px 34px -26px rgba(12,46,110,.5);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0B1523; --card:#111F31; --sunk:#0E1A2A;
+      --ink:#E9EFF7; --muted:#A3B3C8; --faint:#7C8DA5;
+      --line:rgba(190,214,245,.16); --line-soft:rgba(190,214,245,.08);
+      --navy:#9EBEF0; --green:#48CB81; --amber:#DCA94C; --amber-bg:#2C2415;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 34px -26px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0B1523; --card:#111F31; --sunk:#0E1A2A;
+    --ink:#E9EFF7; --muted:#A3B3C8; --faint:#7C8DA5;
+    --line:rgba(190,214,245,.16); --line-soft:rgba(190,214,245,.08);
+    --navy:#9EBEF0; --green:#48CB81; --amber:#DCA94C; --amber-bg:#2C2415;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 34px -26px rgba(0,0,0,.8);
+  }
+
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size:16px; line-height:1.62; -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:820px; margin:0 auto; padding:48px 22px 96px; display:flex; flex-direction:column; gap:44px; }
+  h1,h2,h3 { margin:0; letter-spacing:-.02em; text-wrap:balance; }
+  h1 { font-size:clamp(28px,4.6vw,38px); line-height:1.1; font-weight:800; color:var(--navy); }
+  p { margin:0; }
+  .eyebrow { font-size:11.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--green); }
+
+  header { display:flex; flex-direction:column; gap:14px; }
+  .stand { font-size:17px; color:var(--muted); }
+  .meta { display:flex; flex-wrap:wrap; gap:6px 18px; padding-top:14px; border-top:1px solid var(--line); font-size:13px; color:var(--faint); }
+  .meta b { color:var(--muted); font-weight:650; }
+
+  .notice {
+    background:var(--amber-bg); border:1px solid var(--line);
+    border-left:3px solid var(--amber); border-radius:4px 12px 12px 4px;
+    padding:18px 22px; display:flex; flex-direction:column; gap:9px;
+  }
+  .notice h2 { font-size:17px; color:var(--amber); }
+  .notice p { font-size:14.5px; color:var(--muted); }
+
+  .decisions { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; counter-reset:d; }
+  .decisions > li {
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:20px 22px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:9px;
+  }
+  .decisions h3 { font-size:15.5px; color:var(--navy); font-weight:750; }
+  .decisions h3::before { counter-increment:d; content:counter(d) ". "; color:var(--green); }
+  .decisions .q { font-size:13.5px; color:var(--faint); }
+  .decisions p { font-size:14px; color:var(--muted); }
+  .decisions .prop { background:var(--sunk); border-radius:9px; padding:11px 13px; color:var(--ink); }
+  .decisions .tick { font-size:14px; font-weight:650; color:var(--navy); padding-top:4px; border-top:1px dashed var(--line); }
+
+  article {
+    background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:32px 30px; box-shadow:var(--shadow);
+  }
+  article h2 { font-size:24px; color:var(--navy); font-weight:780; margin-top:1.9em; line-height:1.25; }
+  article > h2:first-of-type { margin-top:0; }
+  article h3 { font-size:17.5px; color:var(--navy); font-weight:700; margin-top:1.5em; }
+  article p, article li { font-size:15.5px; color:var(--muted); }
+  article > * + * { margin-top:1.05em; }
+  article strong { color:var(--ink); font-weight:670; }
+  article ul, article ol { padding-left:1.15em; display:flex; flex-direction:column; gap:.42em; }
+  article a { color:var(--navy); }
+  .tablewrap { overflow-x:auto; }
+  article table { border-collapse:collapse; width:100%; font-size:13.8px; min-width:460px; }
+  article th, article td { border:1px solid var(--line); padding:9px 12px; text-align:left; vertical-align:top; }
+  article th { background:var(--sunk); color:var(--navy); font-weight:700; }
+
+  .doc-head { display:flex; flex-direction:column; gap:7px; margin-bottom:26px; padding-bottom:20px; border-bottom:2px solid var(--line); }
+  .doc-head .t { font-size:22px; font-weight:800; color:var(--ink); line-height:1.2; letter-spacing:-.02em; }
+  .byline { font-size:13.5px; color:var(--green); font-weight:650; }
+
+  footer { border-top:1px solid var(--line); padding-top:18px; font-size:13px; color:var(--faint); display:flex; flex-direction:column; gap:5px; }
+  @media (prefers-reduced-motion:reduce){ *{animation-duration:.001ms!important;transition-duration:.001ms!important} }
+  @media (max-width:600px){ .wrap{padding:34px 15px 70px; gap:34px} article{padding:24px 19px} }
+</style>
+
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">For medical review · not published</span>
+    <h1>Dengue and leptospirosis, for your approval</h1>
+    <p class="stand">
+      Two more drafts for the AJSMC website, written for the monsoon season. Both passed an independent medical fact-check with no blocking issues. Nothing is live and no doctor's name appears on the site until you approve. Please read both and confirm the points below.
+    </p>
+    <div class="meta">
+      <span><b>Article 1</b> Dr. N. Risswana Parveen, TNMC 178155</span>
+      <span><b>Article 2</b> Dr. D. Divya Dakshani, TNMC 130971</span>
+    </div>
+  </header>
+
+  <section class="notice">
+    <h2>Why we are asking</h2>
+    <p>
+      Both were checked line by line against WHO's 2025 arboviral guidelines, the NCVBDC national
+      dengue guidelines 2023, and WHO/ICMR leptospirosis sources. The checker found no blocking
+      errors. One editorial point worth knowing: WHO replaced its dengue guidance on 4 July 2025,
+      so anything you have seen citing "WHO 2009" as the live position is out of date — these
+      articles cite the 2025 document.
+    </p>
+    <p>
+      Please confirm two things: that nothing here describes a service AJSMC does not provide, and
+      that you are willing to have your name on it. The dengue article states plainly that we
+      cannot admit or monitor overnight and sends warning-sign patients elsewhere, including after
+      our hours — that is deliberate, and worth your attention.
+    </p>
+  </section>
+
+  <section>
+    <h2 style="font-size:21px;color:var(--navy);margin-bottom:16px;">What to confirm</h2>
+    <ol class="decisions">
+      <li>
+  <h3>The surveillance figures</h3>
+  <p>Tamil Nadu 7,511 dengue cases and 3 deaths, January–June 2026, the highest of any state; leptospirosis 1,473 cases in the same period. Sourced to Union MoHFW data tabled in the Rajya Sabha, July–August 2026. Please confirm you are comfortable publishing these.</p>
+  <p class="tick">☐ Fine &nbsp;&nbsp; ☐ Remove the figures</p>
+</li>
+<li>
+  <h3>What we say AJSMC can and cannot do</h3>
+  <p>Both articles state: in-house laboratory for blood and urine, most reports reaching the consultant within the same visit, outpatient Mon–Sat 10am–9pm, no casualty unit, no inpatient beds, no intensive care. Warning-sign and severe cases are sent to a hospital with 24-hour emergency care, including at night and on Sundays when we are closed.</p>
+  <p class="tick">☐ Accurate &nbsp;&nbsp; ☐ Needs correction</p>
+</li>
+<li>
+  <h3>Your name on the article</h3>
+  <p>Dr. N. Risswana Parveen (TNMC 178155) on the dengue article; Dr. D. Divya Dakshani (TNMC 130971) on the leptospirosis article. We will not publish either name until you say so.</p>
+  <p class="tick">☐ Approved &nbsp;&nbsp; ☐ Assign a different consultant</p>
+</li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="doc-head">
+      <span class="eyebrow">Article 1</span>
+      <span class="t">Dengue Platelet Count: What the Number Actually Means, and What to Do at Home in Chennai</span>
+      <span class="byline">Written by Dr. N. Risswana Parveen, Consultant General Physician, TNMC 178155</span>
+    </div>
+    <article><p><strong>By Dr. N. Risswana Parveen, Consultant General Physician, TNMC 178155.</strong></p>
+
+<p>Platelets fall in dengue between day 3 and day 8 of illness (WHO, 2025), and in most patients they come back up on their own. The count is not what decides how severe dengue becomes. Plasma leakage, severe bleeding and organ impairment do, and no platelet figure appears anywhere in WHO's definition of severe dengue.</p>
+
+<p>This article is for families in Chennai holding a lab report with a low platelet number and trying to decide what to do next. It does not deal with telling dengue apart from typhoid, chikungunya or leptospirosis, or with which test is worth sending on which day of fever — that is a separate question and it is answered separately. What follows is about the number itself, what the national and WHO guidelines actually instruct at home, and the point at which an outpatient centre such as AJSMC in Egmore is no longer the right place to be.</p>
+
+<p>One line before anything else, because the timing of dengue makes it urgent. AJSMC is an outpatient multi-specialty centre with no casualty unit, no inpatient beds and no 24-hour emergency department. If a person with fever develops any of the warning signs listed further down this page, at night or on a Sunday or at any other hour, go to a hospital with 24-hour emergency care. Do not wait for an outpatient clinic to open. If it is life-threatening, call 108.</p>
+
+<h2>What does a falling platelet count in dengue actually mean?</h2>
+
+<p>It means the illness is following its expected course, and that the days when a patient needs watching most closely have arrived. WHO's current guideline states plainly that dengue infections are frequently accompanied by thrombocytopenia from day 3 and day 8 following onset of illness (WHO, 2025, s.5.5.3). The fall is a signal, not the injury. WHO's 2009 guideline describes the sequence: progressive leukopenia followed by a rapid decrease in platelet count usually precedes plasma leakage.</p>
+
+<p>Why the count falls is genuinely not settled, and any page in Chennai that tells you otherwise is overstating what is known. India's national guideline says the precise mechanism of thrombocytopenia in dengue fever is not known, and lists eight postulated mechanisms including anti-platelet antibody, bone marrow suppression and destruction of platelets in the liver and spleen (NCVBDC, MoHFW, 2023, Ch.3.5). WHO 2025 puts it in one line: the mechanism is multifactorial but remains incompletely understood.</p>
+
+<table>
+  <thead>
+    <tr><th>Stage</th><th>Day of illness</th><th>What happens to the platelet count</th><th>Source</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Febrile phase</td><td>Days 1–3</td><td>Progressive decrease in total white cell count and platelet count</td><td>NCVBDC, MoHFW, 2023, Ch.5.1</td></tr>
+    <tr><td>Thrombocytopenia established</td><td>Days 3–8</td><td>"Dengue infections are frequently accompanied by thrombocytopenia from day 3 and day 8 following onset of illness"</td><td>WHO, 2025, s.5.5.3</td></tr>
+    <tr><td>Just before the critical phase</td><td>Around the fever settling</td><td>"Progressive leukopenia followed by a rapid decrease in platelet count usually precedes plasma leakage"</td><td>WHO, 2009, s.2.1.2</td></tr>
+    <tr><td>Critical phase</td><td>Days 3–7 (WHO 2009); day 4–5 (WHO 2025); lasts 24–48 hours</td><td>Falling platelet count with a rising haematocrit; 5–10% of febrile patients progress this far</td><td>NCVBDC, MoHFW, 2023, Ch.4 and Ch.5.1; WHO, 2009; WHO, 2025</td></tr>
+    <tr><td>Recovery phase</td><td>24–48 hours after the critical phase, over the next 48–72 hours</td><td>White cells rise first; "the recovery of platelet count is typically later than that of white blood cell count"</td><td>WHO, 2009, s.2.1.3; NCVBDC, MoHFW, 2023, Ch.5.1</td></tr>
+    <tr><td>Full recovery</td><td>1–2 weeks</td><td>"Most patients will recover in 1–2 weeks"</td><td>WHO, 2025, s.2.2</td></tr>
+  </tbody>
+</table>
+
+<p>Read the last two rows together, because they answer the question most families in Chennai are really asking on day six. The platelet count is the last number to turn around. A count that is still low on the morning the patient starts feeling better is what the guidelines describe as normal, not a sign that something has gone wrong.</p>
+
+<h2>What platelet count is dangerous in dengue?</h2>
+
+<p>There is no such number, and India's own national guideline says so in five words: platelet counts are unreliable to predict bleeding (NCVBDC, MoHFW, 2023, Ch.5.5). That single line is the most useful sentence available on this subject, and it contradicts almost everything the platelet-panic market in Tamil Nadu is built on.</p>
+
+<p>What bleeding actually tracks is circulation, not the count. WHO 2009 states that patients with severe dengue may have coagulation abnormalities, but these are usually not sufficient to cause major bleeding, and that when major bleeding does occur it is almost always associated with profound shock. Major bleeding follows shock. It does not follow a figure on a report.</p>
+
+<table>
+  <thead>
+    <tr><th>Finding</th><th>Does it decide severity?</th><th>Source</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Plasma leakage leading to shock or fluid accumulation</td><td>Yes</td><td>WHO, 2009, s.2.1.4, definition of severe dengue</td></tr>
+    <tr><td>Severe bleeding</td><td>Yes</td><td>WHO, 2009, s.2.1.4</td></tr>
+    <tr><td>Severe organ impairment</td><td>Yes</td><td>WHO, 2009, s.2.1.4</td></tr>
+    <tr><td>Haematocrit rising 10% above baseline</td><td>Yes — "an early objective indicator of plasma leakage"</td><td>NCVBDC, MoHFW, 2023, Ch.7.3</td></tr>
+    <tr><td>Haematocrit rising on two consecutive measurements</td><td>Yes — listed as a reason to hospitalise</td><td>WHO, 2025, s.2.7</td></tr>
+    <tr><td>A rapidly falling platelet count <strong>together with</strong> a rising haematocrit</td><td>Yes — this pairing is the laboratory warning sign</td><td>NCVBDC, MoHFW, 2023, Box 2; WHO, 2009, Textbox C</td></tr>
+    <tr><td>Platelet count on its own</td><td>No — "Platelet counts are unreliable to predict bleeding"</td><td>NCVBDC, MoHFW, 2023, Ch.5.5</td></tr>
+    <tr><td>Any platelet threshold inside the definition of severe dengue</td><td>No — none exists</td><td>WHO, 2009, s.2.1.4</td></tr>
+    <tr><td>Any platelet threshold in WHO's list of reasons to hospitalise</td><td>No — none listed</td><td>WHO, 2025, s.2.7</td></tr>
+  </tbody>
+</table>
+
+<p>The middle rows are the ones a patient at AJSMC should take away. It is not the falling platelet count that is the laboratory warning sign — it is the falling platelet count alongside a rising haematocrit, which is the guideline's way of saying that fluid is leaking out of the blood vessels. That is a pairing a doctor reads, on repeated tests, in the context of how the patient looks. It is not something a family can act on from a single printout.</p>
+
+<h2>Which signs mean go to a hospital now, whatever the platelet count says?</h2>
+
+<p>These are the warning signs as India's national dengue guideline words them for families, reproduced without editing (NCVBDC, MoHFW, 2023, Ch.7.2, management of mild dengue, Group A, item 1). Any one of them means the person needs to be assessed in a hospital that can admit.</p>
+
+<table>
+  <thead>
+    <tr><th>Warning sign, in the guideline's own words</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Severe abdominal pain and persistent vomiting</td></tr>
+    <tr><td>Red spots patches on skin</td></tr>
+    <tr><td>Bleeding from nose and gums</td></tr>
+    <tr><td>Vomiting blood</td></tr>
+    <tr><td>Black tarry stools</td></tr>
+    <tr><td>Drowsiness or irritability</td></tr>
+    <tr><td>Pale, cold or clammy skin</td></tr>
+    <tr><td>Difficulty in Breathing</td></tr>
+  </tbody>
+</table>
+
+<p>WHO's 2025 list adds detail worth knowing: persistent vomiting defined as three or more episodes in one hour or four episodes in six hours, abdominal pain that becomes continuous and intense towards the end of the febrile stage, inability to keep fluids down, difficulty breathing, and a prolonged capillary refill time.</p>
+
+<p><strong>If any of these appear, go to a hospital with a 24-hour emergency department and inpatient beds. Do not come to an outpatient clinic with them, and do not wait for AJSMC to open the next morning.</strong> This matters in Chennai more than the phrasing suggests, because dengue characteristically turns at the moment the fever breaks, on roughly days 3 to 7 of illness — which lands at night or on a Sunday as often as not. India's national guideline treats a patient living alone or far from a health facility and without any reliable means of transport as an admission criterion in its own right (NCVBDC, MoHFW, 2023, Ch.11). If getting to a hospital quickly would be difficult, that by itself is a reason to be somewhere that can admit.</p>
+
+<p>The other correction the guidelines make is about the fever itself. The fever settling is not recovery. The critical phase begins around defervescence — the point when the temperature drops to 37.5–38&nbsp;°C and stays there (WHO, 2009, s.2.1.2) — and WHO 2025 adds the caveat that not all patients with severe dengue will have warning signs.</p>
+
+<h2>How can I increase my platelet count at home?</h2>
+
+<p>You cannot, and no guideline asks you to try. The honest answer is that the platelet count is not the thing being treated. WHO's current guideline says the reason directly: considerations are different in dengue accounting for the pathophysiology of the disease, the expected spontaneous resolution of thrombocytopenia and the low likelihood of thrombocytopenia-induced haemorrhage in most patients with dengue (WHO, 2025, s.5.5.3). There is also no drug that treats dengue itself — NCVBDC 2023 states there is no specific antiviral therapy, and WHO 2025 says the same.</p>
+
+<p>What the two governing documents contain instead is a short list: fluids by mouth, rest, keeping the temperature down, paracetamol within stated limits, no aspirin or NSAIDs, and repeated review for warning signs with a blood count and haematocrit. That is the whole home-management protocol in NCVBDC 2023 Ch.7.2 and WHO 2025 Ch.4. Monitoring is the treatment.</p>
+
+<p>Here is a fact any reader in Chennai can check personally, and it is stronger than arguing remedy by remedy. A full-text search of India's National Guidelines for Clinical Management of Dengue Fever 2023 (88 pages, published by NCVBDC, MoHFW) returns zero matches for papaya, herbal, Siddha, AYUSH, Ayurveda, kudineer, goat milk and kiwi. The WHO arboviral guidelines of 2025 (125 pages) return zero matches for papaya, herbal, Siddha, Ayurveda and goat. Neither document recommends any herbal, dietary or supplement treatment of any kind. Both PDFs are free to download.</p>
+
+<h2>Does papaya leaf juice increase platelets in dengue?</h2>
+
+<p>The truthful answer is more complicated than either side of this argument usually admits, and a family that has been told by people they trust that it works deserves the actual position rather than a dismissal.</p>
+
+<p>Studies do exist. The best available synthesis pooled nine trials, six of them Indian, and reported a mean platelet count improvement between day 1 and day 5 of treatment of 35.45 (95% CI 23.74–47.15; 3 studies, 129 participants, low quality evidence) and a hospital stay difference of −1.98 days (95% CI −1.83 to −2.12; 3 studies, 580 participants, low quality evidence). The same review described the studies as mostly of low to moderate quality, with high risk of bias, and concluded: the routine use of CP extract for treating dengue cannot be recommended based on current available evidence (Rajapakse et al., BMC Complementary and Alternative Medicine, 2019). A double-blind, placebo-controlled pilot in 50 adults with platelets at or below 30,000/µL reported a platelet rise and concluded that the findings merit validation in larger prospective studies (Sathyapalan et al., PLoS ONE, 2020).</p>
+
+<p>The problem is what has never been measured. The 2019 review states that no studies examined the impact on mortality, and that the effect on plasma leakage and haemorrhage has also not been studied. So the only outcomes ever tested are a number on a report and the length of a hospital stay — while the three things that actually kill people in dengue have not been looked at at all.</p>
+
+<table>
+  <thead>
+    <tr><th>Claim</th><th>What was studied</th><th>What was never studied</th><th>Verdict, in the source's own words</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Papaya leaf extract raises platelets in dengue</td><td>9 trials, "mostly of low to moderate quality, with high risk of bias"; pooled platelet improvement 35.45 (95% CI 23.74–47.15); hospital stay −1.98 days</td><td>Mortality — "No studies examined the impact on mortality with CP"; plasma leakage and haemorrhage — "has also not been studied"</td><td>"The routine use of CP extract for treating dengue cannot be recommended based on current available evidence" — Rajapakse et al., 2019</td></tr>
+    <tr><td>Papaya leaf extract in severe thrombocytopenia</td><td>One double-blind placebo-controlled pilot, 50 adults with platelets ≤30,000/µL</td><td>Clinical outcomes that matter; the trial did not reach its own target of 100 patients</td><td>"These findings merit validation in larger prospective studies" — Sathyapalan et al., 2020</td></tr>
+    <tr><td>Goat milk raises platelets in dengue</td><td>Nothing</td><td>Everything</td><td>"The role of goat milk in increasing platelet count is not scientifically proven" — Khanal et al., 2024</td></tr>
+    <tr><td>Any herbal or dietary treatment endorsed by the governing guidelines</td><td>—</td><td>—</td><td>Zero mentions of papaya, herbal, Siddha, AYUSH, Ayurveda, kudineer or goat milk across NCVBDC 2023 (88 pages) and WHO 2025 (125 pages)</td></tr>
+  </tbody>
+</table>
+
+<p>AJSMC does not recommend papaya leaf juice or any standardised papaya preparation. Two separate reasons. A marketed papaya leaf tablet is a pharmaceutical product, and recommending a pharmaceutical to a person we have not examined is prescribing, which this site does not do. Home-crushed leaf juice is an unmeasured dose of a plant nobody has identified in a laboratory. Neither is the reason that matters most, though. The real risk is behavioural: a family watching a platelet number climb on a herbal drink is a family not watching for the warning signs during the 48 hours when a dengue patient can crash.</p>
+
+<h2>Does goat milk help in dengue?</h2>
+
+<p>There is no evidence that it does, and one published reason to be careful with it. A 2024 case report states that the role of goat milk in increasing platelet count is not scientifically proven, and notes that the rise in dengue cases and platelet panic has been taken advantage of. The case it describes is a 30-year-old woman with NS1-positive dengue who recovered poorly and returned with persistent fever; a family history of drinking unpasteurised goat milk raised the suspicion of brucellosis, which was confirmed (Khanal et al., Clinical Case Reports, 2024).</p>
+
+<p>The practical line is the paper's own: while intake cannot be restricted, the milk must be properly boiled before use. Unboiled milk in an already febrile patient adds a second infection to the first, and in Chennai during dengue season that is a diagnosis that gets missed for weeks.</p>
+
+<h2>Can I take a painkiller for the body pain?</h2>
+
+<p>Paracetamol yes, within limits. Aspirin, ibuprofen, diclofenac, nimesulide, mefenamic acid and the combination body-pain tablets sold over the counter across Chennai, no — not until dengue has been ruled out.</p>
+
+<p>WHO 2025 recommends against the use of non-steroidal anti-inflammatory medications in patients with acute suspected or confirmed arboviral disease, irrespective of severity, and marks it a strong recommendation. It is the only strong recommendation in the whole non-severe chapter. The mechanism is the point: aspirin and other NSAIDs inhibit platelet activation, aggregation and secretion by reducing the production of thromboxane A2 (WHO, 2025, s.4.2.3.3). In plain terms, the platelets a dengue patient still has are the ones doing the work, and an NSAID stops them working. India's national guideline says the same for children — salicylates and other NSAIDs should be avoided as these may predispose the child to develop mucosal bleeds (NCVBDC, MoHFW, 2023, Ch.5.4.1). WHO 2009 lists NSAID use among the risk factors for major bleeding, and adds corticosteroids to the same warning.</p>
+
+<p>WHO's panel also spelled out why this applies to any undiagnosed monsoon fever in Chennai, not only to a confirmed case: in many circumstances during the acute presentation, differentiation of the causative aetiology would not be possible, so unless dengue could be ruled out there would be safer alternatives available (WHO, 2025, s.4.2).</p>
+
+<p>On paracetamol, India's national guideline sets out the home-care figure for a mild (Group A) dengue patient: keep body temperature below 100&nbsp;°F, and if it goes above that, the recommended dose is 10 mg/kg/dose and should be administered in frequencies of not less than six hours, with a maximum for adults of 4 g/day (NCVBDC, MoHFW, 2023, Ch.7.2). That is the guideline's figure, quoted as written. It is not a personalised dose, and it should be confirmed with the treating doctor, particularly for a child, an older patient or anyone with liver or kidney disease. The same section lists tepid sponging of the forehead, armpits and extremities, and a lukewarm shower or bath for adults whose high fever is not responding to paracetamol.</p>
+
+<p>One overdose trap deserves naming, because it is common. WHO 2025 warns that the maximum daily dose to avoid hepatic toxicity is based on all routes of administration and all products containing paracetamol. A fever tablet plus a combination cold remedy plus a body-pain sachet can quietly cross the limit in a single day. Read what is in each packet before taking two of them together.</p>
+
+<h2>What should I drink in dengue, and what should I avoid?</h2>
+
+<p>Fluids by mouth are the actual home treatment, and this is the one place where ordinary Tamil household practice and the guidelines line up. Tender coconut water is named by name in India's national dengue guideline; rice water and a yoghurt drink both appear on WHO's own 2025 list.</p>
+
+<table>
+  <thead>
+    <tr><th>Drink</th><th>What the guideline says</th><th>Source</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Water</td><td>"Water should always be the main source of fluids"</td><td>WHO, 2025, s.4.1.3</td></tr>
+    <tr><td>ORS</td><td>"Adequate oral fluids (ORS/Coconut juice)"; standardised ORS is "a practical way of ensuring appropriate electrolyte replacement"</td><td>NCVBDC, MoHFW, 2023, Ch.7.2; WHO, 2025, s.4.1.3</td></tr>
+    <tr><td>Tender coconut water</td><td>Named in both documents as an oral fluid for mild dengue</td><td>NCVBDC, MoHFW, 2023, Ch.7.2; WHO, 2025, s.4.1.3</td></tr>
+    <tr><td>Soups, unsweetened fruit juice, yoghurt drinks, water used after cooking rice or grains</td><td>Listed by WHO where ORS is unavailable, in addition to water</td><td>WHO, 2025, s.4.1.3</td></tr>
+    <tr><td>Carbonated soft drinks</td><td>"Avoid carbonated drinks"; WHO: avoid commercial carbonated drinks that exceed the isotonic level (5% sugar)</td><td>NCVBDC, MoHFW, 2023, Ch.7.2; WHO, 2025, s.4.1.3</td></tr>
+    <tr><td>Commercial fruit juices and sweetened tea</td><td>Named by WHO among the drinks to avoid</td><td>WHO, 2025, s.4.1.3</td></tr>
+    <tr><td>How to take it</td><td>"Encourage frequent small amounts of oral fluids, especially for those experiencing nausea and anorexia"</td><td>WHO, 2025, s.4.1.3</td></tr>
+    <tr><td>Infants and young children</td><td>"Over-hydration in infants and young children should be carefully observed"</td><td>NCVBDC, MoHFW, 2023, Ch.7.2</td></tr>
+    <tr><td>Rest</td><td>"Patient need to take adequate bed rest"</td><td>NCVBDC, MoHFW, 2023, Ch.7.2</td></tr>
+  </tbody>
+</table>
+
+<p>Note the row about children, because "drink as much as you can" is not universal advice. India's national guideline specifically asks that over-hydration in infants and young children be watched, and WHO notes that the right volume depends on age and on conditions such as heart failure and chronic kidney disease. For a small child, or for an adult with heart or kidney disease, ask the treating doctor what volume is appropriate rather than working from a general figure.</p>
+
+<h2>How do I know at home that the fluids are enough?</h2>
+
+<p>By counting trips to the toilet, not by looking at a platelet report. WHO 2025 gives the number: adequate oral fluid intake should result in urination at least four to six times per day, and patients should monitor their urination frequency and contact their health care provider promptly if there is any significant deviation from that pattern (s.4.1.3). WHO 2009 puts the same idea as a threshold to act on — return for review if not passing urine for more than 4–6 hours.</p>
+
+<p>WHO 2025 also recommends writing the fluids down, and suggests protocolised oral fluid treatment over unstructured advice. The practical instruction is simple enough for any household in Chennai to follow: use a cup or another means of measuring volume, note the amount each time it is given, total it at the end of the day, and review that record daily.</p>
+
+<table>
+  <thead>
+    <tr><th>What to track at home</th><th>The stated benchmark</th><th>Source</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Passing urine</td><td>"Urination at least four to six times per day"</td><td>WHO, 2025, s.4.1.3</td></tr>
+    <tr><td>Passing urine — the trigger to seek review</td><td>Not passing urine for more than 4–6 hours</td><td>WHO, 2009, s.2.3.2.1</td></tr>
+    <tr><td>Fluid intake</td><td>Write down each amount, total it at the end of the day, review daily</td><td>WHO, 2025, s.4.1.3</td></tr>
+    <tr><td>Temperature</td><td>Keep below 100&nbsp;°F</td><td>NCVBDC, MoHFW, 2023, Ch.7.2</td></tr>
+    <tr><td>Warning signs</td><td>Check against the family list above at every point, and hardest when the fever breaks</td><td>NCVBDC, MoHFW, 2023, Ch.7.2</td></tr>
+    <tr><td>Blood count with haematocrit and platelets</td><td>Indicated in "All patients with fever &gt;3 days" and "All patients with warning signs"</td><td>NCVBDC, MoHFW, 2023, Ch.7</td></tr>
+    <tr><td>Review by a doctor</td><td>"Ambulatory patients should be reviewed daily for disease progression... until they are out of the critical period"</td><td>WHO, 2009, s.2.3.2.1</td></tr>
+  </tbody>
+</table>
+
+<p>Signs of recovery are equally observable without a laboratory. India's national guideline lists them as a stable pulse, blood pressure and breathing rate, a normal temperature, no evidence of bleeding, the return of appetite, no vomiting or abdominal pain, good urine output, a stable haematocrit, and the convalescent rash or itching on the limbs (NCVBDC, MoHFW, 2023, Ch.7.5). Seven of those eight are things a family in Chennai can see for themselves. The eighth is haematocrit. Platelets are not on the list at all.</p>
+
+<h2>When will a doctor give a platelet transfusion?</h2>
+
+<p>Far later than most families expect, and not because of a lakh-and-below figure on a report. Every guideline in force says the same thing, and they have said it consistently since 2009.</p>
+
+<table>
+  <thead>
+    <tr><th>Authority</th><th>Position, as written</th><th>Year</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>NCVBDC, MoHFW (India), Box 8</td><td>"Transfuse platelet only if bleeding is present"; "Prophylactic platelet transfusion may be considered for counts &lt; 10,000/cumm without bleed and those who may need emergency surgery"</td><td>2023</td></tr>
+    <tr><td>NCVBDC, MoHFW (India), Ch.7 text</td><td>"Platelet transfusion is not recommended for thrombocytopenia (no prophylaxis platelet transfusion). It may be considered in adults with underlying hypertension and thrombocytopenia less than 10 000 cell/mm3."</td><td>2023</td></tr>
+    <tr><td>WHO, current</td><td>"WHO suggests against the use of prophylactic platelet transfusion in patients with... platelet count of &lt;50,000 platelets/microlitre who have no active bleeding." [Conditional recommendation, low certainty evidence]</td><td>2025</td></tr>
+    <tr><td>WHO, superseded guideline</td><td>"Prophylactic platelet transfusions for severe thrombocytopaenia in otherwise haemodynamically stable patients have not been shown to be effective and are not necessary"</td><td>2009</td></tr>
+    <tr><td>Randomised trial cited by NCVBDC</td><td>372 adults with dengue and platelets ≤20,000/µL: prophylactic transfusion "was not superior to supportive care in preventing bleeding" and "was associated with adverse events some of which were serious"</td><td>Lye et al., The Lancet, 2017</td></tr>
+  </tbody>
+</table>
+
+<p>Those figures are decision points for a clinician inside a hospital, with the patient in front of them. They are not thresholds for a family at home to measure themselves against, and nobody should be transfused, or panic, on the strength of a number alone. Transfusion is not never indicated either — WHO's 2025 panel names active bleeding, the prevention of haemorrhage in surgery or another invasive procedure, and pre-existing anticoagulation treatment as the situations where it is considered.</p>
+
+<p>There is also evidence that transfusing a patient who is not bleeding can make matters worse, which is worth knowing before anyone goes looking for platelets in Chennai during a dengue season.</p>
+
+<table>
+  <thead>
+    <tr><th>Outcome</th><th>Not transfused (n=302)</th><th>Transfused (n=486)</th><th>p</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Mucosal bleeding</td><td>9.3%</td><td>18.5%</td><td>&lt;0.001</td></tr>
+    <tr><td>Any clinical bleeding</td><td>18.2%</td><td>23.5%</td><td>0.08</td></tr>
+    <tr><td>Median days to reach platelets above 50,000/mm3</td><td>2 days</td><td>3 days</td><td>&lt;0.0001</td></tr>
+    <tr><td>Median hospital stay</td><td>5 days</td><td>6 days</td><td>&lt;0.0001</td></tr>
+    <tr><td>ICU admission and mortality</td><td>no significant difference</td><td>no significant difference</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<p>Source: Lee TH, Wong JGX, Leo YS, et al., "Potential Harm of Prophylactic Platelet Transfusion in Adult Dengue Patients", PLoS Neglected Tropical Diseases, 2016;10(3):e0004576 — 788 adult dengue patients with platelets under 20,000/mm3 and no bleeding, Tan Tock Seng Hospital, Singapore. The authors concluded that transfusion in the absence of bleeding did not reduce bleeding or expedite platelet recovery, and that there was potential harm through slower recovery and longer hospitalisation.</p>
+
+<h2>When does home and outpatient care stop being enough?</h2>
+
+<p>At the points India's national guideline lists as criteria for admission to hospital, reproduced complete below (NCVBDC, MoHFW, 2023, Ch.11). Note what is absent from it: no platelet number appears anywhere.</p>
+
+<table>
+  <thead>
+    <tr><th>Criterion for admission to hospital</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Any warning sign: persistent vomiting; abdominal pain and tenderness; clinical fluid accumulation (ascites, pleural effusion); lethargy or restlessness; mucosal bleed (nosebleed, black stools, vomiting blood, heavy menstrual bleeding, blood in urine); enlarged liver more than 2 cm; progressive increase in haematocrit with rapid decrease in platelet count</td></tr>
+    <tr><td>Severe dengue</td></tr>
+    <tr><td>Intolerance to oral administration of fluids</td></tr>
+    <tr><td>Dyspnoea (difficulty breathing)</td></tr>
+    <tr><td>Hypotension and narrow pulse pressure</td></tr>
+    <tr><td>Acute renal failure</td></tr>
+    <tr><td>Coagulopathy</td></tr>
+    <tr><td>Patient living alone or far from a health facility and without any reliable means of transport</td></tr>
+  </tbody>
+</table>
+
+<p>A patient who has crossed any of those lines needs inpatient care, and the reason is the pace of the monitoring rather than the diagnosis. In hospital, the national guideline sets vital signs at least every 2–4 hours in non-shock patients and every 1–2 hours in shock, serial haematocrit at least every four to six hours in stable cases and more often if unstable, urine output every 8 to 12 hours in uncomplicated cases and hourly in prolonged shock, and a platelet count repeated 6 to 8 hourly if the trend is declining through the critical phase. Nothing at that cadence can be delivered by an outpatient clinic.</p>
+
+<h2>What can an outpatient centre in Egmore do, and what can it not?</h2>
+
+<p>AJSMC, on Police Commissioner Office Road in Egmore, Chennai, is an outpatient and day-care centre running Monday to Saturday, 10am to 9pm, with an in-house laboratory that handles blood and urine samples and most reports reaching the consultant within the same visit. What that suits is the patient India's guideline calls Group A: no warning signs, keeping fluids down, passing urine normally, well enough to be at home. Such a patient still needs review, and WHO 2009 sets the interval — ambulatory patients should be reviewed daily for disease progression until they are out of the critical period. A blood count with haematocrit and platelet count is indicated in anyone whose fever has lasted more than three days, and immediately in anyone with a warning sign (NCVBDC, MoHFW, 2023, Ch.7). Before travelling, call 044 2532 2021 and ask which of these tests are run in-house, which go to a referral laboratory, and by what time the sample must be given.</p>
+
+<p>What AJSMC cannot do should be equally clear, because getting this wrong costs time no dengue patient has. There is no casualty unit, no trauma unit, no inpatient beds, no intensive care and no 24-hour emergency department. A patient who needs admission, intravenous fluid titration through the night, serial monitoring at the intervals set out above, or observation over a Sunday, needs a hospital with inpatient and 24-hour emergency care — not this centre, and not any outpatient clinic. Positioning this honestly is the only useful thing a clinic can do with a dengue page.</p>
+
+<p>The local context is not reassuring, and it should not be. Tamil Nadu recorded 7,511 dengue cases and 3 deaths between January and June 2026, the highest of any state in India, against a national total of 23,952 cases and 31 deaths for the same window — Union Ministry of Health and Family Welfare data tabled in the Rajya Sabha on 28 July 2026, reported by The South First on 1 August 2026. That figure covers the first half of the year, which in Chennai is before the season proper. The full-year state history runs 27,378 cases and 13 deaths in 2024, and 23,407 cases and 12 deaths in 2025.</p>
+
+<h2>When should you see a doctor?</h2>
+
+<p>See a doctor if a fever has lasted more than three days — that is the threshold at which India's national guideline asks for a complete blood count with haematocrit and platelet count, whatever else you feel. See one sooner if the fever has broken and the person looks worse rather than better, if they cannot keep fluids down, or if they are passing urine noticeably less than four to six times a day. Take the date the fever started with you; it decides more about the tests than the platelet figure does.</p>
+
+<p>Do not go to an outpatient clinic for any of the warning signs listed on this page. Severe abdominal pain, persistent vomiting, bleeding from the nose or gums, vomiting blood, black stools, red spots or patches on the skin, drowsiness or irritability, pale cold clammy skin, or difficulty in breathing — those need a hospital with a 24-hour emergency department and beds, at whatever hour they appear. If it is life-threatening, call 108. AJSMC outpatient consultations run Monday to Saturday, 10am to 9pm, on 044 2532 2021, and the centre is closed outside those hours, which is precisely when dengue tends to turn.</p></article>
+  </section>
+
+  <section>
+    <div class="doc-head">
+      <span class="eyebrow">Article 2</span>
+      <span class="t">Fever After Walking Through Chennai Floodwater: When It Could Be Leptospirosis</span>
+      <span class="byline">Written by Dr. D. Divya Dakshani, Consultant General Medicine, TNMC 130971</span>
+    </div>
+    <article><p><strong>Reviewed by Dr. D. Divya Dakshani, Consultant General Medicine, TNMC 130971.</strong></p>
+
+<p>Fever that begins 2 to 30 days after contact with flood water, stagnant water, sewage or wet mud can be leptospirosis. The usual gap is 5 to 14 days (National Guidelines on Leptospirosis, NCDC, MoHFW, 2015). Anyone in Chennai who waded through water, cleaned a drain or walked barefoot in the past month and now has fever with severe muscle pain needs to be seen and tested.</p>
+
+<p>That 30-day tail is the whole point. A patient in Egmore, Chennai often does not connect a fever today with a flooded street three weeks ago, so the exposure never gets mentioned and the diagnosis never gets considered. The exposure history is not an optional extra — it is part of the national case definition (NCDC, MoHFW, 2015).</p>
+
+<p>One thing before anything else. AJSMC is an outpatient and day-care multi-specialty centre in Egmore, Chennai, open Monday to Saturday, 10am to 9pm. It has no casualty unit, no trauma unit, no inpatient beds, no intensive care, no dialysis and no 24-hour emergency department. Severe leptospirosis is an inpatient illness. If someone with fever has yellowing of the eyes or skin, has stopped passing urine or is passing very little, is breathless, is coughing blood, is bleeding, or is confused or drowsy, do not come to an outpatient clinic and do not wait for the next outpatient session. Call 108 or go straight to the nearest hospital with a 24-hour emergency department and intensive care.</p>
+
+<h2>Is leptospirosis caught from a rat bite?</h2>
+
+<p>No. The Tamil name for it translates as rat fever, and that name misleads people into ruling themselves out because no rat ever bit them. The organism enters through <strong>abraded skin or through the mucous membranes of the eyes, nose and mouth</strong> in contact with an environment contaminated by the urine of rodents or other carrier animals (NCDC, MoHFW, 2015). Direct person-to-person spread is rare.</p>
+
+<p>The Chennai mechanism is specific and worth understanding. Rodents and cattle excrete large numbers of the organism in their urine into soil and water. When an area waterlogs, rodents are forced out of their burrows and contaminate the standing water they are driven into (NCDC, MoHFW, 2015). Four rodent species are established reservoirs in India: the house rat, the Norway rat, and the lesser and larger bandicoots. A flooded Chennai street is therefore a transmission site, not just an inconvenience — and a graze on the ankle is enough of a doorway.</p>
+
+<h2>Which exposures in the last month actually count?</h2>
+
+<p>More than most people in Chennai assume. The list below is NCDC's own, and two entries on it — lorry drivers and masons — are the exposures that get missed in a city, because neither person thinks of themselves as doing wet outdoor work.</p>
+
+<table>
+  <thead>
+    <tr><th>Exposure in the last 2 to 30 days</th><th>Why it counts</th><th>Source</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Waded or walked barefoot through flood water or stagnant water</td><td>Waterlogging drives rodents from their burrows; they contaminate the standing water with urine</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Sewer, drainage or canal-cleaning work</td><td>Named occupational high-risk group</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Paddy or farm labour; sugar cane or pineapple harvesting</td><td>Named occupational high-risk group</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Livestock handling; fishing</td><td>Named occupational high-risk group</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Washing a vehicle with contaminated water — lorry and van drivers</td><td>Named by NCDC as an occupational route</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Mixing cement and sand with contaminated water — masons and construction workers</td><td>Named by NCDC as an occupational route</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Working or living in rodent-infested surroundings</td><td>Rodents are the major reservoir in India</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Any of the above with a cut, graze or broken skin on the feet or legs</td><td>Entry is through abraded skin or mucous membranes — not through a bite</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td><strong>Incubation period</strong></td><td><strong>Average 5–14 days; full range 2–30 days</strong></td><td><strong>NCDC, MoHFW, 2015</strong></td></tr>
+  </tbody>
+</table>
+
+<p>Do not narrow this to farmers or to young men. In Tamil Nadu's own surveillance, the mean age of confirmed cases was 35 years, 66.1% were aged 20 to 60, and females made up 50.18% of cases against 49.78% males (Tamil Nadu Journal of Public Health and Medical Research, Vol 4 Issue 2, April–June 2024). Chennai is the state's highest-burden district. A homemaker who crossed a flooded lane to buy milk is inside this list.</p>
+
+<h2>What are the first symptoms of rat fever?</h2>
+
+<p>Fever with chills, and muscle pain that is out of proportion to everything else. NCDC calls myalgia a characteristic finding: the calf, abdominal and lumbosacral muscles are very painful and severely tender, and the guideline states plainly that this symptom is very useful in differentiating leptospirosis from other causes of fever. It is usually accompanied by a rise in serum creatine phosphokinase (CPK), which further helps separate it.</p>
+
+<table>
+  <thead>
+    <tr><th>Feature</th><th>What it looks like</th><th>How often</th><th>Source</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Muscle pain</td><td>Calf, lower back and abdominal muscles very painful and severely tender; in severe disease it can be bad enough to stop a person walking</td><td>Characteristic finding</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Fever</td><td>Remittent, with chills, moderate to severe</td><td>Usual</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Headache</td><td>Intense, sometimes throbbing, commonly frontal, and often not relieved by ordinary painkillers</td><td>Common in the milder form</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Red eyes (conjunctival suffusion)</td><td>Reddish colouration of the conjunctiva without discharge, usually in both eyes, most marked on the inner lids</td><td>Variable — 51.4% (19 of 37) in one PCR-confirmed series; "the majority" in some series</td><td>PLOS Neglected Tropical Diseases, 2024; Levett, Clinical Microbiology Reviews, 2001</td></tr>
+    <tr><td>Stomach and bowel</td><td>Nausea, vomiting, abdominal pain, diarrhoea</td><td>Part of the case definition</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Serum CPK</td><td>Raised — and normal in viral and alcoholic hepatitis, which is what makes it useful</td><td>Supporting test</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td><strong>Course</strong></td><td><strong>Features decrease or disappear within 2–3 days, then reappear and may progress to severe disease</strong></td><td><strong>The trap — see below</strong></td><td><strong>NCDC, MoHFW, 2015</strong></td></tr>
+  </tbody>
+</table>
+
+<p>Two cautions about that table. Red eyes are not present in every patient, and their absence does not exclude leptospirosis — treat them as a strong clue when present, not as a filter. And the last row is the single most useful thing a patient in Chennai can know: NCDC states that all the clinical features either decrease or disappear within two to three days and then reappear and may progress to severe disease. Levett (Clinical Microbiology Reviews, 2001) describes the same two-part course — an acute phase of about a week, then an immune phase. <strong>Feeling better on day 3 is not recovery.</strong> Every year people stop the follow-up appointment at exactly that point.</p>
+
+<h2>Is calf pain with fever enough to get tested in Chennai?</h2>
+
+<p>Yes. NCDC's operational rule is unambiguous: in an endemic area, all cases of fever with myalgia and conjunctival suffusion should be considered suspected cases of leptospirosis (NCDC, MoHFW, 2015). The same document names Chennai city among the high-burden areas of Tamil Nadu, so this city meets the endemic-area condition. Tamil Nadu's Health Department fever advisory of 12 August 2026 lists leptospirosis first among the rainy-season illnesses and names severe muscle pain and red eyes in its own symptom list, telling the public to consult a doctor and undergo medical examination instead of self-medicating.</p>
+
+<p>The full national suspected-case definition is acute fever with headache, muscle pain and prostration, together with a history of exposure to infected animals or to an environment contaminated with animal urine, plus one or more of: calf muscle tenderness; red eyes; passing little or no urine, or protein in the urine; jaundice; bleeding; neck stiffness; or nausea, vomiting, abdominal pain and diarrhoea. Notice that the exposure sits inside the definition. Bring it up at the consultation even if nobody asks.</p>
+
+<p>Telling leptospirosis apart from dengue, typhoid and chikungunya is a separate question, and it is covered in detail in the AJSMC article on monsoon fever in Chennai. One point belongs here though: NCDC lists falciparum malaria, dengue, scrub typhus, typhoid and viral hepatitis as illnesses that closely resemble leptospirosis, and adds that the possibility of co-infection should be kept in mind. A confirmed dengue does not rule out a simultaneous leptospirosis.</p>
+
+<h2>Can a leptospirosis test be negative when you actually have it?</h2>
+
+<p>Yes, and the commonest reason is the day it was taken. Antibodies become detectable in the blood only about 5 to 7 days after symptoms start (Levett, Clinical Microbiology Reviews, 2001). A negative antibody test on day 2 or day 3 of fever is uninformative, not reassuring.</p>
+
+<table>
+  <thead>
+    <tr><th>Test</th><th>Useful when</th><th>Why the timing matters</th><th>Source</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>PCR on blood</td><td>The first few days of illness</td><td>Works before antibodies are detectable; NCDC's stated advantage is quick results at the early stage when antibody levels are not yet detectable</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Blood culture</td><td>Within 10 days of onset, and before any antibiotic is started</td><td>Incubated for 4 to 6 weeks, so it is never a same-visit answer; only 0.2% of Tamil Nadu's confirmations came from culture</td><td>NCDC 2015; TN J Public Health Med Res, 2024</td></tr>
+    <tr><td>IgM ELISA</td><td>From late in the first week onward</td><td>Antibodies appear roughly 5–7 days after symptoms begin. This is what actually settles the diagnosis in Tamil Nadu — 70.8% of confirmed cases</td><td>Levett 2001; TN J Public Health Med Res, 2024</td></tr>
+    <tr><td>Rapid IgM card test</td><td>Screening only</td><td>Requires confirmation by ELISA; a negative rapid test does not exclude the illness</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>MAT</td><td>Paired samples — one in the acute illness, one in recovery, run together</td><td>A single titre cannot separate current infection from old antibodies; a four-fold or greater rise is what confirms</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Serology sampling schedule</td><td>First sample 10–12 days after onset; second sample 10 days after the first</td><td>WHO's outbreak standard for confirmation</td><td>WHO Leptospirosis Outbreak Toolbox</td></tr>
+    <tr><td>Urine culture</td><td>Day 10 to day 30 after onset</td><td>The organism is shed in urine only in the later phase</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Dark field microscopy</td><td>Not as a sole test</td><td>Sensitivity 40.2%, specificity 61.5% — explicitly not recommended as a sole diagnostic tool</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Any serology</td><td>Interpret with care</td><td>Cross-reactivity is documented with hepatitis A and hepatitis E, both of which also cause fever and jaundice in monsoon Chennai</td><td>NCDC, MoHFW, 2015</td></tr>
+  </tbody>
+</table>
+
+<p>Three practical consequences for a patient in Egmore, Chennai. Write down the date the fever started and take it to the consultation — it decides which test is worth sending. Do not take an antibiotic before a blood culture is drawn, because the sample must be collected before antibiotics are started. And if the first test was negative and the fever continues or returns, go back; a repeat sample later in the illness is often what makes the diagnosis.</p>
+
+<p>Supporting blood tests do not diagnose leptospirosis, but they tell a doctor how the illness is behaving. NCDC lists what a general laboratory may show: mildly raised white cell count with neutrophilia, ESR around 60 mm, low platelets, raised blood urea and serum creatinine, protein and blood and casts in the urine, raised bilirubin, and marked elevation of CPK. One correction matters for readers used to dengue content — <strong>the platelet count is not the number to watch here.</strong> NCDC states that bleeding in leptospirosis is not directly related to the level of thrombocytopenia.</p>
+
+<h2>Which signs mean this needs a hospital and not an outpatient clinic?</h2>
+
+<p>Any one of the signs in the table below. NCDC's instruction is that these patients are shifted to a higher centre <strong>immediately, whether the rapid test is positive or negative</strong>.</p>
+
+<table>
+  <thead>
+    <tr><th>Sign</th><th>Threshold where one is given</th><th>Source</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Low blood pressure</td><td>Hypotension</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Passing little or no urine</td><td>Less than 400 ml in a day</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Jaundice — yellow eyes or skin</td><td>Serum bilirubin above 3.0 mg%</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Coughing blood, or breathlessness</td><td>—</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Any bleeding tendency</td><td>—</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Irregular pulse</td><td>—</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Altered consciousness, confusion, drowsiness</td><td>—</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Cold hands and feet</td><td>Field-worker version of the same list</td><td>NCDC, MoHFW, 2015, Annexure 2</td></tr>
+    <tr><td>Severe muscle pain</td><td>Field-worker version of the same list</td><td>NCDC, MoHFW, 2015, Annexure 2</td></tr>
+  </tbody>
+</table>
+
+<p>The reason for the urgency is in the numbers. About 90% of patients have the milder anicteric form — fever and muscle pain without jaundice — and about 5 to 10% have the icteric form with jaundice and organ involvement, which is Weil's disease. Case fatality across leptospirosis runs from 0 to 15%, and icteric disease carries a mortality of 5 to 15% (NCDC 2015; Levett, 2001). More than 90% of deaths are from bleeding into the lungs and from kidney complications, and NCDC states that death can occur within hours to two days from pulmonary haemorrhage and severe respiratory distress. Jaundice, when it comes, starts after 4 to 7 days of illness. Leptospirosis in pregnancy carries a poor prognosis, with high foetal loss reported in the first trimester and near term.</p>
+
+<table>
+  <thead>
+    <tr><th>Organ</th><th>What happens in severe disease</th><th>What it requires</th><th>Source</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Kidney</td><td>Acute tubular necrosis and interstitial nephritis; cola-coloured urine; falling urine output; features of uraemia. Function worsens through the first week into the second, then recovers by about week four only if renal support is maintained</td><td>Dialysis in severe acute kidney failure</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Lungs</td><td>Cough, coughing blood, rapidly increasing breathlessness; bleeding into the air sacs. This is the commonest cause of death</td><td>Oxygen, mechanical ventilation, intensive care</td><td>NCDC 2015; NICD/DGHS, 2006</td></tr>
+    <tr><td>Liver</td><td>Jaundice from day 4 to 7, enlarged tender liver. Liver enzymes are only normal or mildly raised, unlike viral hepatitis</td><td>Inpatient assessment</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Circulation</td><td>Low blood pressure, cold clammy extremities, fast or irregular pulse</td><td>Fluids, blood-pressure support, cardiac monitoring</td><td>NCDC 2015; NICD/DGHS, 2006</td></tr>
+    <tr><td>Brain</td><td>Meningitis, confusion, seizures</td><td>Inpatient care</td><td>NCDC, MoHFW, 2015</td></tr>
+  </tbody>
+</table>
+
+<p>Every requirement in that right-hand column is something AJSMC does not have. The honest role of an outpatient centre in Egmore, Chennai is suspicion, examination, baseline tests and early referral — never the treatment of severe leptospirosis.</p>
+
+<h2>Should I take an antibiotic after wading through flood water?</h2>
+
+<p>Not on your own, and not on a chemist's advice. A preventive antibiotic course after exposure is a public-health measure, not a personal one: the national guideline directs it at defined occupational groups in endemic areas where a health authority has identified a cluster of cases, during the peak transmission season, for a fixed period of six weeks that is never to be extended beyond eight (NCDC, MoHFW, 2015). Nothing in that describes an individual who walked through water last Tuesday.</p>
+
+<p>The evidence behind it is also weaker than the confidence with which it is repeated. The Cochrane review of antibiotic prophylaxis for leptospirosis (Win TZ and colleagues, Cochrane Database of Systematic Reviews, 2024, CD014959.pub2) examined five randomised trials with 2,593 participants across Brazil, Sri Lanka, India, Panama and Iran, with evidence current to April 2023. It concluded that there is <strong>insufficient evidence to support or refute</strong> antibiotic prophylaxis: antibiotics may make little to no difference to the clinical diagnosis of leptospirosis and little to no difference to deaths from any cause, and may increase non-serious side effects such as diarrhoea, nausea and vomiting.</p>
+
+<p>Treatment of a suspected or confirmed case is a different matter, and it is a doctor's decision made after examination. This article names no antibiotic, no dose and no duration, deliberately. A self-started antibiotic before a blood sample is drawn can also destroy the chance of a culture-confirmed diagnosis.</p>
+
+<h2>What is safe to take for the fever and the muscle pain?</h2>
+
+<p>Less than people assume, which is why the advice here is to be examined rather than to be medicated. Two specific warnings apply to leptospirosis and both are counter-intuitive.</p>
+
+<ul>
+  <li><strong>Do not take ibuprofen, diclofenac, nimesulide, mefenamic acid or any similar painkiller</strong> for the muscle pain. NSAIDs are named among the drugs to avoid where there is kidney involvement (NICD/DGHS, 2006), and kidney involvement is almost invariable in leptospirosis (NCDC, 2015). These are exactly the tablets an aching-calves patient reaches for.</li>
+  <li><strong>If the eyes or skin have turned yellow, or the urine is dark, stop self-medicating entirely and get tested before taking anything.</strong> Paracetamol is listed among the drugs to avoid where the liver is involved in leptospirosis (NICD/DGHS, 2006), and jaundice in the severe form starts from day 4 to 7 of illness.</li>
+  <li>There is no home treatment for leptospirosis. No decoction, herbal preparation or kitchen remedy prevents it after exposure or treats it once it starts. Tamil Nadu's Health Department advisory of 12 August 2026 tells the public to consult a doctor and undergo medical examination instead of self-medicating, and that is the correct instruction.</li>
+</ul>
+
+<h2>How common is leptospirosis in Chennai?</h2>
+
+<p>Common enough that Chennai alone accounts for over a third of the whole state's confirmed cases. The figures below come from the Tamil Nadu Directorate of Public Health and Preventive Medicine's own analysis of IDSP-IHIP surveillance data, and from Ministry of Health figures tabled in the Rajya Sabha.</p>
+
+<table>
+  <thead>
+    <tr><th>Measure</th><th>Figure</th><th>Period</th><th>Source</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Samples tested in Tamil Nadu</td><td>73,329</td><td>Apr 2021 – Mar 2024</td><td>TN J Public Health Med Res, Vol 4(2), Apr–Jun 2024 (IDSP-IHIP, DPH&amp;PM)</td></tr>
+    <tr><td>Confirmed cases in Tamil Nadu</td><td>7,080</td><td>Apr 2021 – Mar 2024</td><td>Same</td></tr>
+    <tr><td>Positivity rate</td><td>9.7% (95% CI 9.5–9.9)</td><td>Apr 2021 – Mar 2024</td><td>Same</td></tr>
+    <tr><td>Chennai's share of state cases</td><td>35.4% — the highest district; next is Thiruvallur at 9.6%</td><td>Apr 2021 – Mar 2024</td><td>Same</td></tr>
+    <tr><td>Confirmed cases requiring hospital admission</td><td>63.6% — only 36.4% were managed as outpatients</td><td>Apr 2021 – Mar 2024</td><td>Same</td></tr>
+    <tr><td>Who gets it</td><td>Mean age 35 years; 66.1% aged 20–60; females 50.18%, males 49.78%</td><td>Apr 2021 – Mar 2024</td><td>Same</td></tr>
+    <tr><td>How cases were confirmed</td><td>IgM ELISA 70.8%, MAT 26.6%, rapid IgM 2.3%, culture 0.2%</td><td>Apr 2021 – Mar 2024</td><td>Same</td></tr>
+    <tr><td>Seasonal pattern</td><td>Cases start rising in June, climb steadily to December, then fall — consistent every year</td><td>2021–2024</td><td>Same</td></tr>
+    <tr><td>Tamil Nadu confirmed cases</td><td>2,901 (2023); 3,923 (2024); 2,862 (2025); 1,473 (January–June 2026)</td><td>2023 – Jun 2026</td><td>MoHFW figures tabled in Rajya Sabha, reported 4 August 2026</td></tr>
+    <tr><td>India confirmed cases</td><td>8,121, of which the five southern states account for 4,340 (53.4%) — Kerala 1,726, Tamil Nadu 1,473, Karnataka 624, Andhra Pradesh 416, Telangana 101</td><td>January – June 2026</td><td>Same</td></tr>
+  </tbody>
+</table>
+
+<p>Read the 2026 figure with its date attached. The 1,473 cases cover January to June only, and the state's own seasonal analysis shows cases climbing from June through to December. Publishing in mid-August places Chennai on the rising limb of the curve, not past it. This is not an outbreak — it is the season.</p>
+
+<p>The 63.6% hospitalisation figure deserves separate attention, because it corrects a comfortable misreading. About 90% of leptospirosis is the milder clinical form, but that describes the form of the illness, not the setting it is safely managed in. Nearly two out of three confirmed cases in Tamil Nadu needed a hospital bed.</p>
+
+<h2>What actually prevents leptospirosis during the Chennai monsoon?</h2>
+
+<p>Physical barriers and skin care, before and after exposure. This is NCDC's own list, taken from the national guideline and its public-facing prevention poster, whose headline is that early reporting to a health facility can prevent illness and death.</p>
+
+<table>
+  <thead>
+    <tr><th>Measure</th><th>The guidance as written</th><th>Source</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Boots and gloves</td><td>Do not enter or work in dirty water without rubber boots or gloves</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Cuts and grazes</td><td>Apply an antiseptic ointment such as betadine to any cut or abrasion on the lower limbs before entering and after leaving</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>After exposure</td><td>If you have walked through dirty or flood water barefoot, wash the feet thoroughly with soap and water</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Washing</td><td>Do not bathe, or wash the face or hands, in dirty water</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Rodents at home</td><td>Do not litter food grains or leftover food; keep surroundings clean and clutter-free to avoid rodent infestation</td><td>NCDC, MoHFW, 2015</td></tr>
+    <tr><td>Rodents in the neighbourhood</td><td>The Greater Chennai Corporation's Vector Control Department has a Zoonotic Diseases Control wing that keeps rodents in check, as they are responsible for leptospirosis and scrub typhus outbreaks. A rodent complaint has a municipal address</td><td>Greater Chennai Corporation, Public Health Department</td></tr>
+    <tr><td>When to present</td><td>Contact a health facility immediately if you have fever with headache, red eyes, calf muscle pain or chest pain</td><td>NCDC, MoHFW, 2015</td></tr>
+  </tbody>
+</table>
+
+<p>For a household in Egmore, Chennai the practical version is short: keep a pair of rubber boots by the door through the monsoon, cover any cut on the foot or leg before going out into water, wash and dry the feet with soap the moment you are back indoors, and keep food and grain in closed containers so rats have no reason to be in the building.</p>
+
+<h2>What can AJSMC in Egmore do about this, and what can it not?</h2>
+
+<p>What an outpatient centre can usefully do is see a febrile patient early, take the exposure history properly, examine for the separators, send baseline blood and urine tests, and refer without delay if any of the warning signs above are present. AJSMC has an in-house laboratory in Egmore, Chennai handling blood and urine samples, and outpatient consultations in General Medicine run Monday to Saturday, 10am to 9pm.</p>
+
+<p>Confirmatory leptospirosis testing — IgM ELISA, MAT, PCR and culture — is specialised serology. Before travelling for a test, call 044 2532 2021 and ask which of the tests named in this article can be run in-house and which are sent to a referral laboratory, and by what time in the day a sample has to be given. Sending a sample to the wrong place wastes the very day of illness this article is about.</p>
+
+<p>What AJSMC cannot do is treat severe leptospirosis, and no patient should be brought here for it. Dialysis, oxygen, mechanical ventilation, blood-pressure support and cardiac monitoring are what severe disease needs, and AJSMC has no inpatient beds, no intensive care, no dialysis and no 24-hour emergency department. Outside 10am to 9pm, and on Sundays, there is no outpatient service here at all — which matters in an illness where lung bleeding can kill within hours to two days. For those patients the destination is a hospital with a 24-hour emergency department, reached by calling 108 if needed.</p>
+
+<h2>When should you see a doctor?</h2>
+
+<p>See a doctor for any fever that starts within a month of contact with flood water, stagnant water, sewage, wet mud, farm work or animals — and say so at the consultation, even if nobody asks. Come sooner if the fever comes with severe calf, thigh or lower-back muscle pain, an intense headache that painkillers do not touch, or redness of both eyes without discharge. Come back if the fever settles for two or three days and then returns, because that is the pattern of this illness and not the end of it.</p>
+
+<p>Go to a hospital with a 24-hour emergency department instead, or call 108, if there is yellowing of the eyes or skin, reduced or absent urine, breathlessness, blood in the cough, any bleeding, confusion or drowsiness, or cold hands and feet. Those are NCDC's own immediate-referral criteria, and they apply whether a rapid test has come back positive or negative.</p>
+
+<p>Take the date the fever started and the date of the water exposure with you. Between them, those two dates decide which test is worth sending and how it should be read.</p></article>
+  </section>
+
+  <footer>
+    <p>AJ Subaitha Medical Centre · Police Commissioner Office Road, Egmore, Chennai 600008</p>
+    <p>Draft for medical review. Not published, not indexed, and not to be shared as patient advice until approved.</p>
+  </footer>
+
+</div>

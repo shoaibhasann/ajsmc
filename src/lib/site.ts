@@ -10,16 +10,24 @@ export const siteConfig = {
    * answer engines quote a self-contained opening paragraph almost verbatim, so it
    * names the organisation, the category, the locality and the hours in plain
    * sentences rather than opening with adjectives.
+   *
+   * A getter, not a string, and deliberately so: the counts come from `listedDoctors`
+   * and `specialties`, which are declared further down this file. Getters are lazy, so
+   * they read the arrays at access time rather than at module load. This once said
+   * "17 consultants" while the site rendered 28 — the schema-facing description
+   * contradicting the page it described. Do not inline these numbers back.
    */
-  description:
-    "AJ Subaitha Medical Centre (AJSMC) is a multi speciality hospital on Police Commissioner Office Road in Egmore, Chennai. It provides consultations across 12 departments, day-care surgery, sleep studies and in-house lab and imaging, with 17 specialist consultants under one roof. Outpatient timings are Monday to Saturday, 10am to 9pm, and treatment costs are quoted upfront.",
+  get description() {
+    return `AJ Subaitha Medical Centre (AJSMC) is a multi speciality hospital on Police Commissioner Office Road in Egmore, Chennai. It provides consultations across ${specialties.length} departments, day-care surgery, sleep studies and in-house lab and imaging, with ${listedDoctors.length} specialist consultants under one roof. Outpatient timings are Monday to Saturday, 10am to 9pm, and treatment costs are quoted upfront.`;
+  },
   /**
    * The `description` above is the long form: it goes into schema.org and is what an AI
    * answer engine quotes, so it stays complete. This one is for the meta tag, where
    * Google truncates past roughly 160 characters and the rest is wasted.
    */
-  metaDescription:
-    "Multi speciality hospital in Egmore, Chennai. 17 consultants across 12 departments, day-care surgery, sleep studies and an in-house lab. Open Mon to Sat, 10am to 9pm.",
+  get metaDescription() {
+    return `Multi speciality hospital in Egmore, Chennai. ${listedDoctors.length} consultants across ${specialties.length} departments, day-care surgery, sleep studies and an in-house lab. Open Mon to Sat, 10am to 9pm.`;
+  },
   url: "https://www.ajsmc.in",
   ogImage: "/og-image.jpg",
   /**
@@ -64,7 +72,7 @@ export const siteConfig = {
    * going to a hospital with a casualty department can die of the difference. Every
    * public string about hours comes from this field. Keep it as service language.
    */
-  roundTheClock: "24 Hours Service",
+  roundTheClock: "24-Hour Helpline",
   roundTheClockNote: "24/7 medical assistance by phone",
   // Official Google listing share link — opens the hospital's place page/directions.
   mapsHref: "https://share.google/cwOs9gRRkiI2E8dNM",
@@ -86,6 +94,7 @@ export const navLinks = [
   { label: "About Us", href: "/about" },
   { label: "Specialties", href: "/specialties" },
   { label: "Doctors", href: "/doctors" },
+  { label: "Health Library", href: "/blog" },
   { label: "Reach Us", href: "/contact" },
 ] as const;
 
@@ -443,15 +452,43 @@ export const doctors: Doctor[] = [
 ];
 
 /**
- * The doctors the site actually shows. A portrait is what makes a card presentable,
- * so an entry without one is held back until its photo lands rather than rendering a
- * blank tile.
+ * The doctors the site shows — the full roster, ordered so everyone with a portrait
+ * comes first and those still awaiting a photo fall to the end (they render with an
+ * on-brand avatar placeholder instead of a blank tile).
  *
- * Every public count and listing reads from here, never from `doctors` — otherwise a
- * link promises "view all 28" and the page it opens shows 17. Keep the full roster in
- * `doctors`; add an `image` to move someone onto the site.
+ * Every public count and listing reads from here, never from `doctors` — so the count
+ * a link promises ("view all N doctors") always matches the page it opens. Order within
+ * each group preserves `doctors`; add an `image` to move someone up into the photographed
+ * group.
  */
-export const listedDoctors: Doctor[] = doctors.filter((d) => d.image);
+export const listedDoctors: Doctor[] = [
+  ...doctors.filter((d) => d.image),
+  ...doctors.filter((d) => !d.image),
+];
+
+/** URL slug for a department: "Obstetrics & Gynaecology" -> "obstetrics-gynaecology". */
+export function specialtySlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/&/g, " ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+/** Consultants listed under a department, in roster order. */
+export function doctorsInSpecialty(name: string): Doctor[] {
+  return listedDoctors.filter((d) => d.specialty === name);
+}
+
+/**
+ * Departments that get their own page. A department is only given a URL once a consultant
+ * is listed under it — a page for a service with nobody to perform it is the same overclaim
+ * as advertising emergency care without a casualty unit. General Surgery currently has no
+ * consultant on the roster, so it has no page until one is added here.
+ */
+export const specialtiesWithPages: Specialty[] = specialties.filter(
+  (s) => doctorsInSpecialty(s.name).length > 0,
+);
 
 export const doctorSpecialtyFilters = [
   "Reproductive Medicine",
@@ -490,8 +527,16 @@ export type SignatureService = {
  */
 export const signatureServices: SignatureService[] = [
   {
-    name: "Heart Care",
-    description: "Chest pain, BP and palpitations checked with ECG",
+    /**
+     * Named for the test, not the symptom, and deliberately so. There is no cardiologist
+     * among the consultants and no casualty unit, so this card must not read as an
+     * invitation to anyone with chest pain — the FAQ on this same site correctly tells
+     * that patient to call 108. What AJSMC does run is an outpatient ECG and blood
+     * pressure check under General Medicine, which is what this now describes. Do not
+     * put "chest pain" back into this card without a cardiologist on the roster.
+     */
+    name: "Heart Checks",
+    description: "ECG, blood pressure and lipid profile, read by a physician",
     asset: "ecgTest",
   },
   {
@@ -515,32 +560,19 @@ export const facilities = [
   { name: "Pharmacy & Diagnostics", span: "wide", accent: true },
 ] as const;
 
-export const testimonials = [
-  {
-    name: "Priya Ramesh",
-    role: "Ophthalmology · Day Care",
-    quote:
-      "My cataract surgery was done the same day and I was home by evening. The doctors explained each step, and the cost was exactly what they quoted.",
-    rating: 5,
-    dark: false,
-  },
-  {
-    name: "Karthik Subramanian",
-    role: "Sleep Study · Pulmonology",
-    quote:
-      "I did my sleep study here and the whole team explained every step. Comfortable overnight stay and a clear diagnosis the next morning.",
-    rating: 5,
-    dark: true,
-  },
-  {
-    name: "Fathima Noor",
-    role: "Family · Multi-Specialty",
-    quote:
-      "From paediatrics to my mother's diabetes care, every specialist is under one roof. Friendly staff and fair pricing kept us coming back.",
-    rating: 5,
-    dark: false,
-  },
-] as const;
+/**
+ * Patient testimonials are not published on this site, and the removal is deliberate.
+ *
+ * Three invented patients with invented quotes used to sit here, carried over from the
+ * design mockup and shown to people choosing where to take a sick relative. Real quotes
+ * would not fix it either: IMC (Professional Conduct, Etiquette and Ethics) Regulations
+ * 2002 reg. 6.1.1 bars a practitioner or their institution from advertising "cases,
+ * operations, cures or remedies", a website included, and the CCPA's 2022
+ * misleading-advertisement guidelines reach the hospital as the advertiser.
+ *
+ * The route to visible social proof is a verified Google Business Profile, where the
+ * reviews are the patients' own and are attributable. Do not reintroduce an array here.
+ */
 
 /**
  * Written for the two things that read them. Google shows these in People Also Ask,
@@ -569,7 +601,7 @@ export const faqs = [
   },
   {
     q: "Which specialties are available at AJSMC?",
-    a: "AJSMC has 12 departments: General Medicine, General Surgery, Ophthalmology, Dermatology, Pediatrics, Orthopedics, Urology, Obstetrics and Gynaecology, Diabetology, Reproductive Medicine, Psychology and Pathology. Seventeen consultants practise across them, so most conditions can be seen without a referral elsewhere.",
+    a: `AJSMC has ${specialties.length} departments: General Medicine, General Surgery, Ophthalmology, Dermatology, Pediatrics, Orthopedics, Urology, Obstetrics and Gynaecology, Diabetology, Reproductive Medicine, Psychology and Pathology. ${listedDoctors.length} consultants practise across them, so most conditions can be seen without a referral elsewhere.`,
   },
   {
     q: "Is AJSMC open 24 hours?",
@@ -577,7 +609,7 @@ export const faqs = [
   },
   {
     q: "What is day-care surgery?",
-    a: "Day-care surgery means the procedure and your recovery happen on the same day, so you go home that evening instead of staying overnight. Cataract surgery, hernia repair and several gynaecological and urological procedures are done this way at AJSMC. It costs less than an inpatient admission and gets you back home sooner.",
+    a: "Day-care surgery means the procedure and your recovery happen on the same day, so you go home that evening instead of staying overnight. Cataract surgery and several gynaecological and urological procedures are done this way at AJSMC. You are told what the procedure involves, and what it will cost, before you decide.",
   },
   {
     q: "What is a sleep study and who needs one?",
@@ -598,7 +630,7 @@ export const faqs = [
 ] as const;
 
 export const aboutHighlights = [
-  "17 specialist consultants across 12 departments",
+  `${listedDoctors.length} specialist consultants across ${specialties.length} departments`,
   "Day-care surgery and sleep studies on site",
   "Treatment costs quoted upfront, before you decide",
 ];
@@ -606,7 +638,7 @@ export const aboutHighlights = [
 export const whyChooseUs = [
   {
     title: "Expert Specialists",
-    description: "17 consultants covering 12 departments, in one building.",
+    description: `${listedDoctors.length} consultants covering ${specialties.length} departments, in one building.`,
     icon: "users",
     tone: "green",
   },
@@ -623,7 +655,7 @@ export const whyChooseUs = [
     tone: "green",
   },
   {
-    title: "24 Hours Service",
+    title: "24-Hour Helpline",
     description: "A helpline that answers at any hour, plus round-the-clock inpatient support.",
     icon: "clock",
     tone: "green",

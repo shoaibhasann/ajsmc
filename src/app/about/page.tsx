@@ -8,11 +8,11 @@ import { WhyChooseUs } from "@/components/about/WhyChooseUs";
 import { Leadership } from "@/components/about/Leadership";
 import { assets } from "@/lib/assets";
 import { breadcrumbSchema } from "@/lib/schema";
-import { siteConfig } from "@/lib/site";
+import { listedDoctors, siteConfig, specialties } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About Our Hospital in Egmore",
-  description: "About AJ Subaitha Medical Centre, a multi speciality hospital in Egmore, Chennai. 17 consultants, 12 departments, day-care surgery and an in-house lab, with costs quoted upfront.",
+  title: "About Our Hospital in Chennai",
+  description: `About AJ Subaitha Medical Centre, a multi speciality hospital in Egmore, Chennai. ${listedDoctors.length} consultants, ${specialties.length} departments, day-care surgery and an in-house lab, with costs quoted upfront.`,
   alternates: { canonical: "/about" },
 };
 

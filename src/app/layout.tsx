@@ -24,7 +24,9 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Multi Speciality Hospital in Egmore, Chennai | AJSMC",
+    // "Chennai" carries the volume; "Egmore" is the qualifier that wins the local
+    // pack and tells a patient whether we are reachable. City first, locality second.
+    default: "Multi Speciality Hospital in Chennai | AJSMC, Egmore",
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.metaDescription,
@@ -52,7 +54,7 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: siteConfig.url,
     siteName: siteConfig.fullName,
-    title: `${siteConfig.fullName}: Multi Speciality Hospital in Egmore, Chennai`,
+    title: `${siteConfig.fullName}: Multi Speciality Hospital in Chennai`,
     description: siteConfig.description,
   },
   twitter: {
