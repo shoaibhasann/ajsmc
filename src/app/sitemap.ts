@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "@/lib/blog";
-import { doctors, siteConfig } from "@/lib/site";
+import { doctors, siteConfig, specialtySlug, specialtiesWithPages } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["", "/about", "/specialties", "/doctors", "/blog", "/contact"];
@@ -28,5 +28,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...pages, ...consultants, ...posts];
+  const departments: MetadataRoute.Sitemap = specialtiesWithPages.map((s) => ({
+    url: `${siteConfig.url}/specialties/${specialtySlug(s.name)}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  return [...pages, ...departments, ...consultants, ...posts];
 }

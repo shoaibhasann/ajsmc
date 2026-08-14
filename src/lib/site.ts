@@ -466,6 +466,30 @@ export const listedDoctors: Doctor[] = [
   ...doctors.filter((d) => !d.image),
 ];
 
+/** URL slug for a department: "Obstetrics & Gynaecology" -> "obstetrics-gynaecology". */
+export function specialtySlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/&/g, " ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+/** Consultants listed under a department, in roster order. */
+export function doctorsInSpecialty(name: string): Doctor[] {
+  return listedDoctors.filter((d) => d.specialty === name);
+}
+
+/**
+ * Departments that get their own page. A department is only given a URL once a consultant
+ * is listed under it — a page for a service with nobody to perform it is the same overclaim
+ * as advertising emergency care without a casualty unit. General Surgery currently has no
+ * consultant on the roster, so it has no page until one is added here.
+ */
+export const specialtiesWithPages: Specialty[] = specialties.filter(
+  (s) => doctorsInSpecialty(s.name).length > 0,
+);
+
 export const doctorSpecialtyFilters = [
   "Reproductive Medicine",
   "General Medicine",

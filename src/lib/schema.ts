@@ -1,5 +1,13 @@
 import { getReviewer, type BlogPost } from "@/lib/blog";
-import { faqs, listedDoctors, siteConfig, specialties, type Doctor } from "@/lib/site";
+import {
+  faqs,
+  listedDoctors,
+  siteConfig,
+  specialties,
+  specialtySlug,
+  type Doctor,
+  type Specialty,
+} from "@/lib/site";
 
 export function organizationSchema() {
   return {
@@ -131,6 +139,50 @@ export function physicianSchema(doctor: Doctor) {
       addressCountry: siteConfig.address.country,
     },
     telephone: siteConfig.phone,
+  };
+}
+
+/**
+ * A department page. `MedicalClinic` rather than a bare service type, because the entity a
+ * patient is looking for is "somewhere in Egmore that does this, with a named doctor" — so
+ * the markup ties the specialty to the physicians who actually hold it and to the address.
+ */
+export function specialtySchema(specialty: Specialty, consultants: Doctor[]) {
+  const url = `${siteConfig.url}/specialties/${specialtySlug(specialty.name)}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "MedicalClinic",
+    "@id": url,
+    url,
+    name: `${specialty.name} — ${siteConfig.fullName}`,
+    description: specialty.context,
+    medicalSpecialty: specialty.name,
+    parentOrganization: { "@id": `${siteConfig.url}/#organization` },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: siteConfig.address.line1,
+      addressLocality: siteConfig.address.locality,
+      addressRegion: siteConfig.address.region,
+      postalCode: siteConfig.address.postalCode,
+      addressCountry: siteConfig.address.country,
+    },
+    telephone: siteConfig.phone,
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        opens: "10:00",
+        closes: "21:00",
+      },
+    ],
+    physician: consultants.map((doc) => ({
+      "@type": "Physician",
+      "@id": `${siteConfig.url}/doctors/${doc.slug}`,
+      name: doc.name,
+      medicalSpecialty: doc.specialty,
+      jobTitle: doc.role,
+      ...(doc.reg && { identifier: doc.reg }),
+    })),
   };
 }
 
