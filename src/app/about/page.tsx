@@ -11,7 +11,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 import { listedDoctors, siteConfig, specialties } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About Our Hospital in Egmore",
+  title: "About Our Hospital in Chennai",
   description: `About AJ Subaitha Medical Centre, a multi speciality hospital in Egmore, Chennai. ${listedDoctors.length} consultants, ${specialties.length} departments, day-care surgery and an in-house lab, with costs quoted upfront.`,
   alternates: { canonical: "/about" },
 };

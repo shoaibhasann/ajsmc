@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const doctor = doctors.find((d) => d.slug === slug);
   if (!doctor) return {};
 
-  const title = `${doctor.name} — ${doctor.specialty} in Egmore, Chennai`;
+  const title = `${doctor.name} — ${doctor.specialty} in Chennai | AJSMC Egmore`;
   return {
     title,
     description: `${doctor.name}, ${doctor.role} at ${siteConfig.fullName}, Egmore, Chennai.${

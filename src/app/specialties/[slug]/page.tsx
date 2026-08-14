@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!specialty) return {};
 
   const consultants = doctorsInSpecialty(specialty.name);
-  const title = `${specialty.name} in Egmore, Chennai`;
+  const title = `${specialty.name} in Chennai — AJSMC, Egmore`;
 
   return {
     title,
@@ -85,7 +85,7 @@ export default async function SpecialtyPage({ params }: Params) {
             <SpecialtyIcon icon={specialty.icon} className="mb-5" />
 
             <h1 className="max-w-[760px] font-heading text-[34px] font-extrabold leading-[1.06] tracking-tight text-navy sm:text-[44px] lg:text-[52px]">
-              {specialty.name} in {siteConfig.address.locality}, {siteConfig.address.city}
+              {specialty.name} in {siteConfig.address.city}
             </h1>
             <p className="mt-4 font-body text-[17px] font-semibold text-green-deep">
               {specialty.description}
