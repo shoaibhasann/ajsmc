@@ -74,6 +74,16 @@ export default async function ReviewPage({ params }: Params) {
               {reviewer.role}
               {reviewer.reg ? ` · ${reviewer.reg}` : ""}
             </p>
+            {/* The registration number is the one credential on the page a reader can check
+                independently. Where we do not hold it, say so here rather than publishing a
+                byline that looks verifiable and is not. */}
+            {!reviewer.reg && (
+              <p className="mt-2 rounded-lg bg-[#FBF4DE] px-3 py-2 font-body text-[12.5px] leading-relaxed text-[#6B5410]">
+                We do not have your registration number on file. Please send it — it appears
+                beside your name on the published article, and it is the detail a reader can
+                verify for themselves.
+              </p>
+            )}
             {second && (
               <p className="mt-2 font-body text-[13px] text-muted">
                 Second reader: {second.name}
