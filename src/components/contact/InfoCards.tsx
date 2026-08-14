@@ -46,9 +46,9 @@ export function InfoCards() {
           </span>
           <h3 className="mb-1 font-heading text-base font-bold text-white">Opening Hours</h3>
           <p className="font-body text-[13px] leading-snug text-white/72">
-            {siteConfig.hoursShort}
+            Consultations {siteConfig.hoursShort}
             <br />
-            <span className="font-semibold text-green-bright">24/7 Emergency</span>
+            <span className="font-semibold text-green-bright">{siteConfig.roundTheClock}</span>
           </p>
         </div>
       </div>

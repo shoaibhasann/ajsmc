@@ -199,7 +199,7 @@ export function Header() {
                   <span className="text-faint">·</span>
                   <span className="inline-flex items-center gap-1.5 text-green-deep">
                     <span className="h-[6px] w-[6px] rounded-full bg-green-bright shadow-[0_0_0_3px_rgba(52,208,88,0.25)]" />
-                    24/7 Emergency
+                    {siteConfig.roundTheClock}
                   </span>
                 </div>
               </motion.div>

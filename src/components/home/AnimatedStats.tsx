@@ -6,7 +6,7 @@ import { motion, useInView } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { assets } from "@/lib/assets";
 import { AJ_EASE } from "@/lib/motion";
-import { siteConfig } from "@/lib/site";
+import { listedDoctors, siteConfig, specialties } from "@/lib/site";
 
 function useCountUp(target: number, active: boolean, duration = 1500) {
   const [value, setValue] = useState(0);
@@ -30,8 +30,8 @@ function useCountUp(target: number, active: boolean, duration = 1500) {
 
 const stats = [
   { key: "years", target: siteConfig.yearsOfService, label: "Years of Trusted Care" },
-  { key: "docs", target: siteConfig.doctorCount, label: "Specialist Doctors" },
-  { key: "specs", target: siteConfig.specialtyCount, label: "Specialty Departments" },
+  { key: "docs", target: listedDoctors.length, label: "Specialist Doctors" },
+  { key: "specs", target: specialties.length, label: "Specialty Departments" },
 ] as const;
 
 export function AnimatedStats() {
@@ -60,7 +60,7 @@ export function AnimatedStats() {
           <div className="font-heading text-[34px] font-extrabold tracking-tight text-green-bright sm:text-[44px] lg:text-[52px]">
             24/7
           </div>
-          <div className="mt-1 font-body text-sm font-semibold text-white/85">Emergency Service</div>
+          <div className="mt-1 font-body text-sm font-semibold text-white/85">Helpline Service</div>
         </div>
       </Container>
     </section>

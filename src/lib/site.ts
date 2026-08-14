@@ -5,14 +5,37 @@ export const siteConfig = {
   fullName: "AJ Subaitha Medical Centre",
   shortDescription: "Multi-specialty hospital in Egmore, Chennai",
   tagline: "Expert care, every specialty, one roof.",
+  /**
+   * Written to be lifted whole. Search engines use it as the fallback snippet and AI
+   * answer engines quote a self-contained opening paragraph almost verbatim, so it
+   * names the organisation, the category, the locality and the hours in plain
+   * sentences rather than opening with adjectives.
+   */
   description:
-    "AJ Subaitha Medical Centre (AJSMC) is a trusted multi-specialty hospital in Egmore, Chennai, offering 15+ specialist doctors across 12+ departments, day-care surgery, sleep studies and 24-hour emergency care — with affordable, transparent pricing and no heavy charges.",
+    "AJ Subaitha Medical Centre (AJSMC) is a multi speciality hospital on Police Commissioner Office Road in Egmore, Chennai. It provides consultations across 12 departments, day-care surgery, sleep studies and in-house lab and imaging, with 17 specialist consultants under one roof. Outpatient timings are Monday to Saturday, 10am to 9pm, and treatment costs are quoted upfront.",
+  /**
+   * The `description` above is the long form: it goes into schema.org and is what an AI
+   * answer engine quotes, so it stays complete. This one is for the meta tag, where
+   * Google truncates past roughly 160 characters and the rest is wasted.
+   */
+  metaDescription:
+    "Multi speciality hospital in Egmore, Chennai. 17 consultants across 12 departments, day-care surgery, sleep studies and an in-house lab. Open Mon to Sat, 10am to 9pm.",
   url: "https://www.ajsmc.in",
   ogImage: "/og-image.jpg",
+  /**
+   * UNVERIFIED. Neither the founding year nor the years-of-service figure appears
+   * anywhere on ajsmc.in, and they are published here as fact: on the About hero, in
+   * the hero badge, in the animated counter, and as `foundingDate` in the Hospital
+   * schema. Confirm both with the hospital, or drop them. An invented founding date is
+   * the kind of detail that quietly undermines a medical site's credibility, and
+   * Google reads YMYL trust signals closely.
+   *
+   * The doctor and department counts are no longer duplicated here. Everything counts
+   * `listedDoctors.length` and `specialties.length` directly, so the numbers on the
+   * page cannot drift from what the page actually shows.
+   */
   founded: "2003",
   yearsOfService: 23,
-  doctorCount: 15,
-  specialtyCount: 12,
   phone: "044 2532 2021",
   phoneHref: "tel:04425322021",
   mobile: "+91 91506 42999",
@@ -32,22 +55,29 @@ export const siteConfig = {
     postalCode: "600008",
     country: "IN",
   },
-  hours: "Mon–Sat · 10:00 am – 09:00 pm",
-  hoursShort: "Mon–Sat: 10am–9pm",
-  emergency: "24 Hours Emergency Service",
+  hours: "Mon to Sat · 10:00 am to 09:00 pm",
+  hoursShort: "Mon to Sat: 10am to 9pm",
+  /**
+   * AJSMC runs a 24-hour helpline and inpatient support. It is NOT a casualty or
+   * trauma unit, and it must never be described as one: a patient who reads
+   * "emergency" on a hospital site and drives here during a cardiac event instead of
+   * going to a hospital with a casualty department can die of the difference. Every
+   * public string about hours comes from this field. Keep it as service language.
+   */
+  roundTheClock: "24 Hours Service",
+  roundTheClockNote: "24/7 medical assistance by phone",
   // Official Google listing share link — opens the hospital's place page/directions.
   mapsHref: "https://share.google/cwOs9gRRkiI2E8dNM",
   // Iframe source for the embedded map (no API key needed with output=embed).
   mapsEmbed:
     "https://maps.google.com/maps?q=AJ+Subaitha+Medical+Centre,+Police+Commissioner+Office+Road,+Egmore,+Chennai+600008&z=16&output=embed",
-  rating: {
-    value: 4.9,
-    count: 1200,
-  },
+  // Real profiles only. These are published as schema.org `sameAs`, which is how
+  // search engines and AI answer engines confirm that this site, the Google listing
+  // and the social accounts are all the same organisation. Placeholder links to a
+  // network's homepage break that link instead of making it.
   social: {
-    facebook: "https://facebook.com",
-    instagram: "https://instagram.com",
-    twitter: "https://twitter.com",
+    facebook: "https://www.facebook.com/61558762183594",
+    instagram: "https://www.instagram.com/ajsmc2022/",
   },
 } as const;
 
@@ -83,43 +113,43 @@ export type Specialty = {
 export const specialties: Specialty[] = [
   {
     name: "Ophthalmology",
-    description: "Eye care, cataract & vision correction",
+    description: "Cataract surgery, eye tests & vision care",
     icon: "eye",
     tone: "green",
     context:
-      "Complete eye care — routine vision checks, cataract surgery, glaucoma management and treatment for everyday eye conditions, backed by modern diagnostics.",
+      "Eye tests, cataract surgery, glaucoma treatment and care for everyday problems like dry eyes, redness, watering and blurred vision. Cataract procedures are done as day care, so you come in and go home the same day.",
   },
   {
     name: "Dermatology",
-    description: "Skin, hair & cosmetology care",
+    description: "Acne, hair fall & skin treatment",
     icon: "sparkles",
     tone: "blue",
     context:
-      "Medical and cosmetic care for skin, hair and nails — from acne, eczema and allergies to hair-loss treatment and skin-health procedures.",
+      "Treatment for acne, eczema, psoriasis, fungal infections, pigmentation and hair fall, along with cosmetic procedures for skin and hair. We treat both adults and children.",
   },
   {
     name: "Pediatrics",
-    description: "Child health & vaccination",
+    description: "Vaccination & child health",
     icon: "baby",
     tone: "green",
     context:
-      "Complete child health — newborn care, vaccinations, growth monitoring and treatment of childhood illnesses in a friendly, reassuring setting.",
+      "Newborn checks, the full vaccination schedule, growth and development monitoring, and treatment for fever, cough, loose motions and the other illnesses children pick up.",
   },
   {
     name: "Orthopedics",
-    description: "Bone, joint & fracture care",
+    description: "Knee pain, fractures & joint care",
     icon: "bone",
     tone: "blue",
     context:
-      "Diagnosis and treatment of bone, joint and muscle problems — fractures, arthritis, sports injuries and joint-replacement guidance.",
+      "Care for bone, joint and muscle problems including fractures, back pain, knee and shoulder pain, arthritis and sports injuries, plus guidance on joint replacement surgery.",
   },
   {
     name: "Urology",
-    description: "Kidney & urinary tract care",
+    description: "Kidney stones & urinary problems",
     icon: "droplet",
     tone: "green",
     context:
-      "Care for the kidneys, bladder and urinary tract — stones, infections, prostate concerns and minimally invasive surgical treatment.",
+      "Treatment for kidney stones, urinary infections, blood in urine, prostate enlargement and difficulty passing urine, including minimally invasive surgery.",
   },
   {
     name: "Obstetrics & Gynaecology",
@@ -127,7 +157,7 @@ export const specialties: Specialty[] = [
     icon: "heart-pulse",
     tone: "blue",
     context:
-      "Full women's and maternity care — pregnancy, safe delivery, menstrual and hormonal health, and minimal-access gynaecological surgery.",
+      "Pregnancy care from the first scan through to delivery, plus treatment for irregular periods, PCOS, fibroids, white discharge, menopause symptoms and infertility. Keyhole gynaecological surgery is available.",
   },
   {
     name: "General Medicine",
@@ -135,7 +165,7 @@ export const specialties: Specialty[] = [
     icon: "stethoscope",
     tone: "green",
     context:
-      "Your first point of care for everyday and chronic conditions — fevers, infections, blood pressure, thyroid and long-term disease management.",
+      "Your first stop for fever, infection, body pain, weakness and stomach trouble, and for long-term conditions such as high blood pressure, thyroid disorders and high cholesterol. Annual health checks are done here too.",
   },
   {
     name: "Diabetology",
@@ -143,7 +173,7 @@ export const specialties: Specialty[] = [
     icon: "activity",
     tone: "blue",
     context:
-      "Focused diabetes and endocrine care — blood-sugar control, lifestyle guidance and management of thyroid and hormonal disorders.",
+      "Diabetes diagnosis and blood sugar control, diet and lifestyle guidance, diabetic foot and eye screening, and treatment for thyroid and other hormonal disorders.",
   },
   {
     name: "Reproductive Medicine",
@@ -151,7 +181,7 @@ export const specialties: Specialty[] = [
     icon: "flower",
     tone: "green",
     context:
-      "Sensitive, confidential care for fertility and infertility, reproductive health and STD treatment — with counselling at every step.",
+      "Private, confidential consultation and treatment for infertility in men and women, sexual health concerns and sexually transmitted infections. Counselling is part of every consultation, and records stay confidential.",
   },
   {
     name: "Psychology",
@@ -159,7 +189,7 @@ export const specialties: Specialty[] = [
     icon: "brain",
     tone: "blue",
     context:
-      "Confidential counselling and mental-wellness support — stress, anxiety, relationship and behavioural concerns for adults and children.",
+      "Confidential counselling for stress, anxiety, low mood, sleep difficulty, exam pressure, relationship problems and behavioural concerns in both children and adults.",
   },
   {
     name: "Pathology",
@@ -167,15 +197,15 @@ export const specialties: Specialty[] = [
     icon: "flask",
     tone: "green",
     context:
-      "In-house laboratory for accurate, timely diagnostics — blood tests, biopsies and routine screening that guide the right treatment.",
+      "An in-house laboratory for blood tests, urine tests, biopsies and routine screening. Samples are processed in the building, so most reports reach your doctor within the same visit.",
   },
   {
-    name: "Emergency Medicine",
-    description: "24/7 urgent & trauma care",
+    name: "General Surgery",
+    description: "Hernia, appendix & general procedures",
     icon: "siren",
     tone: "dark",
     context:
-      "24-hour emergency and trauma care with a ready on-call team — immediate attention when every minute matters.",
+      "Surgical consultation and treatment for common conditions such as hernia, appendicitis, gallstones, piles and lumps. Many of these are done as day-care procedures, so you go home the same day.",
   },
 ];
 
@@ -240,6 +270,7 @@ export const doctors: Doctor[] = [
     role: "Consultant · Pathology & General Physician",
     degree: "MD (Pathology), FIDM, PGDM",
     reg: "TNMC 126449",
+    image: "https://res.cloudinary.com/dh4blkvix/image/upload/v1785246312/ajsmc/assets/ddgcbklj23hteiupdfhr.png",
   },
   {
     slug: "a-najeerul-ameen",
@@ -266,6 +297,7 @@ export const doctors: Doctor[] = [
     role: "Consultant Dermatologist",
     degree: "MD (DVL), DNB (DVL)",
     reg: "TNMC 118632",
+    image: "https://res.cloudinary.com/dh4blkvix/image/upload/v1785174295/ajsmc/assets/ju5gtcavezrhocvqge2b.png",
   },
   {
     slug: "d-divya-dakshani",
@@ -283,6 +315,7 @@ export const doctors: Doctor[] = [
     role: "Consultant · Obstetrics & Gynaecology (Minimal access surgery)",
     degree: "MBBS, DNB (Obstetrics & Gynaecology), FMAS, DMAS",
     reg: "TNMC 102973",
+    image: "https://res.cloudinary.com/dh4blkvix/image/upload/v1785159737/ajsmc/assets/n4te22sq4khuugm3mayg.png",
   },
   {
     slug: "jeric-ashwin",
@@ -306,6 +339,7 @@ export const doctors: Doctor[] = [
     specialty: "Orthopedics",
     role: "Consultant Orthopedics · Joint Replacement Fellowship (FIJR)",
     degree: "MBBS, MS (Orthopedics)",
+    image: "https://res.cloudinary.com/dh4blkvix/image/upload/v1785246201/ajsmc/assets/gbkvwjkpngo4azu4sx1x.png",
   },
   {
     slug: "mohamed-moideen",
@@ -314,10 +348,25 @@ export const doctors: Doctor[] = [
     role: "Consultant · General Medicine",
   },
   {
+    slug: "mohammad-abdul-qadir",
+    name: "Dr. Mohammad Abdul Qadir",
+    specialty: "General Medicine",
+    role: "Consultant · General Physician",
+    image: "https://res.cloudinary.com/dh4blkvix/image/upload/v1785246454/ajsmc/assets/umftibutadqms2yllibm.png",
+  },
+  {
     slug: "md-nizamuddin-khan",
     name: "Dr. MD Nizamuddin Khan",
     specialty: "Orthopedics",
     role: "Consultant · Orthopedics",
+  },
+  {
+    slug: "balachander-rajendiran",
+    name: "Dr. Balachander Rajendiran",
+    specialty: "Orthopedics",
+    role: "Consultant · Orthopedics",
+    degree: "MBBS, MS (Orthopedics)",
+    image: "https://res.cloudinary.com/dh4blkvix/image/upload/v1785245844/ajsmc/assets/itvhkoufhhoxzbgblovb.png",
   },
   {
     slug: "arun",
@@ -336,6 +385,8 @@ export const doctors: Doctor[] = [
     name: "Dr. G. Sarala",
     specialty: "Neurology",
     role: "Senior Consultant · Neurology",
+    degree: "MBBS, MD (General Medicine), DM (Neurology)",
+    image: "https://res.cloudinary.com/dh4blkvix/image/upload/v1785245987/ajsmc/assets/dwdd7ir3gpwwvqzr5cyw.png",
   },
   {
     slug: "pradeep-sathya",
@@ -362,6 +413,14 @@ export const doctors: Doctor[] = [
     role: "Senior Consultant · General Medicine & Diabetology",
   },
   {
+    slug: "rm-fahadh",
+    name: "Dr. R.M. Fahadh",
+    specialty: "Diabetology",
+    role: "Consultant · General Medicine & Diabetology",
+    degree: "MBBS, FID",
+    image: "https://res.cloudinary.com/dh4blkvix/image/upload/v1785159355/ajsmc/assets/vc250lwfcbpgluprpwiy.png",
+  },
+  {
     slug: "sarvath",
     name: "Dr. Sarvath",
     specialty: "Pulmonology",
@@ -373,7 +432,26 @@ export const doctors: Doctor[] = [
     specialty: "Nephrology",
     role: "Consultant · Nephrology",
   },
+  {
+    slug: "chynna-christina",
+    name: "Ms. Chynna Christina",
+    specialty: "Psychology",
+    role: "Counseling Psychologist",
+    degree: "MSc (Applied Psychology)",
+    image: "https://res.cloudinary.com/dh4blkvix/image/upload/v1785226888/ajsmc/assets/yklhnk53wytzloi2h6xi.png",
+  },
 ];
+
+/**
+ * The doctors the site actually shows. A portrait is what makes a card presentable,
+ * so an entry without one is held back until its photo lands rather than rendering a
+ * blank tile.
+ *
+ * Every public count and listing reads from here, never from `doctors` — otherwise a
+ * link promises "view all 28" and the page it opens shows 17. Keep the full roster in
+ * `doctors`; add an `image` to move someone onto the site.
+ */
+export const listedDoctors: Doctor[] = doctors.filter((d) => d.image);
 
 export const doctorSpecialtyFilters = [
   "Reproductive Medicine",
@@ -394,6 +472,7 @@ export const doctorSpecialtyFilters = [
   "Pathology",
   "Pulmonology",
   "Nephrology",
+  "Psychology",
 ];
 
 export type SignatureService = {
@@ -412,17 +491,17 @@ export type SignatureService = {
 export const signatureServices: SignatureService[] = [
   {
     name: "Heart Care",
-    description: "Chest pain, BP & palpitations — ECG and treatment",
+    description: "Chest pain, BP and palpitations checked with ECG",
     asset: "ecgTest",
   },
   {
     name: "Brain Care",
-    description: "Headache, dizziness & memory — checked and treated",
+    description: "Headache, dizziness and memory concerns assessed",
     asset: "brainHealth",
   },
   {
     name: "Liver Care",
-    description: "Jaundice, fatigue & appetite loss — LFT and treatment",
+    description: "Jaundice, fatigue and appetite loss checked with LFT",
     asset: "liverHealth",
     tone: "navy",
   },
@@ -441,7 +520,7 @@ export const testimonials = [
     name: "Priya Ramesh",
     role: "Ophthalmology · Day Care",
     quote:
-      "My cataract surgery was done the same day and I was home by evening. Caring doctors and genuinely affordable — no hidden charges at all.",
+      "My cataract surgery was done the same day and I was home by evening. The doctors explained each step, and the cost was exactly what they quoted.",
     rating: 5,
     dark: false,
   },
@@ -463,57 +542,89 @@ export const testimonials = [
   },
 ] as const;
 
+/**
+ * Written for the two things that read them. Google shows these in People Also Ask,
+ * and AI answer engines lift a question and its answer as a single unit, so each
+ * answer opens with the fact itself and repeats enough context ("AJSMC", "Egmore")
+ * to survive being quoted on its own, away from the rest of the page.
+ *
+ * Phrased the way patients actually type, not the way a brochure would ask.
+ */
 export const faqs = [
   {
-    q: "How do I book an appointment at AJSMC?",
-    a: "Book online through the appointment form on this site, or simply call 044 2532 2021 / +91 91506 42999. Walk-ins are welcome Monday–Saturday, 10am–9pm, and our team will guide you to the right specialist.",
+    q: "Where is AJ Subaitha Medical Centre located?",
+    a: "AJSMC is at No.47 (31), Police Commissioner Office Road, Egmore, Chennai 600008, beside the Commissioner of Police office. Egmore railway station is about a five minute walk and Chennai Central is roughly ten minutes by road. Call 044 2532 2021 if you need directions.",
   },
   {
-    q: "Are AJSMC treatments really affordable?",
-    a: "Yes. AJSMC is built on transparent, fair pricing with no heavy or hidden charges. You are told the cost upfront, and every specialty is available under one roof — so you save on repeat visits elsewhere.",
+    q: "Which areas of Chennai does AJSMC serve?",
+    a: "Being in Egmore puts AJSMC in the middle of the city, so most patients come from the surrounding neighbourhoods: Chetpet, Kilpauk, Purasawalkam, Nungambakkam, Vepery, Periamet, Aminjikarai, Choolai, Triplicane and Anna Nagar. Egmore and Chennai Central stations both being close by also makes it straightforward for patients travelling in from outside the city.",
+  },
+  {
+    q: "What are AJSMC hospital timings?",
+    a: "Doctor consultations at AJSMC run Monday to Saturday, 10am to 9pm. The helpline is answered 24 hours on 044 2532 2021. Individual consultants keep their own clinic hours within that window, so call ahead to confirm when a particular doctor is available.",
+  },
+  {
+    q: "How do I book an appointment at AJSMC?",
+    a: "You can book three ways: fill in the appointment form on this website, call 044 2532 2021 or +91 91506 42999, or message the same number on WhatsApp. Walk-in patients are also seen Monday to Saturday between 10am and 9pm, though booking ahead means less waiting.",
+  },
+  {
+    q: "Which specialties are available at AJSMC?",
+    a: "AJSMC has 12 departments: General Medicine, General Surgery, Ophthalmology, Dermatology, Pediatrics, Orthopedics, Urology, Obstetrics and Gynaecology, Diabetology, Reproductive Medicine, Psychology and Pathology. Seventeen consultants practise across them, so most conditions can be seen without a referral elsewhere.",
+  },
+  {
+    q: "Is AJSMC open 24 hours?",
+    a: "The AJSMC helpline runs 24 hours and inpatients are supported round the clock, so someone answers on 044 2532 2021 at any hour. Doctor consultations are Monday to Saturday, 10am to 9pm. AJSMC does not run a casualty or trauma unit. In a life-threatening emergency such as an accident, chest pain, stroke symptoms or heavy bleeding, call 108 or go directly to the nearest hospital with a 24-hour emergency department.",
   },
   {
     q: "What is day-care surgery?",
-    a: "Day-care surgery means selected procedures are completed the same day, so you can recover at home instead of staying overnight. It is faster, lower-cost, and reduces hospital exposure.",
+    a: "Day-care surgery means the procedure and your recovery happen on the same day, so you go home that evening instead of staying overnight. Cataract surgery, hernia repair and several gynaecological and urological procedures are done this way at AJSMC. It costs less than an inpatient admission and gets you back home sooner.",
   },
   {
-    q: "Does AJSMC offer 24-hour emergency services?",
-    a: "Yes, we provide 24-hour emergency service every day of the year. For urgent care outside consultation hours, call us directly and our on-call team will assist you immediately.",
+    q: "What is a sleep study and who needs one?",
+    a: "A sleep study records your breathing, oxygen levels and heart rate while you sleep overnight, and it is the test used to diagnose obstructive sleep apnoea. It is worth doing if you snore loudly, wake up gasping, feel exhausted despite a full night in bed, or have been told you stop breathing in your sleep. AJSMC runs sleep studies on site and the report goes to your consultant directly.",
   },
   {
-    q: "Which medical specialties are available at AJSMC?",
-    a: "Ophthalmology, Dermatology, Pediatrics, Orthopedics, Urology, Obstetrics & Gynaecology, General Medicine, Diabetology, Reproductive Medicine and Psychology — 15+ specialist consultants across 12+ departments.",
+    q: "Do I need an appointment or can I walk in?",
+    a: "Both work. Walk-in patients are seen Monday to Saturday, 10am to 9pm, in the order they arrive. Booking ahead by phone or through this site means you are given a slot with the consultant you need, which usually cuts the wait considerably.",
+  },
+  {
+    q: "How much does a consultation at AJSMC cost?",
+    a: "Consultation fees vary by specialist, and the amount is told to you before your visit rather than at the billing counter. The same applies to procedures and tests: you are quoted the cost upfront. Call 044 2532 2021 for the current fee for the consultant you want to see.",
+  },
+  {
+    q: "Does AJSMC have its own lab and pharmacy?",
+    a: "Yes. Blood tests, urine tests, biopsies and routine screening are processed in the in-house laboratory, so most reports reach your doctor within the same visit instead of days later. There is also a pharmacy on site, which means consultation, tests and medicines can all be done in one trip.",
   },
 ] as const;
 
 export const aboutHighlights = [
-  "15+ specialist consultants across 12+ departments",
-  "Day-care surgery, sleep study & 24-hour service",
-  "Affordable, transparent pricing for every patient",
+  "17 specialist consultants across 12 departments",
+  "Day-care surgery and sleep studies on site",
+  "Treatment costs quoted upfront, before you decide",
 ];
 
 export const whyChooseUs = [
   {
     title: "Expert Specialists",
-    description: "15+ experienced consultants across every major specialty.",
+    description: "17 consultants covering 12 departments, in one building.",
     icon: "users",
     tone: "green",
   },
   {
     title: "Affordable Care",
-    description: "Transparent, fair pricing — no heavy or hidden charges.",
+    description: "You are told what a treatment costs before it starts.",
     icon: "heart",
     tone: "green",
   },
   {
     title: "Under One Roof",
-    description: "Consultations, surgery, lab and pharmacy in one place.",
+    description: "Consultation, surgery, lab and pharmacy without leaving the site.",
     icon: "building",
     tone: "green",
   },
   {
-    title: "24/7 Emergency",
-    description: "Round-the-clock support, every day of the year.",
+    title: "24 Hours Service",
+    description: "A helpline that answers at any hour, plus round-the-clock inpatient support.",
     icon: "clock",
     tone: "green",
   },
@@ -523,21 +634,21 @@ export const missionVisionValues = [
   {
     title: "Our Mission",
     description:
-      "To deliver accurate, effective and affordable healthcare to every patient — with all specialties accessible under one roof.",
+      "To deliver high quality, personal care to every patient who walks through our doors, and to keep it affordable enough that cost never decides whether a family seeks treatment.",
     icon: "target",
     tone: "green",
   },
   {
     title: "Our Vision",
     description:
-      "To be Chennai's most trusted neighbourhood multi-specialty centre — known for compassion, quality and fair pricing.",
+      "To be the multi-specialty centre families in Egmore turn to first, trusted for its doctors, its honesty about cost, and the calm of the place itself.",
     icon: "eye",
     tone: "green",
   },
   {
     title: "Our Values",
     description:
-      "Compassion, integrity and transparency — treating every patient like family, and every bill with honesty.",
+      "Compassion, integrity and transparency. We treat every patient the way we would want our own family treated, and every bill the same way.",
     icon: "heart-handshake",
     tone: "green",
   },

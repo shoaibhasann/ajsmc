@@ -8,10 +8,11 @@ import { Container } from "@/components/ui/Container";
 import { DoctorCard } from "@/components/ui/DoctorCard";
 import { SectionBadge } from "@/components/ui/SectionBadge";
 import { AJ_EASE } from "@/lib/motion";
-import { doctors } from "@/lib/site";
+import { listedDoctors } from "@/lib/site";
 
-// First four in roster order, exactly as declared in the doctors array.
-const featured = doctors.slice(0, 4);
+// First four in roster order. Drawn from the listed set, so the preview can never
+// feature someone the /doctors page it links to does not show.
+const featured = listedDoctors.slice(0, 4);
 
 export function DoctorsPreview() {
   return (
@@ -24,7 +25,7 @@ export function DoctorsPreview() {
           </h2>
         </div>
         <Link href="/doctors" className="inline-flex items-center gap-2.5 font-body text-[15px] font-bold text-navy">
-          View all {doctors.length} doctors
+          View all {listedDoctors.length} doctors
           <span className="flex h-[34px] w-[34px] items-center justify-center rounded-full bg-navy text-white">
             <ArrowUpRight className="h-[15px] w-[15px]" strokeWidth={2.6} />
           </span>

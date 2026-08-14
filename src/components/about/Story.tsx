@@ -2,12 +2,14 @@ import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SectionBadge } from "@/components/ui/SectionBadge";
 import { assets } from "@/lib/assets";
-import { siteConfig } from "@/lib/site";
+import { listedDoctors, siteConfig, specialties } from "@/lib/site";
 
+// Derived, not typed in. These numbers appear in several places across the site and
+// drifted apart last time they were hardcoded.
 const stats = [
-  { value: "12+", label: "Departments" },
-  { value: "24/7", label: "Emergency care" },
-  { value: "1000s", label: "Patients served" },
+  { value: `${specialties.length}`, label: "Departments" },
+  { value: "24/7", label: "Helpline service" },
+  { value: `${listedDoctors.length}`, label: "Specialist doctors" },
 ];
 
 export function Story() {
@@ -27,7 +29,7 @@ export function Story() {
             <div className="font-body text-[11px] font-medium text-muted">Years</div>
           </div>
           <div className="rounded-2xl bg-navy/[0.92] px-[18px] py-3.5 shadow-[0_20px_40px_-22px_rgba(12,46,110,0.5)] backdrop-blur-md">
-            <div className="font-heading text-2xl font-extrabold text-green-bright">{siteConfig.doctorCount}+</div>
+            <div className="font-heading text-2xl font-extrabold text-green-bright">{listedDoctors.length}</div>
             <div className="font-body text-[11px] font-medium text-white/75">Specialists</div>
           </div>
         </div>
@@ -39,15 +41,22 @@ export function Story() {
           Two decades of care you can rely on
         </h2>
         <p className="mt-4.5 font-body text-[15px] leading-[1.75] text-body">
-          Founded in {siteConfig.founded}, AJSMC began with a simple belief: quality healthcare
-          should be accessible to every family &mdash; without heavy charges or the need to
-          travel between hospitals. Today we bring together 15+ consultants across 12+
-          specialties in a single, welcoming day-care centre in the heart of Egmore.
+          AJ Subaitha Medical Centre was built around a simple idea: a family should not have
+          to travel across Chennai, or pay heavily, to see a good specialist. So we put them
+          in one building. Today 17 consultants practise here across 12 departments, on
+          Police Commissioner Office Road in the heart of Egmore.
         </p>
         <p className="mt-3.5 font-body text-[15px] leading-[1.75] text-body">
-          From day-care surgery and sleep studies to everyday consultations, our team pairs
-          clinical excellence with a patient-first approach &mdash; and round-the-clock
-          emergency support when you need it most.
+          That covers most of what a family needs in a year. Everyday consultations and
+          health checks. Day-care surgery, where you have the procedure and go home the same
+          evening. Sleep studies for snoring and breathing trouble at night. Lab tests and
+          imaging done in house, so results reach your doctor the same visit instead of a
+          week later.
+        </p>
+        <p className="mt-3.5 font-body text-[15px] leading-[1.75] text-body">
+          Our helpline runs 24 hours. We are not a casualty or trauma unit, so if you are
+          facing a genuine emergency, please call 108 or head to the nearest hospital with an
+          emergency department. For everything else, we are a phone call away.
         </p>
         <div className="mt-6.5 grid grid-cols-3 gap-4">
           {stats.map((stat, i) => (

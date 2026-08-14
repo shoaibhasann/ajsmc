@@ -37,14 +37,14 @@ export function MapCard() {
           <Siren className="h-6 w-6" strokeWidth={1.9} />
         </span>
         <div className="flex-1">
-          <div className="font-heading text-base font-bold text-white">24-Hour Emergency</div>
+          <div className="font-heading text-base font-bold text-white">24 Hours Service</div>
           <div className="font-body text-[13px] font-medium text-white/72">
-            Call anytime &mdash; we&apos;re always open for emergencies.
+            Our helpline answers at any hour. For a life-threatening emergency, call 108.
           </div>
         </div>
         <a
           href={siteConfig.phoneHref}
-          aria-label="Call for emergency"
+          aria-label={`Call ${siteConfig.fullName}`}
           className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full bg-green-bright text-[#083b20]"
         >
           <Phone className="h-5 w-5" strokeWidth={2.2} />

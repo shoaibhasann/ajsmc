@@ -11,8 +11,8 @@ import { breadcrumbSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About Us",
-  description: `Founded in ${siteConfig.founded}, ${siteConfig.fullName} (AJSMC) has served families in Egmore, Chennai for over two decades with 15+ specialist doctors, day-care surgery and affordable, transparent pricing.`,
+  title: "About Our Hospital in Egmore",
+  description: "About AJ Subaitha Medical Centre, a multi speciality hospital in Egmore, Chennai. 17 consultants, 12 departments, day-care surgery and an in-house lab, with costs quoted upfront.",
   alternates: { canonical: "/about" },
 };
 
@@ -28,8 +28,8 @@ export default function AboutPage() {
       <PageHero
         crumb="About Us"
         badge={`SERVING CHENNAI SINCE ${siteConfig.founded}`}
-        title="Trusted multi-specialty care, one roof"
-        description="AJ Subaitha Medical Centre has cared for families in Egmore for over two decades — combining specialist expertise, modern technology and genuinely affordable treatment."
+        title="A multi speciality hospital built around one idea"
+        description="That a family should not have to cross Chennai, or pay heavily, to see a good specialist. So we put 17 of them in one building on Police Commissioner Office Road, Egmore."
         image={assets.aboutHeroBg}
         decoration={assets.aboutHeroDecor}
       />
@@ -38,8 +38,8 @@ export default function AboutPage() {
       <WhyChooseUs />
       <Leadership />
       <CtaBand
-        title="Your health, our priority"
-        description="Visit us in Egmore or book an appointment today — affordable specialist care, every day of the week."
+        title="Come and see us in Egmore"
+        description="Book a slot with the consultant you need, or just walk in between 10am and 9pm, Monday to Saturday."
       />
     </>
   );

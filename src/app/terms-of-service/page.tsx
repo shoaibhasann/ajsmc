@@ -28,12 +28,36 @@ export default function TermsOfServicePage() {
             medical advice or a diagnosis.
           </p>
         </section>
+        {/* Google's quality guidelines treat health content as YMYL and rate a page that
+            gives medical information with no accountable source at the bottom of the
+            scale. A plain disclaimer is also the honest thing to publish on a site whose
+            readers are deciding what to do about a symptom. */}
+        <section>
+          <h2 className="mb-2 font-heading text-xl font-bold text-navy">Medical disclaimer</h2>
+          <p>
+            Nothing on this website is a substitute for being examined by a doctor. The
+            descriptions of departments, conditions and procedures here are general, and they
+            cannot account for your history, your medication or your test results. Do not use
+            this site to diagnose yourself, and do not start, stop or change any treatment on
+            the strength of something you read here. If a symptom worries you, book a
+            consultation on {siteConfig.phone} and let a doctor examine you.
+          </p>
+          <p className="mt-3">
+            AJSMC does not operate a casualty or trauma unit. If you are dealing with chest
+            pain, breathlessness, stroke symptoms, heavy bleeding, a serious injury, poisoning
+            or any other life-threatening emergency, call 108 or go straight to the nearest
+            hospital with a 24-hour emergency department. Do not wait for a reply to a form or
+            a message.
+          </p>
+        </section>
         <section>
           <h2 className="mb-2 font-heading text-xl font-bold text-navy">Appointments</h2>
           <p>
             Submitting the appointment or contact form is a request only and does not guarantee a
-            confirmed slot until our team contacts you. For urgent or emergency care, please call{" "}
-            {siteConfig.phone} directly rather than using the website form.
+            confirmed slot until our team contacts you. For anything urgent, call{" "}
+            {siteConfig.phone} directly rather than using the website form. AJSMC does not run a
+            casualty or trauma unit, so in a medical emergency call 108 or go to the nearest
+            hospital with a 24-hour emergency department.
           </p>
         </section>
         <section>

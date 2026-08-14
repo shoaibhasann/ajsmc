@@ -5,11 +5,10 @@ import { CtaBand } from "@/components/ui/CtaBand";
 import { DoctorsClient } from "@/components/doctors/DoctorsClient";
 import { assets } from "@/lib/assets";
 import { breadcrumbSchema, physiciansSchema } from "@/lib/schema";
-import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Our Doctors",
-  description: `Meet the ${siteConfig.doctorCount}+ specialist doctors at ${siteConfig.fullName} across 12+ departments — Ophthalmology, Orthopedics, Pediatrics, Gynaecology, Diabetology and more, all under one roof in Egmore, Chennai.`,
+  title: "Our Doctors in Egmore, Chennai",
+  description: "Meet the specialist consultants at AJ Subaitha Medical Centre, Egmore, Chennai. Ophthalmology, Orthopedics, Pediatrics, Gynaecology, Diabetology, Dermatology, Urology and more, with qualifications and TNMC registration listed.",
   alternates: { canonical: "/doctors" },
 };
 
@@ -26,8 +25,8 @@ export default function DoctorsPage() {
       <PageHero
         crumb="Our Doctors"
         badge="MEET OUR EXPERT TEAM"
-        title="Find the right specialist for you"
-        description="15+ consultants across 12+ departments — every specialty under one roof, with affordable, transparent care and no heavy charges."
+        title="Meet the consultants at AJSMC"
+        description="Filter by department to find the right consultant, with qualifications and Tamil Nadu Medical Council registration numbers listed for each."
         image={assets.aboutHeroBg}
         decoration={assets.doctorsHeroDecor}
         decorationClassName="-rotate-[18deg]"
@@ -35,7 +34,7 @@ export default function DoctorsPage() {
       <DoctorsClient />
       <CtaBand
         title="Not sure which specialist to see?"
-        description="Call us and our team will guide you to the right doctor — affordable care, every specialty, one roof."
+        description="Call 044 2532 2021, tell us what is troubling you, and our team will point you to the right consultant."
       />
     </>
   );

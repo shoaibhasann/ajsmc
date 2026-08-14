@@ -14,12 +14,12 @@ export function Specialties() {
         <div>
           <SectionBadge tone="green">OUR SPECIALTIES</SectionBadge>
           <h2 className="mt-4.5 font-heading text-[30px] font-extrabold leading-[1.05] tracking-tight text-navy sm:text-[38px] lg:text-[clamp(30px,3.6vw,46px)]">
-            Care for every part of you
+            Twelve departments, one building
           </h2>
         </div>
         <p className="max-w-[360px] font-body text-[15px] leading-relaxed text-muted">
-          From everyday check-ups to specialist treatment &mdash; whatever you need, you will
-          find the right doctor here.
+          From an everyday check-up to day-care surgery, the department you need is here in
+          Egmore. Pick one to see what it covers and who you would be seeing.
         </p>
       </div>
 

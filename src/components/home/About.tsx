@@ -8,14 +8,19 @@ import { Container } from "@/components/ui/Container";
 import { SectionBadge } from "@/components/ui/SectionBadge";
 import { assets } from "@/lib/assets";
 import { aboutHighlights, siteConfig } from "@/lib/site";
+import { useIsCompact } from "@/lib/useIsCompact";
 
 export function About() {
+  const compact = useIsCompact();
+
   return (
     <Container as="section" id="about" className="grid grid-cols-1 items-center gap-10 py-16 lg:grid-cols-2 lg:gap-14">
       <motion.div
-        initial={{ opacity: 0, x: -48 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
+        initial={compact ? { opacity: 0, y: 24 } : { opacity: 0, x: -48 }}
+        whileInView={{ opacity: 1, x: 0, y: 0 }}
+        // -100px eats a sixth of a phone screen, so the tile was already well past
+        // the fold before it began. -40px trips it as the top edge clears.
+        viewport={{ once: true, margin: "-40px" }}
         transition={{ duration: 0.75, ease: AJ_EASE }}
         className="relative min-h-[360px] overflow-hidden rounded-[26px] sm:min-h-[440px]"
       >
@@ -28,7 +33,11 @@ export function About() {
         />
         {/* Glass card: low-alpha fill + heavy blur so the building shows through,
             a bright top-left edge, and a soft top sheen for the lit-glass look. */}
-        <div className="absolute bottom-5 left-5 w-[210px] overflow-hidden rounded-[20px] border border-white/40 bg-white/[0.12] p-[18px] shadow-[0_24px_48px_-20px_rgba(12,46,110,0.55),inset_0_1px_0_0_rgba(255,255,255,0.55)] ring-1 ring-inset ring-white/15 backdrop-blur-lg backdrop-saturate-150">
+        {/* The blur steps up only at sm. A large-radius backdrop-filter is re-sampled
+            every frame of the parent's entrance, and on phone GPUs that alone drops the
+            reveal to a stutter; a small radius costs a fraction and reads the same at
+            this size. The fill is opaque enough that the card holds up either way. */}
+        <div className="absolute bottom-5 left-5 w-[210px] overflow-hidden rounded-[20px] border border-white/40 bg-white/[0.12] p-[18px] shadow-[0_24px_48px_-20px_rgba(12,46,110,0.55),inset_0_1px_0_0_rgba(255,255,255,0.55)] ring-1 ring-inset ring-white/15 backdrop-blur-sm backdrop-saturate-150 sm:backdrop-blur-lg">
           <span
             aria-hidden
             // Negative z keeps the sheen behind the text (backdrop-blur makes this
@@ -54,21 +63,24 @@ export function About() {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, x: 48 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
+        initial={compact ? { opacity: 0, y: 24 } : { opacity: 0, x: 48 }}
+        whileInView={{ opacity: 1, x: 0, y: 0 }}
+        viewport={{ once: true, margin: "-40px" }}
         transition={{ duration: 0.75, ease: AJ_EASE, delay: 0.12 }}
         className="flex flex-col items-center text-center lg:items-start lg:text-left"
       >
         <SectionBadge tone="solid">ABOUT US</SectionBadge>
+        {/* Keyword-bearing H2. The hero H1 is the brand line, so this is the first
+            heading on the page that says what AJSMC is and where it is. */}
         <h2 className="mt-5 font-heading text-[32px] font-extrabold leading-[1.06] tracking-tight text-navy sm:text-[38px] lg:text-[clamp(30px,3.6vw,46px)]">
-          YOUR TRUSTED MULTI-SPECIALTY HOSPITAL
+          A MULTI SPECIALITY HOSPITAL IN THE HEART OF EGMORE
         </h2>
         <p className="mt-5 max-w-[500px] font-body text-base leading-relaxed text-body">
-          AJ Subaitha Medical Centre combines clinical expertise, modern technology and a
-          patient-first approach to deliver accurate diagnosis and effective treatment &mdash;
-          with <strong className="text-navy">every specialist under one roof</strong> and{" "}
-          <strong className="text-navy">no heavy charges</strong>.
+          AJ Subaitha Medical Centre sits on Police Commissioner Office Road, minutes from
+          Egmore station. Seventeen consultants practise here across twelve departments,
+          alongside a day-care theatre, a sleep lab and our own laboratory. You see{" "}
+          <strong className="text-navy">every specialist under one roof</strong>, and you are
+          told <strong className="text-navy">what it costs before it starts</strong>.
         </p>
         <div className="my-[26px] flex w-fit flex-col gap-3.5 text-left">
           {aboutHighlights.map((item) => (

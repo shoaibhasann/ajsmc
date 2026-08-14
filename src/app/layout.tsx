@@ -24,20 +24,22 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} | ${siteConfig.fullName} — Multi-Specialty Hospital in Egmore, Chennai`,
+    default: "Multi Speciality Hospital in Egmore, Chennai | AJSMC",
     template: `%s | ${siteConfig.name}`,
   },
-  description: siteConfig.description,
+  description: siteConfig.metaDescription,
+  // Google has ignored this tag since 2009, so it is here only for the handful of
+  // smaller crawlers and internal search tools that still read it. Nothing about the
+  // site's ranking depends on it, and no term belongs here that the pages do not
+  // genuinely cover.
   keywords: [
-    "multi-specialty hospital Chennai",
+    "multi speciality hospital in Egmore",
     "AJSMC",
     "AJ Subaitha Medical Centre",
-    "hospital Egmore Chennai",
-    "affordable hospital Chennai",
+    "hospital in Egmore Chennai",
     "day care surgery Chennai",
     "sleep study Chennai",
-    "24 hour emergency hospital Chennai",
-    "best doctors Egmore",
+    "general physician Egmore",
   ],
   authors: [{ name: siteConfig.fullName }],
   creator: siteConfig.fullName,
@@ -50,12 +52,12 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: siteConfig.url,
     siteName: siteConfig.fullName,
-    title: `${siteConfig.fullName} — Every Specialty, One Roof`,
+    title: `${siteConfig.fullName}: Multi Speciality Hospital in Egmore, Chennai`,
     description: siteConfig.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.fullName} — Every Specialty, One Roof`,
+    title: `${siteConfig.fullName}: Multi Speciality Hospital in Egmore, Chennai`,
     description: siteConfig.description,
   },
   robots: {
