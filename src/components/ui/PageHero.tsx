@@ -43,6 +43,7 @@ export function PageHero({
   image,
   decoration,
   decorationClassName = "",
+  children,
 }: {
   crumb: string;
   /** Sits between Home and `crumb`, for pages nested one level down. */
@@ -58,13 +59,16 @@ export function PageHero({
   titleScale?: keyof typeof TITLE_SCALES;
   /** Short green line under the heading, before the longer description. */
   tagline?: string;
-  description: string;
+  /** Optional — a page whose `children` already carry the intro should not repeat it. */
+  description?: string;
   /** Optional background artwork; a light scrim keeps the navy text readable over it. */
   image?: ImageAsset;
   /** Optional cut-out illustration anchored to the bottom-right corner. */
   decoration?: ImageAsset;
   /** Extra classes for the decoration (e.g. a rotation) that vary per page. */
   decorationClassName?: string;
+  /** Rendered inside the hero, below the description. */
+  children?: ReactNode;
 }) {
   return (
     <div className="px-3 pt-3 sm:px-4 sm:pt-4">
@@ -189,9 +193,12 @@ export function PageHero({
         {tagline && (
           <p className="mt-4 font-body text-[17px] font-semibold text-green-deep">{tagline}</p>
         )}
-        <p className="mt-4.5 max-w-[560px] font-body text-base leading-relaxed text-body">
-          {description}
-        </p>
+        {description && (
+          <p className="mt-4.5 max-w-[560px] font-body text-base leading-relaxed text-body">
+            {description}
+          </p>
+        )}
+        {children}
       </Container>
     </section>
     </div>

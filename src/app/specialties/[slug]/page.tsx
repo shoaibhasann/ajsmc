@@ -6,10 +6,15 @@ import { Container } from "@/components/ui/Container";
 import { BookCta } from "@/components/ui/BookCta";
 import { PageHero } from "@/components/ui/PageHero";
 import { ConsultantCarousel } from "@/components/specialties/ConsultantCarousel";
+import { SpecialtySummary } from "@/components/specialties/SpecialtySummary";
+import { SpecialtyCovers, WhenToSee } from "@/components/specialties/SpecialtyDetail";
 import { SpecialtyIcon } from "@/components/ui/SpecialtyIcon";
+import { SectionBadge } from "@/components/ui/SectionBadge";
+import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { JsonLd } from "@/components/JsonLd";
 import { assets } from "@/lib/assets";
-import { breadcrumbSchema, specialtySchema } from "@/lib/schema";
+import { articleFaqSchema, breadcrumbSchema, specialtySchema } from "@/lib/schema";
+import { specialtyContent } from "@/lib/specialty-content";
 import {
   doctorsInSpecialty,
   siteConfig,
@@ -47,6 +52,7 @@ export default async function SpecialtyPage({ params }: Params) {
 
   const consultants = doctorsInSpecialty(specialty.name);
   const others = specialtiesWithPages.filter((s) => s.name !== specialty.name).slice(0, 6);
+  const content = specialtyContent[specialty.name];
 
   return (
     <>
@@ -58,6 +64,9 @@ export default async function SpecialtyPage({ params }: Params) {
           { name: specialty.name, path: `/specialties/${slug}` },
         ])}
       />
+      {/* The questions on the page, in the form Google shows as People Also Ask and answer
+          engines lift whole. Same source as the visible accordion, so they cannot diverge. */}
+      {content && <JsonLd data={articleFaqSchema(content.faqs)} />}
 
       {/* Same hero as the rest of the site — background artwork, scrim and the corner
           decoration from the Specialties listing — rather than the bare gradient this
@@ -69,10 +78,19 @@ export default async function SpecialtyPage({ params }: Params) {
         title={`${specialty.name} in ${siteConfig.address.city}`}
         titleScale="compact"
         tagline={specialty.description}
-        description={specialty.context}
+        // No `description` here on purpose. It was specialty.context, and the summary card
+        // below opens by saying the same thing more completely — the two sat one under the
+        // other and a reader met the same sentence twice before reaching anything new.
         image={assets.aboutHeroBg}
         decoration={assets.specialtiesHeroDecor}
-      />
+      >
+        {content && <SpecialtySummary summary={content.summary} />}
+      </PageHero>
+
+      {content && (
+        <SpecialtyCovers specialtyName={specialty.name} covers={content.covers} />
+      )}
+      {content && <WhenToSee specialtyName={specialty.name} items={content.whenToSee} />}
 
       {/* Department copy on the left, the consultants beside it on the right. Below lg the
           grid collapses to the two stacked rows it reads as on a phone. */}
@@ -141,6 +159,23 @@ export default async function SpecialtyPage({ params }: Params) {
 
         <BookCta className="mt-14" />
       </Container>
+
+      {content && (
+        <Container as="section" id="faq" className="py-14 lg:py-16">
+          <div className="mx-auto mb-9 flex max-w-[640px] flex-col items-center text-center">
+            <SectionBadge tone="green">FAQ</SectionBadge>
+            <h2 className="mt-4.5 font-heading text-[30px] font-extrabold leading-[1.05] tracking-tight text-navy sm:text-[38px] lg:text-[clamp(30px,3.6vw,46px)]">
+              {specialty.name} questions, answered
+            </h2>
+            <p className="mt-4 max-w-[440px] font-body text-[15px] leading-relaxed text-muted">
+              The things people ask before booking. Still unsure? Our team is a call away on{" "}
+              {siteConfig.phone}.
+            </p>
+          </div>
+
+          <FaqAccordion items={content.faqs} />
+        </Container>
+      )}
 
       <Container as="section" className="py-14">
         <h2 className="mb-6 font-heading text-[22px] font-extrabold tracking-tight text-navy sm:text-[26px]">
