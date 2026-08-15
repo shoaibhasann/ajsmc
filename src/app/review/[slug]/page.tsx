@@ -77,7 +77,7 @@ export default async function ReviewPage({ params }: Params) {
         </h1>
 
         {reviewer && (
-          <div className="mt-6 rounded-[18px] border border-navy/[0.1] aj-card p-5">
+          <div className="mt-6 rounded-[18px] border aj-card p-5">
             <p className="font-body text-[11.5px] font-bold uppercase tracking-[0.12em] text-green-deep">
               We are asking you to review this
             </p>
@@ -109,7 +109,7 @@ export default async function ReviewPage({ params }: Params) {
           </div>
         )}
 
-        <div className="mt-5 rounded-[18px] border border-navy/[0.1] aj-card p-5">
+        <div className="mt-5 rounded-[18px] border aj-card p-5">
           <p className="font-body text-[11.5px] font-bold uppercase tracking-[0.12em] text-green-deep">
             Why this article exists
           </p>
@@ -126,7 +126,7 @@ export default async function ReviewPage({ params }: Params) {
           </p>
           <ol className="mt-5 flex list-none flex-col gap-4 p-0">
             {item.questions.map((q, i) => (
-              <li key={q.q} className="rounded-[16px] border border-navy/[0.1] aj-card p-5">
+              <li key={q.q} className="rounded-[16px] border aj-card p-5">
                 <p className="font-heading text-[16px] font-bold leading-snug text-navy">
                   <span className="text-green-deep">{i + 1}.</span> {q.q}
                 </p>
@@ -155,7 +155,7 @@ export default async function ReviewPage({ params }: Params) {
           </ul>
         </section>
 
-        <section className="mt-8 rounded-[18px] border border-navy/[0.1] aj-card p-5">
+        <section className="mt-8 rounded-[18px] border aj-card p-5">
           <h2 className="font-heading text-[17px] font-bold text-navy">How to send your comments</h2>
           <p className="mt-2 font-body text-[14.5px] leading-relaxed text-body">
             Whatever is easiest — mark up a printout, reply by email, or send a voice note on

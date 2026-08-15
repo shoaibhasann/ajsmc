@@ -78,7 +78,7 @@ export function Header() {
               onClick={() => setOpen(true)}
               aria-label="Open menu"
               aria-expanded={open}
-              className="flex h-[46px] w-[46px] items-center justify-center rounded-full border border-navy/[0.14] aj-card text-navy transition-colors hover:border-navy/25 lg:hidden"
+              className="flex h-[46px] w-[46px] items-center justify-center rounded-full border aj-card text-navy transition-colors hover:border-navy/25 lg:hidden"
             >
               <Menu className="h-[22px] w-[22px]" strokeWidth={2.2} />
             </button>

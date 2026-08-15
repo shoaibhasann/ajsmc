@@ -51,7 +51,7 @@ export function SpecialtiesGrid() {
           );
 
           const className = `group flex flex-col rounded-[22px] border p-6 transition-shadow hover:shadow-[0_26px_48px_-28px_rgba(12,46,110,0.45)] ${
-            isDark ? "border-navy bg-navy" : "border-navy/[0.08] aj-card"
+            isDark ? "border-navy bg-navy" : "aj-card"
           }`;
 
           return (

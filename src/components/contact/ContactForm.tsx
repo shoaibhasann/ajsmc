@@ -14,7 +14,7 @@ export function ContactForm() {
   }
 
   return (
-    <div className="rounded-[26px] border border-navy/[0.08] aj-card p-8 shadow-[0_30px_60px_-40px_rgba(12,46,110,0.5)] sm:p-9">
+    <div className="rounded-[26px] border aj-card p-8 shadow-[0_30px_60px_-40px_rgba(12,46,110,0.5)] sm:p-9">
       <SectionBadge tone="green">SEND US A MESSAGE</SectionBadge>
       <h2 className="mb-1.5 mt-4 font-heading text-2xl font-extrabold leading-[1.08] tracking-tight text-navy sm:text-[30px] lg:text-[clamp(24px,3vw,34px)]">
         Book a visit or ask a question

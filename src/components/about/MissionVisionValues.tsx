@@ -16,7 +16,7 @@ const toneClasses = {
 
 export function MissionVisionValues() {
   return (
-    <section className="border-y border-navy/[0.06] aj-card">
+    <section className="border-y aj-card">
       <Container className="py-[66px]">
         <div className="mx-auto mb-10 max-w-[560px] text-center">
           <SectionBadge tone="blue">WHAT DRIVES US</SectionBadge>

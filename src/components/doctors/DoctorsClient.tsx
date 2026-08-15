@@ -36,7 +36,7 @@ export function DoctorsClient() {
               onClick={() => setFilter(chip.label)}
               className={cn(
                 "inline-flex items-center gap-2 rounded-full border px-[18px] py-2.5 font-body text-sm font-bold transition-colors",
-                active ? "border-navy bg-navy text-white" : "border-navy/[0.14] aj-card text-[#3A4A63]",
+                active ? "border-navy bg-navy text-white" : "aj-card text-[#3A4A63]",
               )}
             >
               {chip.label}

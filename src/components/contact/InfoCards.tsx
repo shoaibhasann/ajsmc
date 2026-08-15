@@ -25,7 +25,7 @@ export function InfoCards() {
               href={card.href}
               target={card.href.startsWith("http") ? "_blank" : undefined}
               rel={card.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="block rounded-[20px] border border-navy/[0.08] aj-card p-6 transition-shadow hover:shadow-[0_22px_44px_-26px_rgba(12,46,110,0.4)]"
+              className="block rounded-[20px] border aj-card p-6 transition-shadow hover:shadow-[0_22px_44px_-26px_rgba(12,46,110,0.4)]"
             >
               <span className={`mb-3.5 flex h-12 w-12 items-center justify-center rounded-[14px] ${toneClasses[card.tone]}`}>
                 <Icon className="h-6 w-6" strokeWidth={1.9} />

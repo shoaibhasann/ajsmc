@@ -138,6 +138,14 @@
     #eef4fc 78%,
     #e6eefa 100%
   );
+  /*
+   * The border belongs to the surface, not to each caller. Cards had drifted to five
+   * different edges — navy at 0.06, 0.07, 0.08, 0.09 and 0.1, plus a flat #e4edf8 on the
+   * signature service cards, which is the one that read as wrong next to the others.
+   * Declaring it here makes every card agree by construction. Hover borders still win:
+   * `hover:border-navy/30` is a class plus a pseudo-class and outranks this.
+   */
+  border-color: rgba(12, 46, 110, 0.09);
 }
 
 /*
@@ -150,19 +158,40 @@
  * transparent glass panel could not promise.
  */
 .aj-card-glass {
-  background-color: rgba(255, 255, 255, 0.72);
+  /*
+   * 0.55, down from 0.72, so more of the hero artwork comes through.
+   *
+   * Measured by compositing the real hero image, its scrim and this panel, then sampling
+   * the darkest pixel under the text: the summary holds 4.89:1 and the label 9.12:1,
+   * against the 4.5:1 body text needs. 0.45 still passes at 4.69:1, so there is room, but
+   * re-measure before spending it — the margin here is thinner than on a solid card.
+   *
+   * Most of the contrast cost is the tint, not this alpha: dropping from 0.55 to 0.45 costs
+   * 0.20, while halving the tint would gain twice that. Reach for the tint first.
+   */
+  background-color: rgba(255, 255, 255, 0.55);
   background-image: linear-gradient(
     142deg,
     rgba(42, 97, 196, 0.13) 0%,
     rgba(23, 196, 107, 0.11) 46%,
     rgba(12, 46, 110, 0.1) 100%
   );
+  /*
+   * Standard property only. Writing the -webkit- alias underneath it made Lightning CSS
+   * emit *just* the alias, and Chrome does not implement -webkit-backdrop-filter — so the
+   * panel shipped with no blur at all, only transparency. The build adds whatever prefixes
+   * the browser targets actually need; hand-writing them here is what broke it.
+   */
   backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.75);
-  box-shadow:
-    0 24px 48px -28px rgba(12, 46, 110, 0.5),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.85);
+  /*
+   * One even edge. It used to carry `inset 0 1px 0 rgba(255,255,255,0.85)` on top of a
+   * white border — a bright line inside the top edge only, which made that one side read
+   * thicker than the other three. The border is now the same navy the solid cards use, so
+   * glass and card agree, and it stays even because a low-alpha navy reads consistently on
+   * a light backdrop where near-white simply disappears into the pale parts of it.
+   */
+  border: 1px solid rgba(12, 46, 110, 0.14);
+  box-shadow: 0 24px 48px -28px rgba(12, 46, 110, 0.5);
 }
 
 html {

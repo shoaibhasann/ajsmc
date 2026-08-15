@@ -83,7 +83,7 @@ export function ArticleLayout({
       <Container as="section" className="py-12 lg:py-16">
         <div className="mx-auto max-w-[760px]">
           {reviewer && (
-            <div className="mb-8 flex items-start gap-4 rounded-[20px] border border-navy/[0.08] aj-card p-4 shadow-[0_18px_34px_-30px_rgba(12,46,110,0.6)]">
+            <div className="mb-8 flex items-start gap-4 rounded-[20px] border aj-card p-4 shadow-[0_18px_34px_-30px_rgba(12,46,110,0.6)]">
               <span className="relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gradient-to-b from-[#EAF2FC] to-[#B9D4F0]">
                 {reviewer.image ? (
                   <Image
@@ -144,7 +144,7 @@ export function ArticleLayout({
             </section>
           )}
 
-          <p className="mt-8 rounded-[16px] border border-navy/[0.08] aj-card p-4 font-body text-[12.5px] leading-relaxed text-muted">
+          <p className="mt-8 rounded-[16px] border aj-card p-4 font-body text-[12.5px] leading-relaxed text-muted">
             This article is for general information and is not a substitute for a consultation.
             If your symptoms are severe or worsening, contact a doctor. For emergencies at AJSMC,
             call{" "}
@@ -172,7 +172,7 @@ export function ArticleLayout({
               <Link
                 key={p.slug}
                 href={`/blog/${p.slug}`}
-                className="group flex flex-col rounded-[20px] border border-navy/[0.08] aj-card p-5 transition-shadow hover:shadow-[0_26px_48px_-30px_rgba(12,46,110,0.5)]"
+                className="group flex flex-col rounded-[20px] border aj-card p-5 transition-shadow hover:shadow-[0_26px_48px_-30px_rgba(12,46,110,0.5)]"
               >
                 <span className="font-body text-[11px] font-bold uppercase tracking-[0.12em] text-green-deep">
                   {p.category}

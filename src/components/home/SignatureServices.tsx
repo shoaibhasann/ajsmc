@@ -27,7 +27,7 @@ export function SignatureServices() {
               transition={{ duration: 0.7, ease: AJ_EASE, delay: i * 0.1 }}
               className={cn(
                 "group relative flex min-h-[250px] flex-col justify-end overflow-hidden rounded-[28px] border p-5 shadow-[0_22px_46px_-32px_rgba(12,46,110,0.5)] transition-transform hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0",
-                navy ? "border-navy-dark bg-navy" : "border-[#e4edf8] aj-card",
+                navy ? "border-navy-dark bg-navy" : "aj-card",
               )}
             >
               {/* Flat wash — lightest behind the copy, deepening toward the artwork. Only the

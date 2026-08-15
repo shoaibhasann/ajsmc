@@ -32,7 +32,7 @@ export function SpecialtyCovers({
         {covers.map((item) => (
           <article
             key={item.title}
-            className="rounded-[20px] border border-navy/[0.09] aj-card p-6 transition-shadow hover:shadow-[0_22px_44px_-30px_rgba(12,46,110,0.5)]"
+            className="rounded-[20px] border aj-card p-6 transition-shadow hover:shadow-[0_22px_44px_-30px_rgba(12,46,110,0.5)]"
           >
             <h3 className="font-heading text-[19px] font-bold leading-snug text-navy">
               {item.title}

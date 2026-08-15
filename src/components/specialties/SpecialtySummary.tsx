@@ -27,7 +27,12 @@ export function SpecialtySummary({ summary }: { summary: string }) {
         <Sparkles className="h-[15px] w-[15px] text-green-deep" strokeWidth={2.4} />
         In short
       </p>
-      <p className="font-body text-[15px] leading-relaxed text-body sm:text-base">{summary}</p>
+      {/* font-medium, not the body default. The panel was made more transparent so the
+          artwork shows through, and weight is what keeps the text legible against a
+          backdrop that is now doing more of the talking. */}
+      <p className="font-body text-[15px] font-medium leading-relaxed text-body sm:text-base">
+        {summary}
+      </p>
     </div>
   );
 }

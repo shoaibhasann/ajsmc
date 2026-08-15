@@ -43,7 +43,7 @@ export function WhyChooseUs() {
         {whyChooseUs.map((item) => {
           const Icon = iconMap[item.icon];
           return (
-            <div key={item.title} className="rounded-[20px] border border-navy/[0.08] aj-card p-[22px]">
+            <div key={item.title} className="rounded-[20px] border aj-card p-[22px]">
               <span
                 className={`mb-3.5 flex h-[46px] w-[46px] items-center justify-center rounded-[13px] ${toneClasses[item.tone]}`}
               >

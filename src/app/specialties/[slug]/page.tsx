@@ -93,9 +93,13 @@ export default async function SpecialtyPage({ params }: Params) {
       {content && <WhenToSee specialtyName={specialty.name} items={content.whenToSee} />}
 
       {/* Department copy on the left, the consultants beside it on the right. Below lg the
-          grid collapses to the two stacked rows it reads as on a phone. */}
+          grid collapses to the two stacked rows it reads as on a phone.
+
+          items-center, not items-start: the consultant column is the taller of the two, so
+          top-aligning left the copy sitting high against a long card and the pair read as
+          unrelated. Centred, the two columns balance on the same axis. */}
       <Container as="section" className="py-12 lg:py-16">
-        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,340px)] lg:gap-14">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,340px)] lg:gap-14">
         <div>
           <h2 className="font-heading text-[24px] font-extrabold tracking-tight text-navy sm:text-[28px]">
             {/* "a/an" cannot be hardcoded across 11 department names, so the article is
@@ -126,7 +130,7 @@ export default async function SpecialtyPage({ params }: Params) {
             same visit.
           </p>
 
-          <p className="mt-7 rounded-[16px] border border-navy/[0.08] aj-card p-4 font-body text-[12.5px] leading-relaxed text-muted">
+          <p className="mt-7 rounded-[16px] border aj-card p-4 font-body text-[12.5px] leading-relaxed text-muted">
             AJSMC does not run a casualty or trauma unit. In a life-threatening emergency — an
             accident, chest pain, stroke symptoms or heavy bleeding — call 108 or go directly to
             the nearest hospital with a 24-hour emergency department.
@@ -186,7 +190,7 @@ export default async function SpecialtyPage({ params }: Params) {
             <Link
               key={s.name}
               href={`/specialties/${specialtySlug(s.name)}`}
-              className="inline-flex items-center gap-2 rounded-full border border-navy/[0.14] aj-card px-[18px] py-2.5 font-body text-sm font-bold text-[#3A4A63] transition-colors hover:border-navy/30 hover:text-navy"
+              className="inline-flex items-center gap-2 rounded-full border aj-card px-[18px] py-2.5 font-body text-sm font-bold text-[#3A4A63] transition-colors hover:border-navy/30 hover:text-navy"
             >
               {s.name}
               <ChevronRight className="h-3.5 w-3.5 text-green-deep" strokeWidth={2.6} />
