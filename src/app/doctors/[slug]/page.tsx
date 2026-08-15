@@ -81,13 +81,12 @@ export default async function DoctorPage({ params }: Params) {
               <span className="font-bold text-navy">{doctor.name}</span>
             </nav>
 
-            {/* Stretch from lg up so the portrait ends level with the copy beside it. It was
-                a fixed 300px against a column that runs past 400 once the registration pill
-                and the hours panel are there, which left the card floating short of the
-                block it belongs to. Below lg the two stack, so the fixed height stays —
-                there is nothing to match. */}
-            <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-stretch lg:gap-12">
-              <div className="relative mx-auto h-[300px] w-[240px] overflow-hidden rounded-[24px] border border-[#d3e3f5] bg-gradient-to-b from-[#EAF2FC] via-[#D6E6F7] to-[#B9D4F0] shadow-[0_26px_48px_-30px_rgba(12,46,110,0.5)] lg:mx-0 lg:h-full">
+            {/* Centred from lg up, not stretched. Matching the portrait's height to the copy
+                sounded right but pulled a 240x300 card to 240x420 on the longer profiles, and
+                a portrait at that ratio reads as squeezed. It keeps its own proportions and
+                sits on the copy's middle instead. Below lg the two stack, so start-aligned. */}
+            <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-center lg:gap-12">
+              <div className="relative mx-auto h-[300px] w-[240px] overflow-hidden rounded-[24px] border border-[#d3e3f5] bg-gradient-to-b from-[#EAF2FC] via-[#D6E6F7] to-[#B9D4F0] shadow-[0_26px_48px_-30px_rgba(12,46,110,0.5)] lg:mx-0">
                 <DoctorPhoto doctor={doctor} sizes="260px" />
               </div>
 
