@@ -20,7 +20,7 @@ export function FaqAccordion({ items }: { items: readonly { q: string; a: string
         return (
           <div
             key={item.q}
-            className={`overflow-hidden rounded-[18px] border bg-white transition-shadow ${
+            className={`overflow-hidden rounded-[18px] border aj-card transition-shadow ${
               open
                 ? "border-navy/[0.16] shadow-[0_22px_44px_-28px_rgba(12,46,110,0.5)]"
                 : "border-navy/[0.08]"

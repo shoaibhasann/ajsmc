@@ -67,7 +67,7 @@ export function Appointment() {
           whileInView={{ opacity: 1, x: 0, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.75, ease: AJ_EASE, delay: 0.12 }}
-          className="rounded-[26px] border border-navy/[0.08] bg-white p-8 shadow-[0_30px_60px_-40px_rgba(12,46,110,0.5)] sm:p-9"
+          className="rounded-[26px] border border-navy/[0.08] aj-card p-8 shadow-[0_30px_60px_-40px_rgba(12,46,110,0.5)] sm:p-9"
         >
           <SectionBadge tone="green">BOOK A VISIT</SectionBadge>
           <h2 className="mb-1.5 mt-4 font-heading text-[26px] font-extrabold leading-[1.06] tracking-tight text-navy sm:text-[32px] lg:text-[clamp(26px,3vw,38px)]">

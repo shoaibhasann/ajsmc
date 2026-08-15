@@ -49,7 +49,7 @@ export default function BlogIndexPage() {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group flex flex-col rounded-[22px] border border-navy/[0.08] bg-white p-6 transition-shadow hover:shadow-[0_26px_48px_-30px_rgba(12,46,110,0.5)]"
+                className="group flex flex-col rounded-[22px] border border-navy/[0.08] aj-card p-6 transition-shadow hover:shadow-[0_26px_48px_-30px_rgba(12,46,110,0.5)]"
               >
                 <span className="font-body text-[11px] font-bold uppercase tracking-[0.12em] text-green-deep">
                   {post.category}

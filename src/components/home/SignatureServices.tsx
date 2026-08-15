@@ -27,19 +27,21 @@ export function SignatureServices() {
               transition={{ duration: 0.7, ease: AJ_EASE, delay: i * 0.1 }}
               className={cn(
                 "group relative flex min-h-[250px] flex-col justify-end overflow-hidden rounded-[28px] border p-5 shadow-[0_22px_46px_-32px_rgba(12,46,110,0.5)] transition-transform hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0",
-                navy ? "border-navy-dark bg-navy" : "border-[#e4edf8] bg-white",
+                navy ? "border-navy-dark bg-navy" : "border-[#e4edf8] aj-card",
               )}
             >
-              {/* Flat wash — lightest behind the copy, deepening toward the artwork. */}
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0"
-                style={{
-                  background: navy
-                    ? "linear-gradient(225deg, #143A86 0%, #0C2E6E 46%, #0A2657 100%)"
-                    : "linear-gradient(225deg, #FFFFFF 0%, #FAFCFE 44%, #EAF1FB 78%, #DCE9F7 100%)",
-                }}
-              />
+              {/* Flat wash — lightest behind the copy, deepening toward the artwork. Only the
+                  navy variant needs one; the light variant's wash is `aj-card`, which is now
+                  the whole site's card surface and started as this gradient. */}
+              {navy && (
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0"
+                  style={{
+                    background: "linear-gradient(225deg, #143A86 0%, #0C2E6E 46%, #0A2657 100%)",
+                  }}
+                />
+              )}
 
               {/* Artwork and copy are kept to 46% + 52% so they can never collide. */}
               <div className="pointer-events-none absolute inset-y-0 left-[-2%] flex w-[46%] items-center justify-center">
@@ -63,7 +65,7 @@ export function SignatureServices() {
                 aria-hidden
                 className={cn(
                   "absolute right-[18px] top-[18px] flex h-[46px] w-[46px] items-center justify-center rounded-full shadow-[0_10px_22px_-10px_rgba(12,46,110,0.6)] transition-transform group-hover:scale-110 motion-reduce:transition-none motion-reduce:group-hover:scale-100",
-                  navy ? "bg-white text-navy" : "bg-green-bright text-[#083b20]",
+                  navy ? "aj-card text-navy" : "bg-green-bright text-[#083b20]",
                 )}
               >
                 <ArrowUpRight className="h-[18px] w-[18px]" strokeWidth={2.6} />

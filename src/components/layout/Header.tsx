@@ -78,7 +78,7 @@ export function Header() {
               onClick={() => setOpen(true)}
               aria-label="Open menu"
               aria-expanded={open}
-              className="flex h-[46px] w-[46px] items-center justify-center rounded-full border border-navy/[0.14] bg-white text-navy transition-colors hover:border-navy/25 lg:hidden"
+              className="flex h-[46px] w-[46px] items-center justify-center rounded-full border border-navy/[0.14] aj-card text-navy transition-colors hover:border-navy/25 lg:hidden"
             >
               <Menu className="h-[22px] w-[22px]" strokeWidth={2.2} />
             </button>
@@ -109,7 +109,7 @@ export function Header() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 30, stiffness: 300, mass: 0.8 }}
-              className="fixed inset-y-0 right-0 z-[81] flex w-[86vw] max-w-[380px] flex-col bg-white shadow-[-24px_0_60px_-20px_rgba(7,32,79,0.45)]"
+              className="fixed inset-y-0 right-0 z-[81] flex w-[86vw] max-w-[380px] flex-col aj-card shadow-[-24px_0_60px_-20px_rgba(7,32,79,0.45)]"
             >
               {/* brand wash — keeps the panel from reading as a flat white sheet */}
               <div

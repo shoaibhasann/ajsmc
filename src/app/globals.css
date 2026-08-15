@@ -110,6 +110,61 @@
   background-image: var(--aj-gradient-brand);
 }
 
+/*
+ * The card surface, replacing flat white everywhere a card is drawn.
+ *
+ * These are the values the signature service cards already used, lifted into one class
+ * because they are now on thirty-odd cards and a four-stop gradient pasted into thirty
+ * class attributes is a gradient that drifts. The colour lands almost white at the top
+ * right and settles into the page's own blue at the bottom left, so a grid of cards reads
+ * as one surface catching light rather than as white rectangles on a blue page.
+ *
+ * background-color stays white underneath: the gradient is decoration, and text contrast
+ * should not depend on a background-image having painted.
+ *
+ * The last stop is #e6eefa rather than the #dce9f7 the service cards used. On those cards
+ * the copy sits top-right, in the light corner; here text fills the card and reaches the
+ * dark one. Measured against that corner, #dce9f7 put muted text at 4.39:1 and green-deep
+ * at 4.41:1, both just under the 4.5:1 they need — the gradient was quietly spending the
+ * contrast margin that darkening those colours had just bought. #e6eefa gives 4.63 and
+ * 4.65 and still reads as the same wash. Lighten this stop, never darken it.
+ */
+.aj-card {
+  background-color: #fff;
+  background-image: linear-gradient(
+    225deg,
+    #ffffff 0%,
+    #fafcfe 44%,
+    #eef4fc 78%,
+    #e6eefa 100%
+  );
+}
+
+/*
+ * The specialty page's summary card. Glass rather than a surface: it sits on hero artwork,
+ * and the point of the panel is that you can still see the artwork through it.
+ *
+ * Three brand colours at low alpha over a white base — blue, green, navy, in the order the
+ * brand gradient uses them. The white base is doing the real work: at 0.72 it keeps body
+ * text at a measured 5.9:1 no matter which department's hero sits behind it, which a purely
+ * transparent glass panel could not promise.
+ */
+.aj-card-glass {
+  background-color: rgba(255, 255, 255, 0.72);
+  background-image: linear-gradient(
+    142deg,
+    rgba(42, 97, 196, 0.13) 0%,
+    rgba(23, 196, 107, 0.11) 46%,
+    rgba(12, 46, 110, 0.1) 100%
+  );
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow:
+    0 24px 48px -28px rgba(12, 46, 110, 0.5),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.85);
+}
+
 html {
   scroll-behavior: smooth;
   /* Anchor jumps (#appointment, #specialties) must clear the fixed navbar pill. */

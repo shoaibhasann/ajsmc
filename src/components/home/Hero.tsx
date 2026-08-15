@@ -110,7 +110,7 @@ export function Hero() {
                 key={badge.value}
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: badge.delay }}
-                className={`absolute z-[4] flex items-center gap-2.5 rounded-2xl bg-white py-2.5 pl-3 pr-4 shadow-[0_20px_40px_-22px_rgba(12,46,110,0.5)] ${badge.className}`}
+                className={`absolute z-[4] flex items-center gap-2.5 rounded-2xl aj-card py-2.5 pl-3 pr-4 shadow-[0_20px_40px_-22px_rgba(12,46,110,0.5)] ${badge.className}`}
               >
                 <span className={`flex h-10 w-10 items-center justify-center rounded-[11px] ${badge.iconBg}`}>
                   <Sparkles className="h-5 w-5" strokeWidth={2} />
@@ -149,7 +149,7 @@ export function Hero() {
             breakpoint without re-mounting. Centred while stacked, left-aligned once
             the grid splits at lg. */}
         <div className="aj-hero-copy text-center lg:text-left">
-          <span className="inline-flex items-center gap-2.5 rounded-full border border-navy/[0.08] bg-white px-4 py-2.5 font-body text-[13px] font-bold text-navy shadow-[0_10px_24px_-16px_rgba(12,46,110,0.5)]">
+          <span className="inline-flex items-center gap-2.5 rounded-full border border-navy/[0.08] aj-card px-4 py-2.5 font-body text-[13px] font-bold text-navy shadow-[0_10px_24px_-16px_rgba(12,46,110,0.5)]">
             <Sparkles className="h-4 w-4 text-green" strokeWidth={2.2} />
             {/* The H1 below is the brand line and carries no keyword, so the category and
                 the locality ride here instead, in the first text on the page. */}
@@ -191,7 +191,7 @@ export function Hero() {
             </a>
             <a
               href="#specialties"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-navy/15 bg-white/70 py-3.5 px-6 font-body text-[15px] font-bold text-navy backdrop-blur-sm transition-colors hover:border-navy/30 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 sm:w-auto sm:py-[13px]"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-navy/15 bg-white/70 py-3.5 px-6 font-body text-[15px] font-bold text-navy backdrop-blur-sm transition-colors hover:border-navy/30 hover:aj-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 sm:w-auto sm:py-[13px]"
             >
               Explore Specialties
               <ChevronRight className="h-[17px] w-[17px] text-green-deep" strokeWidth={2.6} />

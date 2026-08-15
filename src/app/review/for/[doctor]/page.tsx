@@ -100,7 +100,7 @@ export default async function ReviewerPage({ params }: Params) {
             <Link
               key={item.slug}
               href={`/review/${item.slug}`}
-              className="group flex items-start gap-4 rounded-[18px] border border-navy/[0.1] bg-white p-5 transition-shadow hover:shadow-[0_20px_40px_-28px_rgba(12,46,110,0.55)]"
+              className="group flex items-start gap-4 rounded-[18px] border border-navy/[0.1] aj-card p-5 transition-shadow hover:shadow-[0_20px_40px_-28px_rgba(12,46,110,0.55)]"
             >
               <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-soft-green font-body text-[14px] font-bold text-green-deep">
                 {i + 1}
@@ -127,7 +127,7 @@ export default async function ReviewerPage({ params }: Params) {
           ))}
         </div>
 
-        <div className="mt-8 rounded-[18px] border border-navy/[0.1] bg-white p-5">
+        <div className="mt-8 rounded-[18px] border border-navy/[0.1] aj-card p-5">
           <h2 className="font-heading text-[17px] font-bold text-navy">
             How to send your comments back
           </h2>

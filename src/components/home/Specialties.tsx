@@ -39,7 +39,7 @@ export function Specialties() {
               transition={{ duration: 0.7, ease: AJ_EASE, delay: (i % 4) * 0.08 }}
               whileHover={{ y: -5 }}
               className={`snap-start rounded-[20px] border p-5 shadow-[0_0_0_0_rgba(0,0,0,0)] transition-shadow hover:shadow-[0_22px_44px_-26px_rgba(12,46,110,0.4)] sm:p-[22px] ${
-                isDark ? "border-navy bg-navy" : "border-navy/[0.08] bg-white"
+                isDark ? "border-navy bg-navy" : "border-navy/[0.08] aj-card"
               }`}
             >
               <SpecialtyIcon icon={item.icon} className="mb-3.5" />

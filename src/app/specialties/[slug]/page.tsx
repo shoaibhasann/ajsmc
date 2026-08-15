@@ -126,7 +126,7 @@ export default async function SpecialtyPage({ params }: Params) {
             same visit.
           </p>
 
-          <p className="mt-7 rounded-[16px] border border-navy/[0.08] bg-white p-4 font-body text-[12.5px] leading-relaxed text-muted">
+          <p className="mt-7 rounded-[16px] border border-navy/[0.08] aj-card p-4 font-body text-[12.5px] leading-relaxed text-muted">
             AJSMC does not run a casualty or trauma unit. In a life-threatening emergency — an
             accident, chest pain, stroke symptoms or heavy bleeding — call 108 or go directly to
             the nearest hospital with a 24-hour emergency department.
@@ -186,7 +186,7 @@ export default async function SpecialtyPage({ params }: Params) {
             <Link
               key={s.name}
               href={`/specialties/${specialtySlug(s.name)}`}
-              className="inline-flex items-center gap-2 rounded-full border border-navy/[0.14] bg-white px-[18px] py-2.5 font-body text-sm font-bold text-[#3A4A63] transition-colors hover:border-navy/30 hover:text-navy"
+              className="inline-flex items-center gap-2 rounded-full border border-navy/[0.14] aj-card px-[18px] py-2.5 font-body text-sm font-bold text-[#3A4A63] transition-colors hover:border-navy/30 hover:text-navy"
             >
               {s.name}
               <ChevronRight className="h-3.5 w-3.5 text-green-deep" strokeWidth={2.6} />

@@ -8,7 +8,7 @@ const chairman = doctors[0];
 
 export function Leadership() {
   return (
-    <section className="border-t border-navy/[0.06] bg-white">
+    <section className="border-t border-navy/[0.06] aj-card">
       <Container className="grid grid-cols-1 items-center gap-9 py-[66px] lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-12">
         <div className="relative min-h-[300px] overflow-hidden rounded-3xl bg-tile-blue sm:min-h-[360px]">
           <DoctorPhoto doctor={chairman} sizes="(min-width: 1024px) 420px, 100vw" />

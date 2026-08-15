@@ -21,7 +21,7 @@ export function CtaBand({ title, description }: { title: string; description: st
         <div className="relative flex flex-wrap gap-3.5">
           <Link
             href="/#appointment"
-            className="aj-cta-wave aj-cta-wave-invert inline-flex items-center gap-2.5 rounded-full bg-white py-[9px] pl-6 pr-[9px] font-body text-[15px] font-bold text-navy"
+            className="aj-cta-wave aj-cta-wave-invert inline-flex items-center gap-2.5 rounded-full aj-card py-[9px] pl-6 pr-[9px] font-body text-[15px] font-bold text-navy"
           >
             <span>Book Appointment</span>
             <span className="aj-cta-dot flex h-[38px] w-[38px] items-center justify-center rounded-full bg-green-bright text-[#083b20]">

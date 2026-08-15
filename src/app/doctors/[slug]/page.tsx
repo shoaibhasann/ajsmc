@@ -158,7 +158,7 @@ export default async function DoctorPage({ params }: Params) {
             </p>
           )}
 
-          <p className="mt-8 rounded-[16px] border border-navy/[0.08] bg-white p-4 font-body text-[12.5px] leading-relaxed text-muted">
+          <p className="mt-8 rounded-[16px] border border-navy/[0.08] aj-card p-4 font-body text-[12.5px] leading-relaxed text-muted">
             AJSMC does not run a casualty or trauma unit. In a life-threatening emergency — an
             accident, chest pain, stroke symptoms or heavy bleeding — call 108 or go directly to
             the nearest hospital with a 24-hour emergency department.
@@ -178,7 +178,7 @@ export default async function DoctorPage({ params }: Params) {
               <Link
                 key={c.slug}
                 href={`/doctors/${c.slug}`}
-                className="group flex flex-col rounded-[20px] border border-navy/[0.08] bg-white p-5 transition-shadow hover:shadow-[0_26px_48px_-30px_rgba(12,46,110,0.5)]"
+                className="group flex flex-col rounded-[20px] border border-navy/[0.08] aj-card p-5 transition-shadow hover:shadow-[0_26px_48px_-30px_rgba(12,46,110,0.5)]"
               >
                 <span className="font-heading text-[16px] font-bold text-navy">{c.name}</span>
                 <span className="mt-1 font-body text-[13px] font-semibold text-green-deep">

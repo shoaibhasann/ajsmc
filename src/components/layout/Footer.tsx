@@ -30,7 +30,7 @@ export function Footer() {
         <div className="col-span-2 lg:col-span-1">
           <div className="mb-4 flex items-center gap-3">
             {/* Crest on a white tile — it's a blue/red mark that would vanish on the navy footer. */}
-            <span className="flex h-11 w-11 items-center justify-center rounded-[13px] bg-white p-1.5 shadow-[0_8px_20px_-10px_rgba(0,0,0,0.5)]">
+            <span className="flex h-11 w-11 items-center justify-center rounded-[13px] aj-card p-1.5 shadow-[0_8px_20px_-10px_rgba(0,0,0,0.5)]">
               <Image
                 src={assets.logo.src}
                 alt=""
