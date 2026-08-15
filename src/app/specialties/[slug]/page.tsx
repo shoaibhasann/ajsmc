@@ -5,7 +5,6 @@ import { ChevronRight, Clock, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { BookCta } from "@/components/ui/BookCta";
 import { ConsultantCarousel } from "@/components/specialties/ConsultantCarousel";
-import { SectionBadge } from "@/components/ui/SectionBadge";
 import { SpecialtyIcon } from "@/components/ui/SpecialtyIcon";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema, specialtySchema } from "@/lib/schema";
@@ -139,10 +138,12 @@ export default async function SpecialtyPage({ params }: Params) {
         </div>
 
         <div>
-          <SectionBadge tone="green">
-            {consultants.length === 1 ? "YOUR CONSULTANT" : "YOUR CONSULTANTS"}
-          </SectionBadge>
-          <h2 className="mb-6 mt-4 font-heading text-[22px] font-extrabold tracking-tight text-navy sm:text-[26px]">
+          {/* No badge above this heading. It sat 48px tall above the h2, which pushed this
+              column's heading that far below the left one — two headings side by side on
+              different baselines, which read as a mistake rather than as two columns. The
+              heading already says what the badge said. Same size as the left heading for
+              the same reason. */}
+          <h2 className="mb-6 font-heading text-[24px] font-extrabold tracking-tight text-navy sm:text-[28px]">
             {consultants.length === 1
               ? `Your consultant in ${specialty.name}`
               : `${consultants.length} consultants in ${specialty.name}`}
