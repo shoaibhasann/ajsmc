@@ -53,12 +53,14 @@ export default async function ReviewerPage({ params }: Params) {
   if (items.length === 0) notFound();
 
   return (
-    <div className="bg-bg pb-24">
+    {/* The navbar is a fixed pill roughly 76px tall, so the page has to start below it —
+        without this the red banner renders entirely behind the navbar and is never seen. */}
+    <div className="bg-bg pb-24 pt-[88px] lg:pt-[96px]">
       <div className="bg-[#8A2B1E] px-5 py-3 text-center font-body text-[13px] font-bold text-white">
         DRAFTS FOR MEDICAL REVIEW — NOT PUBLISHED, NOT FOR PATIENTS
       </div>
 
-      <Container className="max-w-[760px] pt-10">
+      <Container className="max-w-[760px] pt-9">
         <p className="font-body text-[11.5px] font-bold uppercase tracking-[0.14em] text-green-deep">
           {siteConfig.fullName}
         </p>
