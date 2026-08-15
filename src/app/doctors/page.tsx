@@ -8,7 +8,7 @@ import { breadcrumbSchema, physiciansSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Our Doctors in Chennai",
-  description: "Meet the specialist consultants at AJ Subaitha Medical Centre, Egmore, Chennai. Ophthalmology, Orthopedics, Pediatrics, Gynaecology, Diabetology, Dermatology, Urology and more, with qualifications and TNMC registration listed.",
+  description: "Meet the specialist consultants at AJ Subaitha Medical Centre, Egmore, Chennai. Ophthalmology, Orthopedics, Pediatrics, Gynaecology, Diabetology, Dermatology, Urology and more, with qualifications listed for each.",
   alternates: { canonical: "/doctors" },
 };
 
@@ -26,7 +26,12 @@ export default function DoctorsPage() {
         crumb="Our Doctors"
         badge="MEET OUR EXPERT TEAM"
         title="Meet the consultants at AJSMC"
-        description="Filter by department to find the right consultant, with qualifications and Tamil Nadu Medical Council registration numbers listed for each."
+        // "for each" was not true: 11 of the 28 carry a registration number and 17 do not,
+        // so the page promised the one credential a patient can actually go and verify and
+        // then withheld it most of the time. Qualifications genuinely are on every profile;
+        // the registration line is now scoped to where we hold it, and needs no edit once
+        // the outstanding numbers come in.
+        description="Filter by department to find the right consultant. Qualifications are listed on every profile, along with the Tamil Nadu Medical Council registration number where we hold it."
         image={assets.aboutHeroBg}
         decoration={assets.doctorsHeroDecor}
         decorationClassName="-rotate-[18deg]"
