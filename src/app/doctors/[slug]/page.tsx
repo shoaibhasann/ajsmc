@@ -5,8 +5,10 @@ import { BadgeCheck, ChevronRight, Clock, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { BookCta } from "@/components/ui/BookCta";
 import { DoctorPhoto } from "@/components/ui/DoctorPhoto";
+import { HeroSurface } from "@/components/ui/HeroSurface";
 import { SectionBadge } from "@/components/ui/SectionBadge";
 import { JsonLd } from "@/components/JsonLd";
+import { assets } from "@/lib/assets";
 import { breadcrumbSchema, physicianSchema } from "@/lib/schema";
 import { doctors, siteConfig, specialties } from "@/lib/site";
 
@@ -57,24 +59,25 @@ export default async function DoctorPage({ params }: Params) {
         ])}
       />
 
-      <div className="px-3 pt-3 sm:px-4 sm:pt-4">
-        <section
-          className="relative overflow-hidden rounded-[28px] sm:rounded-[36px]"
-          style={{
-            background:
-              "radial-gradient(85% 120% at 88% 12%, rgba(23,196,107,0.20) 0%, rgba(23,196,107,0) 55%), linear-gradient(160deg, #E7F1FC 0%, #F4F9FD 60%, #E8F6EF 100%)",
-          }}
-        >
-          <Container className="relative pb-12 pt-[104px] lg:pt-[116px]">
+      {/* Same backdrop as the Doctors listing this page is reached from — the artwork and
+          the stethoscope in the corner — rather than the bare gradient it drew itself. */}
+      <HeroSurface
+        image={assets.aboutHeroBg}
+        decoration={assets.doctorsHeroDecor}
+        // Every word on this hero is in the right-hand column, beside the portrait, so the
+        // fading scrim would lighten the photo and leave the text on bare artwork.
+        scrim="even"
+      >
+        <Container className="relative pb-12 pt-[104px] lg:pt-[116px]">
             <nav
               aria-label="Breadcrumb"
-              className="mb-6 flex flex-wrap items-center gap-2 font-body text-[13px] font-semibold text-muted"
+              className="mb-6 flex flex-wrap items-center gap-2 font-body text-[13px] font-semibold text-body"
             >
-              <Link href="/" className="text-muted hover:text-navy">
+              <Link href="/" className="text-body hover:text-navy">
                 Home
               </Link>
               <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.4} />
-              <Link href="/doctors" className="text-muted hover:text-navy">
+              <Link href="/doctors" className="text-body hover:text-navy">
                 Doctors
               </Link>
               <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.4} />
@@ -86,7 +89,11 @@ export default async function DoctorPage({ params }: Params) {
                 <DoctorPhoto doctor={doctor} sizes="260px" />
               </div>
 
-              <div>
+              {/* Capped so the copy stops short of the stethoscope in the corner. Without it
+                  the column takes the full remaining width — about 1000px at 1440 — and the
+                  longest line runs under the artwork, as well as being far past a comfortable
+                  measure to read. */}
+              <div className="lg:max-w-[620px]">
                 {doctor.tag && <SectionBadge tone="green">{doctor.tag.toUpperCase()}</SectionBadge>}
                 <h1 className="mt-4 font-heading text-[32px] font-extrabold leading-[1.08] tracking-tight text-navy sm:text-[40px] lg:text-[46px]">
                   {doctor.name}
@@ -127,9 +134,8 @@ export default async function DoctorPage({ params }: Params) {
                 </div>
               </div>
             </div>
-          </Container>
-        </section>
-      </div>
+        </Container>
+      </HeroSurface>
 
       <Container as="section" className="py-12 lg:py-16">
         <div className="mx-auto max-w-[760px]">
