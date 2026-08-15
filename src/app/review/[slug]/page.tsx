@@ -60,9 +60,9 @@ export default async function ReviewPage({ params }: Params) {
   const second = secondReviewerOf(item);
   const html = articleHtml(item);
 
+  // pt clears the fixed navbar pill, which is about 76px tall. Without it the red DRAFT
+  // banner renders entirely behind the navbar and is never seen.
   return (
-    {/* The navbar is a fixed pill roughly 76px tall, so the page has to start below it —
-        without this the red banner renders entirely behind the navbar and is never seen. */}
     <div className="bg-bg pb-24 pt-[88px] lg:pt-[96px]">
       <div className="bg-[#8A2B1E] px-5 py-3 text-center font-body text-[13px] font-bold text-white">
         DRAFT FOR MEDICAL REVIEW — NOT PUBLISHED, NOT FOR PATIENTS
