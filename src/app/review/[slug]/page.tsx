@@ -28,9 +28,19 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   const item = getReviewItem(slug);
   if (!item) return {};
+  const reviewer = reviewerOf(item);
+  const title = `For review: ${item.title}`;
+  const description = reviewer
+    ? `A draft article awaiting ${reviewer.name}'s approval before it is published on the AJSMC website.`
+    : "A draft article awaiting a consultant's approval before publication.";
+
   return {
-    title: `For review: ${item.title}`,
+    title,
+    description,
     robots: { index: false, follow: false, nocache: true, googleBot: { index: false, follow: false } },
+    // Named card rather than the site-wide one, for the same reason as the per-doctor
+    // page: these get forwarded, and an identical preview on every link is useless.
+    openGraph: { title, description, url: `${siteConfig.url}/review/${slug}`, type: "article" },
   };
 }
 

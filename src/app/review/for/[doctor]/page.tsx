@@ -17,9 +17,26 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { doctor: slug } = await params;
   const doctor = doctors.find((d) => d.slug === slug);
   if (!doctor) return {};
+
+  const title = `Articles for review — ${doctor.name}`;
+  const description = `Draft articles awaiting ${doctor.name}'s approval before they are published on the AJSMC website.`;
+
   return {
-    title: `Articles for review — ${doctor.name}`,
+    title,
+    description,
     robots: { index: false, follow: false, nocache: true, googleBot: { index: false, follow: false } },
+    /*
+     * Overrides the site-wide Open Graph card. These links get forwarded one to
+     * each consultant, and inheriting the root card made all eight preview
+     * identically — nobody could tell which link was theirs. The card names the
+     * doctor and says nothing clinical.
+     */
+    openGraph: {
+      title,
+      description,
+      url: `${siteConfig.url}/review/for/${slug}`,
+      type: "website",
+    },
   };
 }
 
