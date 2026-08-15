@@ -711,16 +711,26 @@ export const contactInfoCards = [
 ] as const;
 
 /**
- * The department list the booking forms offer, derived rather than typed.
+ * What the booking forms offer, derived from the roster rather than typed.
  *
- * It used to be a hand-maintained array of ten while `specialties` held twelve, so the
- * forms had quietly stopped offering Pathology — the same duplicate-list failure that let
- * the About hero claim 17 consultants while the rest of the page said 28. Add a department
- * to `specialties` and it now appears here on its own.
+ * The rule is one line long: if a consultant practises it, a patient can ask for it.
  *
- * The filter is the point, not an afterthought: a department with no consultant on the
- * roster must not be bookable. That is what keeps General Surgery out of this list — AJSMC
- * publishes the department but has no surgeon, and offering the appointment would promise
- * someone a consultation that cannot happen.
+ * That matters because the two lists are not the same. AJSMC publishes twelve departments,
+ * but consultants carry specialty tags that reach past them — ENT, Oncology, Neurology,
+ * Gastroenterology, Radiology, Plastic Surgery, Pulmonology and Nephrology are nine
+ * consultants between them, every one with a profile page on this site, and none of them
+ * was selectable while this list came from `specialties` alone.
+ *
+ * Published departments come first, in their own order, so the common ones stay at the top
+ * of the dropdown; the rest follow alphabetically.
+ *
+ * General Surgery drops out on its own, which is the other half of the rule working: AJSMC
+ * publishes the department but has no surgeon, and offering that appointment would promise
+ * a consultation that cannot happen.
  */
-export const departments = specialtiesWithPages.map((s) => s.name);
+export const departments = [
+  ...specialtiesWithPages.map((s) => s.name),
+  ...[...new Set(listedDoctors.map((d) => d.specialty))]
+    .filter((name) => !specialties.some((s) => s.name === name))
+    .sort(),
+];

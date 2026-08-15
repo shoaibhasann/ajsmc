@@ -393,6 +393,25 @@ h6 {
   box-shadow: 0 0 0 3px rgba(12, 46, 110, 0.12);
 }
 
+/*
+ * Selects draw their own arrow, and the browser pins it to the very edge of the control —
+ * so on a 12px radius it sat on the rounded corner and touched the border. The native one
+ * is turned off and replaced with a chevron drawn in, positioned 16px in and matched to the
+ * navy the rest of the form uses. padding-right keeps the longest option name off it.
+ *
+ * `appearance` needs the -webkit- prefix hand-written here: unlike backdrop-filter, which
+ * Lightning CSS prefixes on its own, dropping this one loses the fix in Safari.
+ */
+select.aj-input {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 44px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230c2e6e' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 15px 15px;
+}
+
 /* Article body typography.
    Measure is capped by the layout, so these rules only own rhythm and colour. Headings
    stay scannable because both readers and AI engines lift answers section by section. */
