@@ -31,7 +31,6 @@ export default function ContactPage() {
         description="We are on Police Commissioner Office Road, a short walk from Egmore station. Call, WhatsApp or use the form below to book. Consultations run Monday to Saturday, 10am to 9pm, and our helpline answers around the clock."
         image={assets.aboutHeroBg}
         decoration={assets.contactHeroDecor}
-        decorationClassName="!w-[150px] !bottom-5 lg:!w-[200px] lg:!bottom-8"
       />
       <InfoCards />
       <Container as="section" id="form" className="grid grid-cols-1 items-stretch gap-6.5 py-16 pb-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">

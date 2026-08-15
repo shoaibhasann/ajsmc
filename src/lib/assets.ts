@@ -12,7 +12,26 @@ export type ImageAsset = {
   alt: string;
   width: number;
   height: number;
+  /**
+   * Where a hero's corner illustration sits, in px, for the small and large renders.
+   *
+   * This belongs to the asset rather than to the hero because it depends entirely on how
+   * the artwork was drawn. Each of these is a square canvas with the drawing floating in
+   * it, and the transparent margin underneath varies enormously — measured off the alpha
+   * channel: sparkle 24.5%, stethoscope 14.5%, bottle 8.5%, book 3.5%. The hero pushes the
+   * box below its own bottom edge so the drawing appears to rest on it; how far to push is
+   * therefore a property of the drawing.
+   *
+   * Negative `bottom` pushes the box below the edge (the overflow clips it), positive
+   * lifts it clear. A single shared value was used for all of these once, tuned for the
+   * bottle, and it sliced about 17px off the bottom of the book — which is what this field
+   * exists to stop happening again. Measure the alpha, do not guess.
+   */
+  placement?: { width: number; widthLg: number; bottom: number; bottomLg: number };
 };
+
+/** What most of the illustrations use: they carry enough transparent margin to ground on it. */
+const GROUNDED = { width: 210, widthLg: 310, bottom: -20, bottomLg: -28 };
 
 export const assets = {
   /**
@@ -37,12 +56,14 @@ export const assets = {
     alt: "Bottle of medicine with capsules and tablets",
     width: 1254,
     height: 1254,
+    placement: GROUNDED
   },
   doctorsHeroDecor: {
     src: `${CLOUDINARY}/v1784912139/ajsmc/assets/s2bufxg52b4cfh1vfp1m.png`,
     alt: "Blue and green stethoscope",
     width: 1254,
     height: 1254,
+    placement: GROUNDED
   },
   contactHeroDecor: {
     // e_trim strips the wide transparent padding so the pin fills its box.
@@ -50,18 +71,21 @@ export const assets = {
     alt: "Blue and green location pin",
     width: 472,
     height: 623,
+    placement: { width: 150, widthLg: 200, bottom: 20, bottomLg: 32 }
   },
   blogHeroDecor: {
     src: `${CLOUDINARY}/v1786816360/ajsmc/assets/lr6nfihvwgnb8yy1de4x.png`,
     alt: "Blue and green medical reference book with a caduceus",
     width: 1254,
     height: 1254,
+    placement: { width: 210, widthLg: 310, bottom: 0, bottomLg: 0 }
   },
   specialtiesHeroDecor: {
     src: `${CLOUDINARY}/v1784925716/ajsmc/assets/lhwr7mwtdplbukvvuh2n.png`,
     alt: "Blue and green sparkle",
     width: 1254,
     height: 1254,
+    placement: GROUNDED
   },
   statsBg: {
     src: `${CLOUDINARY}/v1784925859/ajsmc/assets/bdkfzj9wwbu1hhdyrvaz.png`,

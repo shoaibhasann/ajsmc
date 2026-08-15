@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import Image from "next/image";
 import type { ImageAsset } from "@/lib/assets";
 
@@ -48,10 +48,16 @@ export function HeroSurface({
   scrim?: "copy-left" | "copy-wide" | "even";
   /** Cut-out illustration anchored to the bottom-right corner. */
   decoration?: ImageAsset;
-  /** Extra classes for the decoration (e.g. a rotation) that vary per page. */
+  /**
+   * Extra classes for the decoration — genuine per-page effects only, like the rotation on
+   * the Doctors listing. Size and vertical offset belong to the asset now, not here.
+   */
   decorationClassName?: string;
   children: ReactNode;
 }) {
+  // Falls back to the shared grounding for any illustration that has not been measured yet.
+  const place = decoration?.placement ?? { width: 210, widthLg: 310, bottom: -20, bottomLg: -28 };
+
   return (
     <div className="px-3 pt-3 sm:px-4 sm:pt-4">
       <section
@@ -125,9 +131,18 @@ export function HeroSurface({
             width={decoration.width}
             height={decoration.height}
             sizes="(min-width: 1024px) 320px, 220px"
-            // Negative bottom offsets the image's transparent lower padding so the artwork
-            // grounds right at the section's bottom edge (clipped by overflow).
-            className={`pointer-events-none absolute -bottom-5 right-3 hidden h-auto w-[210px] select-none drop-shadow-[0_18px_30px_rgba(12,46,110,0.28)] sm:block lg:-bottom-7 lg:right-10 lg:w-[310px] ${decorationClassName}`.trim()}
+            // Size and vertical offset come from the asset, because both depend on how much
+            // transparent margin the artwork was drawn with — see `placement` in assets.ts.
+            // Passed as custom properties so one class list can serve every illustration.
+            style={
+              {
+                "--aj-decor-w": `${place.width}px`,
+                "--aj-decor-w-lg": `${place.widthLg}px`,
+                "--aj-decor-b": `${place.bottom}px`,
+                "--aj-decor-b-lg": `${place.bottomLg}px`,
+              } as CSSProperties
+            }
+            className={`pointer-events-none absolute bottom-[var(--aj-decor-b)] right-3 hidden h-auto w-[var(--aj-decor-w)] select-none drop-shadow-[0_18px_30px_rgba(12,46,110,0.28)] sm:block lg:bottom-[var(--aj-decor-b-lg)] lg:right-10 lg:w-[var(--aj-decor-w-lg)] ${decorationClassName}`.trim()}
           />
         )}
 
