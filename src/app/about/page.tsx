@@ -29,7 +29,10 @@ export default function AboutPage() {
         crumb="About Us"
         badge={`SERVING CHENNAI SINCE ${siteConfig.founded}`}
         title="A multi speciality hospital built around one idea"
-        description="That a family should not have to cross Chennai, or pay heavily, to see a good specialist. So we put 17 of them in one building on Police Commissioner Office Road, Egmore."
+        // Interpolated, not typed. This read "17 of them" while the same page said 28 three
+        // times below it — the last survivor of the count regression the note in site.ts
+        // describes. A number about the roster does not get hardcoded here.
+        description={`That a family should not have to cross Chennai, or pay heavily, to see a good specialist. So we put ${listedDoctors.length} of them in one building on Police Commissioner Office Road, Egmore.`}
         image={assets.aboutHeroBg}
         decoration={assets.aboutHeroDecor}
       />
