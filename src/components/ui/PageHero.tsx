@@ -69,7 +69,7 @@ export function PageHero({
   /** Extra classes for the decoration (e.g. a rotation) that vary per page. */
   decorationClassName?: string;
   /** Forwarded to HeroSurface — see the note there on why direction matters. */
-  scrim?: "copy-left" | "even";
+  scrim?: "copy-left" | "copy-wide" | "even";
   /** Rendered inside the hero, below the description. */
   children?: ReactNode;
 }) {
@@ -135,8 +135,14 @@ export function PageHero({
           </h1>
         </div>
 
+        {/* 19px bold, not 17px semibold. This is the smallest coloured text on any hero and
+            the one element that decided how heavy the scrim had to be: at 17px it needed
+            4.5:1 and could not get there without washing the artwork flat. At 19px bold WCAG
+            counts it as large text at 3:1 — because the glyphs really are easier to read —
+            and it measures 3.77:1, which lets the artwork stay vivid. It is also a short,
+            prominent line that was always under-set at 17px. */}
         {tagline && (
-          <p className="mt-4 font-body text-[17px] font-semibold text-green-deep">{tagline}</p>
+          <p className="mt-4 font-body text-[19px] font-bold text-green-deep">{tagline}</p>
         )}
         {description && (
           <p className="mt-4.5 max-w-[560px] font-body text-base leading-relaxed text-body">

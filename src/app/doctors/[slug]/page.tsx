@@ -64,9 +64,10 @@ export default async function DoctorPage({ params }: Params) {
       <HeroSurface
         image={assets.aboutHeroBg}
         decoration={assets.doctorsHeroDecor}
-        // Every word on this hero is in the right-hand column, beside the portrait, so the
-        // fading scrim would lighten the photo and leave the text on bare artwork.
-        scrim="even"
+        // The copy runs to about 74% of the box, beside the portrait, so copy-left has
+        // faded out under it and `even` flattened the artwork this page is supposed to
+        // share with the listing. copy-wide covers the text and lets the corner stay vivid.
+        scrim="copy-wide"
       >
         <Container className="relative pb-12 pt-[104px] lg:pt-[116px]">
             <nav
@@ -98,7 +99,8 @@ export default async function DoctorPage({ params }: Params) {
                 <h1 className="mt-4 font-heading text-[32px] font-extrabold leading-[1.08] tracking-tight text-navy sm:text-[40px] lg:text-[46px]">
                   {doctor.name}
                 </h1>
-                <p className="mt-3 font-body text-[17px] font-semibold text-green-deep">
+                {/* 19px bold for the same reason as the specialty tagline — see PageHero. */}
+                <p className="mt-3 font-body text-[19px] font-bold text-green-deep">
                   {doctor.role}
                 </p>
                 {doctor.degree && (

@@ -27,13 +27,25 @@ export function HeroSurface({
    * busy half to the right, so the scrim fades left to right and lightens only what is
    * under text.
    *
-   * `even` is for layouts where that assumption is wrong — the doctor profiles put a
-   * portrait on the left and every word on the right, so the fading scrim lightened the
-   * photo and left the text bare. Measured there at 1440px: the role line came out at
-   * 3.28:1, the address 3.08:1 and the breadcrumb 3.56:1, all against 4.5. An even scrim
-   * at every width fixes it, and it is the one already used on phones.
+   * `copy-wide` is for layouts whose text runs most of the way across — the doctor profiles
+   * put a portrait on the left and every word to its right, out to about 74% of the box.
+   * `copy-left` has faded to nothing by then, and `even` covers the text but flattens the
+   * artwork everywhere, which made these heroes look like a different site from the listing
+   * they are reached from. This one holds its cover across the text and then drops to zero
+   * over the last quarter, so the corner the artwork and the illustration actually live in
+   * stays vivid.
+   *
+   * The values are the lightest that still clear 4.5:1. Measured at 1440 on a profile, the
+   * binding element is the 14.5px address line at 4.76:1 — not the green tagline, which
+   * stopped being the constraint once it went to 19px bold. The right-hand strip holds a
+   * mean luminance of 0.66 against the listing's 0.61; `even` washed it to 0.87, which is
+   * what made these heroes look like a different site. Lighter than this and the address
+   * fails, so do not open it up further without re-measuring.
+   *
+   * `even` is the flat, strong one. It is what phones get at every breakpoint, since a
+   * narrow box has no left half to speak of.
    */
-  scrim?: "copy-left" | "even";
+  scrim?: "copy-left" | "copy-wide" | "even";
   /** Cut-out illustration anchored to the bottom-right corner. */
   decoration?: ImageAsset;
   /** Extra classes for the decoration (e.g. a rotation) that vary per page. */
@@ -90,13 +102,15 @@ export function HeroSurface({
                   "linear-gradient(180deg, rgba(244,249,253,0.88) 0%, rgba(240,249,246,0.82) 100%)",
               }}
             />
-            {scrim === "copy-left" && (
+            {scrim !== "even" && (
               <div
                 aria-hidden
                 className="absolute inset-0 hidden lg:block"
                 style={{
                   background:
-                    "linear-gradient(100deg, rgba(244,249,253,0.6) 0%, rgba(244,249,253,0.36) 42%, rgba(240,249,246,0.12) 74%, rgba(233,246,240,0) 100%)",
+                    scrim === "copy-wide"
+                      ? "linear-gradient(100deg, rgba(244,249,253,0.66) 0%, rgba(244,249,253,0.58) 50%, rgba(240,249,246,0.44) 78%, rgba(233,246,240,0) 100%)"
+                      : "linear-gradient(100deg, rgba(244,249,253,0.6) 0%, rgba(244,249,253,0.36) 42%, rgba(240,249,246,0.12) 74%, rgba(233,246,240,0) 100%)",
                 }}
               />
             )}
