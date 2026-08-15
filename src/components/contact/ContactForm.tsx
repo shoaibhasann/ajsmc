@@ -8,6 +8,18 @@ import { SectionBadge } from "@/components/ui/SectionBadge";
 export function ContactForm() {
   const [sent, setSent] = useState(false);
 
+  /*
+   * KNOWN, AND DELIBERATE FOR NOW: this sends nothing anywhere.
+   *
+   * There is no fetch, no form action, no API route, and the inputs carry no name and no
+   * state binding — what a patient types is never read. The success panel below still tells
+   * them "Your message has been received. We'll call you back soon.", so anyone who submits
+   * this form is waiting for a call that no one knows to make.
+   *
+   * Flagged and left as-is at the client's instruction. Whoever picks this up: the routes
+   * discussed were a WhatsApp deep link to the number already advertised for booking, or an
+   * API route posting to helpdesk@ajsmc.in. The same stub is in home/Appointment.tsx.
+   */
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSent(true);

@@ -710,15 +710,17 @@ export const contactInfoCards = [
   },
 ] as const;
 
-export const departments = [
-  "General Medicine",
-  "Ophthalmology",
-  "Dermatology",
-  "Pediatrics",
-  "Orthopedics",
-  "Urology",
-  "Obstetrics & Gynaecology",
-  "Diabetology",
-  "Reproductive Medicine",
-  "Psychology",
-];
+/**
+ * The department list the booking forms offer, derived rather than typed.
+ *
+ * It used to be a hand-maintained array of ten while `specialties` held twelve, so the
+ * forms had quietly stopped offering Pathology — the same duplicate-list failure that let
+ * the About hero claim 17 consultants while the rest of the page said 28. Add a department
+ * to `specialties` and it now appears here on its own.
+ *
+ * The filter is the point, not an afterthought: a department with no consultant on the
+ * roster must not be bookable. That is what keeps General Surgery out of this list — AJSMC
+ * publishes the department but has no surgeon, and offering the appointment would promise
+ * someone a consultation that cannot happen.
+ */
+export const departments = specialtiesWithPages.map((s) => s.name);

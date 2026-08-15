@@ -15,6 +15,15 @@ export function Appointment() {
   const [sent, setSent] = useState(false);
   const compact = useIsCompact();
 
+  /*
+   * KNOWN, AND DELIBERATE FOR NOW: this sends nothing anywhere. No fetch, no form action,
+   * no API route, and the inputs carry no name and no state binding, so what a patient
+   * types is never read. The confirmation shown afterwards says the request was received.
+   *
+   * This is the site's main booking path, and it is the same stub as in
+   * contact/ContactForm.tsx — see the fuller note there. Flagged and left at the client's
+   * instruction; fix both together.
+   */
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSent(true);
