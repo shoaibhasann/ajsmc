@@ -465,6 +465,26 @@ reviewItems.push(
   },
 );
 
+/**
+ * Everything a given consultant has been asked to read. Drives the per-doctor page,
+ * so each reviewer gets one link rather than one per article.
+ */
+export function itemsForReviewer(doctorSlug: string): ReviewItem[] {
+  return reviewItems.filter(
+    (r) => r.reviewer === doctorSlug || r.secondReviewer === doctorSlug,
+  );
+}
+
+/** Every consultant who has at least one article waiting. */
+export function reviewerSlugs(): string[] {
+  const slugs = new Set<string>();
+  for (const r of reviewItems) {
+    slugs.add(r.reviewer);
+    if (r.secondReviewer) slugs.add(r.secondReviewer);
+  }
+  return [...slugs];
+}
+
 export function getReviewItem(slug: string): ReviewItem | undefined {
   return reviewItems.find((r) => r.slug === slug);
 }
