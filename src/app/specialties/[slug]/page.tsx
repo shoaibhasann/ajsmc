@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ChevronRight, Clock, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { BookCta } from "@/components/ui/BookCta";
-import { DoctorCard } from "@/components/ui/DoctorCard";
+import { ConsultantCarousel } from "@/components/specialties/ConsultantCarousel";
 import { SectionBadge } from "@/components/ui/SectionBadge";
 import { SpecialtyIcon } from "@/components/ui/SpecialtyIcon";
 import { JsonLd } from "@/components/JsonLd";
@@ -97,8 +97,11 @@ export default async function SpecialtyPage({ params }: Params) {
         </section>
       </div>
 
+      {/* Department copy on the left, the consultants beside it on the right. Below lg the
+          grid collapses to the two stacked rows it reads as on a phone. */}
       <Container as="section" className="py-12 lg:py-16">
-        <div className="mx-auto max-w-[760px]">
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,340px)] lg:gap-14">
+        <div>
           <h2 className="font-heading text-[24px] font-extrabold tracking-tight text-navy sm:text-[28px]">
             {/* "a/an" cannot be hardcoded across 11 department names, so the article is
                 avoided entirely rather than reading "a Orthopedics consultant". */}
@@ -134,36 +137,30 @@ export default async function SpecialtyPage({ params }: Params) {
             the nearest hospital with a 24-hour emergency department.
           </p>
         </div>
-      </Container>
 
-      <Container as="section" className="pb-4">
-        <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <SectionBadge tone="green">
-              {consultants.length === 1 ? "YOUR CONSULTANT" : "YOUR CONSULTANTS"}
-            </SectionBadge>
-            <h2 className="mt-4 font-heading text-[26px] font-extrabold tracking-tight text-navy sm:text-[32px]">
-              {consultants.length === 1
-                ? `Your consultant in ${specialty.name}`
-                : `${consultants.length} consultants in ${specialty.name}`}
-            </h2>
-          </div>
+        <div>
+          <SectionBadge tone="green">
+            {consultants.length === 1 ? "YOUR CONSULTANT" : "YOUR CONSULTANTS"}
+          </SectionBadge>
+          <h2 className="mb-6 mt-4 font-heading text-[22px] font-extrabold tracking-tight text-navy sm:text-[26px]">
+            {consultants.length === 1
+              ? `Your consultant in ${specialty.name}`
+              : `${consultants.length} consultants in ${specialty.name}`}
+          </h2>
+
+          <ConsultantCarousel doctors={consultants} />
+
           <Link
             href="/doctors"
-            className="inline-flex items-center gap-2 font-body text-[15px] font-bold text-navy"
+            className="mt-6 inline-flex items-center gap-2 font-body text-[15px] font-bold text-navy"
           >
             All doctors
             <ChevronRight className="h-4 w-4 text-green-deep" strokeWidth={2.6} />
           </Link>
         </div>
-
-        <div className="grid grid-cols-1 gap-5.5 sm:grid-cols-2 lg:grid-cols-4">
-          {consultants.map((doctor) => (
-            <DoctorCard key={doctor.slug} doctor={doctor} />
-          ))}
         </div>
 
-        <BookCta className="mt-12" />
+        <BookCta className="mt-14" />
       </Container>
 
       <Container as="section" className="py-14">

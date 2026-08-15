@@ -131,18 +131,19 @@ export function Footer() {
                 Terms of Service
               </Link>
             </span>
-            <span className="text-white/45">
+            {/* The whole credit is the link, not just the name — a two-word target in a
+                footer is a small thing to hit, on a phone especially. */}
+            <a
+              href="https://zyntec.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Design and developed by Zyntec — visit zyntec.in (opens in a new tab)"
+              className="inline-flex items-center gap-1.5 text-white/45 transition-colors hover:text-white/80"
+            >
+              <span aria-hidden>✨</span>
               Design &amp; Developed by{" "}
-              <a
-                href="https://zyntec.in"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Zyntec — visit zyntec.in (opens in a new tab)"
-                className="font-semibold text-white/70 transition-colors hover:text-green-bright"
-              >
-                Zyntec
-              </a>
-            </span>
+              <span className="font-bold tracking-wide text-white/75">ZYNTEC</span>
+            </a>
           </div>
         </Container>
       </div>
