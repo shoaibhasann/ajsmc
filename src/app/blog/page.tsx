@@ -33,10 +33,7 @@ export default function BlogIndexPage() {
         title="Health guides from our specialists"
         description="Plain answers to the questions patients ask us most — what a symptom means, when it needs a doctor, what treatment involves, and what it costs at AJSMC."
         image={assets.aboutHeroBg}
-        // Stand-in. This page is the only hero without artwork of its own; the bottle is
-        // borrowed from About so it stops being the odd one out. Swap for a library-specific
-        // asset when one exists — one line here and one entry in assets.ts.
-        decoration={assets.aboutHeroDecor}
+        decoration={assets.blogHeroDecor}
       />
 
       <Container as="section" className="py-12 lg:py-16">

@@ -51,6 +51,12 @@ export const assets = {
     width: 472,
     height: 623,
   },
+  blogHeroDecor: {
+    src: `${CLOUDINARY}/v1786816360/ajsmc/assets/lr6nfihvwgnb8yy1de4x.png`,
+    alt: "Blue and green medical reference book with a caduceus",
+    width: 1254,
+    height: 1254,
+  },
   specialtiesHeroDecor: {
     src: `${CLOUDINARY}/v1784925716/ajsmc/assets/lhwr7mwtdplbukvvuh2n.png`,
     alt: "Blue and green sparkle",
