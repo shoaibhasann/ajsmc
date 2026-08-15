@@ -465,6 +465,46 @@ reviewItems.push(
   },
 );
 
+reviewItems.push({
+  slug: "how-fast-you-age",
+  title: "What Actually Slows How Fast You Age, and What the Evidence Says About the Things You Are Sold",
+  file: "c1-how-fast-you-age.draft.html",
+  reviewer: "a-ameer-jahan",
+  purpose:
+    "People search this constantly and almost every result is a supplement seller or a cosmetic clinic. A hospital can answer it honestly, which is the one thing a vendor structurally cannot do. The article opens with an 'In short' block written to be quoted whole by an AI answer engine.",
+  questions: [
+    {
+      q: "This article had to be written without your own specialty in it. Are you comfortable with that?",
+      why:
+        "India's Drugs and Magic Remedies (Objectionable Advertisements) Act 1954 reaches sexual vigour and potency claims, and its Schedule names premature ageing and infirmity in old age. A section on testosterone in ageing men, male hormonal decline and sperm recovery was written and then removed for that reason. The removal is marked in the file so it is not restored by accident. If you would rather your name went on an article inside your actual field, say so and we will write that instead.",
+    },
+    {
+      q: "Is the 'In short' block at the top defensible standing entirely alone?",
+      why:
+        "It is written to be lifted verbatim by AI search engines, which means it will be read with no surrounding context and no disclaimer visible. Every sentence in it has to hold up on its own.",
+    },
+    {
+      q: "Is the section on what people are sold — NAD+, NMN, collagen, growth hormone, stem cell therapy, IV drips, biological-age tests — fair rather than dismissive?",
+      why:
+        "Readers asking about these have usually been told they work by someone they trust. The article says the evidence does not support them. Tell us if it is too blunt, or not blunt enough.",
+    },
+    {
+      q: "Is the answer to persistent tiredness in the thirties correct — that it is far more often vitamin D or B12 deficiency, anaemia, thyroid disease, sleep apnoea or depression than ageing?",
+      why:
+        "This is the most searched question in the whole topic and the most useful correction on the page. It is also the one that leads a reader to an actual consultation.",
+    },
+  ],
+  factsToConfirm: [
+    "That AJSMC has no ageing, wellness, longevity or hormone-optimisation service, and that the article is right to say so plainly.",
+    "That the tests the article describes as ordinary — vitamin D, B12, thyroid, haemoglobin, blood pressure, glucose, lipids — are ones a patient can have through AJSMC in a normal outpatient consultation.",
+  ],
+  sources: [
+    "Lancet Commission on dementia prevention, intervention and care, 2024",
+    "Jha et al., NEJM 2013; Mandsager et al., JAMA Network Open 2018; WHO physical activity guidelines 2020",
+    "Higgins-Chen et al., Nature Aging 2022 on epigenetic clock reproducibility; ICMR-INDIAB-17, Lancet Diabetes Endocrinol 2023",
+  ],
+});
+
 /**
  * Everything a given consultant has been asked to read. Drives the per-doctor page,
  * so each reviewer gets one link rather than one per article.
