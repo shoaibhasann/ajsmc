@@ -4,9 +4,11 @@ import { notFound } from "next/navigation";
 import { ChevronRight, Clock, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { BookCta } from "@/components/ui/BookCta";
+import { PageHero } from "@/components/ui/PageHero";
 import { ConsultantCarousel } from "@/components/specialties/ConsultantCarousel";
 import { SpecialtyIcon } from "@/components/ui/SpecialtyIcon";
 import { JsonLd } from "@/components/JsonLd";
+import { assets } from "@/lib/assets";
 import { breadcrumbSchema, specialtySchema } from "@/lib/schema";
 import {
   doctorsInSpecialty,
@@ -57,44 +59,20 @@ export default async function SpecialtyPage({ params }: Params) {
         ])}
       />
 
-      <div className="px-3 pt-3 sm:px-4 sm:pt-4">
-        <section
-          className="relative overflow-hidden rounded-[28px] sm:rounded-[36px]"
-          style={{
-            background:
-              "radial-gradient(85% 120% at 88% 12%, rgba(23,196,107,0.20) 0%, rgba(23,196,107,0) 55%), linear-gradient(160deg, #E7F1FC 0%, #F4F9FD 60%, #E8F6EF 100%)",
-          }}
-        >
-          <Container className="relative pb-14 pt-[104px] lg:pt-[116px]">
-            <nav
-              aria-label="Breadcrumb"
-              className="mb-5 flex flex-wrap items-center gap-2 font-body text-[13px] font-semibold text-muted"
-            >
-              <Link href="/" className="text-muted hover:text-navy">
-                Home
-              </Link>
-              <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.4} />
-              <Link href="/specialties" className="text-muted hover:text-navy">
-                Specialties
-              </Link>
-              <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.4} />
-              <span className="font-bold text-navy">{specialty.name}</span>
-            </nav>
-
-            <SpecialtyIcon icon={specialty.icon} className="mb-5" />
-
-            <h1 className="max-w-[760px] font-heading text-[34px] font-extrabold leading-[1.06] tracking-tight text-navy sm:text-[44px] lg:text-[52px]">
-              {specialty.name} in {siteConfig.address.city}
-            </h1>
-            <p className="mt-4 font-body text-[17px] font-semibold text-green-deep">
-              {specialty.description}
-            </p>
-            <p className="mt-4 max-w-[620px] font-body text-base leading-relaxed text-body">
-              {specialty.context}
-            </p>
-          </Container>
-        </section>
-      </div>
+      {/* Same hero as the rest of the site — background artwork, scrim and the corner
+          decoration from the Specialties listing — rather than the bare gradient this
+          page used to draw for itself. */}
+      <PageHero
+        crumb={specialty.name}
+        parent={{ name: "Specialties", href: "/specialties" }}
+        icon={<SpecialtyIcon icon={specialty.icon} />}
+        title={`${specialty.name} in ${siteConfig.address.city}`}
+        titleScale="compact"
+        tagline={specialty.description}
+        description={specialty.context}
+        image={assets.aboutHeroBg}
+        decoration={assets.specialtiesHeroDecor}
+      />
 
       {/* Department copy on the left, the consultants beside it on the right. Below lg the
           grid collapses to the two stacked rows it reads as on a phone. */}
