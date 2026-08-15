@@ -160,10 +160,22 @@ export function PageHero({
          * The icon sits on the heading's first line rather than above it. `items-start`
          * with a nudge, not `items-center`: some of these headings wrap to two lines, and
          * centring would park the icon in the gap between them instead of beside the words.
+         *
+         * Desktop only, from lg up. It costs about 62px of the heading's line, and the
+         * heading is the part carrying the information — the icon only decorates it. At
+         * 768px that 62px is the difference between "Orthopedics in Chennai" sitting on
+         * one line and wrapping to two; at 375px the heading wraps either way, so there
+         * it simply takes width from a line that has none to spare.
+         *
+         * The per-breakpoint nudges below stay correct for the sizes they name, so showing
+         * this lower down again is a one-word change rather than a re-measurement.
          */}
         <div className={`flex items-start gap-3.5 sm:gap-4 ${badge ? "mt-4.5" : ""}`}>
           {icon && (
-            <span aria-hidden className={`shrink-0 ${TITLE_SCALES[titleScale].iconNudge}`}>
+            <span
+              aria-hidden
+              className={`hidden shrink-0 lg:block ${TITLE_SCALES[titleScale].iconNudge}`}
+            >
               {icon}
             </span>
           )}
