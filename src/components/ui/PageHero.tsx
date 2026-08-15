@@ -89,11 +89,29 @@ export function PageHero({
             priority
             className="pointer-events-none select-none object-cover object-[60%_center]"
           />
-          {/* Light scrim — just enough to keep the navy heading and muted copy readable;
-              kept low so the artwork reads as a real background, not a white wash. */}
+          {/*
+           * Two scrims, because one direction cannot serve both layouts.
+           *
+           * On desktop the copy occupies the left of a wide box and the artwork's busy half
+           * sits to the right, so a scrim that fades left-to-right lightens exactly what is
+           * under text and leaves the rest alone.
+           *
+           * On a phone the box is narrow and tall and the text runs its full width, so that
+           * same fade leaves the end of every line sitting on unscrimmed artwork. Measured
+           * at 375px: body copy fell to 3.39:1 and the breadcrumb to 4.07:1 against a 4.5
+           * requirement. A flatter, stronger vertical scrim puts them at 5.32 and 4.72.
+           */}
           <div
             aria-hidden
-            className="absolute inset-0"
+            className="absolute inset-0 lg:hidden"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(244,249,253,0.80) 0%, rgba(240,249,246,0.72) 100%)",
+            }}
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 hidden lg:block"
             style={{
               background:
                 "linear-gradient(100deg, rgba(244,249,253,0.6) 0%, rgba(244,249,253,0.36) 42%, rgba(240,249,246,0.12) 74%, rgba(233,246,240,0) 100%)",
