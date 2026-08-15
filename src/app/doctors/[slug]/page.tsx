@@ -64,21 +64,17 @@ export default async function DoctorPage({ params }: Params) {
       <HeroSurface
         image={assets.aboutHeroBg}
         decoration={assets.doctorsHeroDecor}
-        // The copy runs to about 74% of the box, beside the portrait, so copy-left has
-        // faded out under it and `even` flattened the artwork this page is supposed to
-        // share with the listing. copy-wide covers the text and lets the corner stay vivid.
-        scrim="copy-wide"
       >
         <Container className="relative pb-12 pt-[104px] lg:pt-[116px]">
             <nav
               aria-label="Breadcrumb"
-              className="mb-6 flex flex-wrap items-center gap-2 font-body text-[13px] font-semibold text-body"
+              className="mb-6 flex flex-wrap items-center gap-2 font-body text-[13px] font-semibold text-navy"
             >
-              <Link href="/" className="text-body hover:text-navy">
+              <Link href="/" className="text-navy/80 hover:text-navy">
                 Home
               </Link>
               <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.4} />
-              <Link href="/doctors" className="text-body hover:text-navy">
+              <Link href="/doctors" className="text-navy/80 hover:text-navy">
                 Doctors
               </Link>
               <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.4} />
@@ -116,7 +112,12 @@ export default async function DoctorPage({ params }: Params) {
                   </p>
                 )}
 
-                <div className="mt-7 flex flex-col gap-3 font-body text-[14.5px] text-body">
+                {/* On glass, like the summary card on a department page. These two lines sit
+                    furthest right, where the scrim has faded, and at 14.5px they were the only
+                    thing on any hero still short of 4.5:1 — 3.95:1 for the address. Giving the
+                    block its own surface fixes that without dimming the artwork, which is the
+                    whole point of the hero. */}
+                <div className="aj-card-glass mt-7 flex flex-col gap-3 rounded-[18px] p-4 font-body text-[14.5px] text-body sm:p-5">
                   <span className="flex items-start gap-2.5">
                     <Clock className="mt-0.5 h-[18px] w-[18px] shrink-0 text-green-deep" strokeWidth={2} />
                     Outpatient consultations {siteConfig.hoursShort}. Individual consultants keep

@@ -82,20 +82,21 @@ export function PageHero({
     >
       {/* pt clears the fixed navbar pill floating inside this card's top edge. */}
       <Container className="relative pb-[60px] pt-[104px] lg:pt-[116px]">
-        {/* text-body, not text-muted: this sits on hero artwork, where muted measured
-            4.31:1 against the 4.5:1 it needs. Same string on a plain background was already
-            marginal. */}
+        {/* Navy links on hero artwork. text-muted measured 4.31:1 here and text-body 4.46:1
+            on the tallest hero, where the crumb sits lower into the darker part of the image
+            — both short of 4.5. Navy clears it on every page with room to spare, and the
+            current-page crumb still reads as different because it is bold. */}
         <nav
           aria-label="Breadcrumb"
-          className="mb-4.5 flex flex-wrap items-center gap-2 font-body text-[13px] font-semibold text-body"
+          className="mb-4.5 flex flex-wrap items-center gap-2 font-body text-[13px] font-semibold text-navy"
         >
-          <Link href="/" className="text-body hover:text-navy">
+          <Link href="/" className="text-navy/80 hover:text-navy">
             Home
           </Link>
           <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.4} />
           {parent && (
             <>
-              <Link href={parent.href} className="text-body hover:text-navy">
+              <Link href={parent.href} className="text-navy/80 hover:text-navy">
                 {parent.name}
               </Link>
               <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.4} />

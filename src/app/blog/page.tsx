@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
+import { assets } from "@/lib/assets";
 import { BookCta } from "@/components/ui/BookCta";
 import { JsonLd } from "@/components/JsonLd";
 import { blogListingSchema, breadcrumbSchema } from "@/lib/schema";
@@ -31,6 +32,11 @@ export default function BlogIndexPage() {
         badge="WRITTEN & REVIEWED BY OUR DOCTORS"
         title="Health guides from our specialists"
         description="Plain answers to the questions patients ask us most — what a symptom means, when it needs a doctor, what treatment involves, and what it costs at AJSMC."
+        image={assets.aboutHeroBg}
+        // Stand-in. This page is the only hero without artwork of its own; the bottle is
+        // borrowed from About so it stops being the odd one out. Swap for a library-specific
+        // asset when one exists — one line here and one entry in assets.ts.
+        decoration={assets.aboutHeroDecor}
       />
 
       <Container as="section" className="py-12 lg:py-16">

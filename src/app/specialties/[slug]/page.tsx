@@ -83,10 +83,6 @@ export default async function SpecialtyPage({ params }: Params) {
         // other and a reader met the same sentence twice before reaching anything new.
         image={assets.aboutHeroBg}
         decoration={assets.specialtiesHeroDecor}
-        // The green tagline is the smallest coloured text on any hero, and against the
-        // copy-left scrim it measured 3.29:1 at 1440px. copy-wide clears it without
-        // flattening the artwork the way `even` did.
-        scrim="copy-wide"
       >
         {content && <SpecialtySummary summary={content.summary} />}
       </PageHero>
