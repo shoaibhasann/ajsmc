@@ -8,9 +8,28 @@
   --color-navy-deep: #07204f;
   --color-navy-mid: #123f9e;
   --color-navy-dark: #0a2657;
-  --color-blue: #2e6bd6;
+  /*
+   * Darkened from #2e6bd6 for the same reason as --color-green-deep below, and found by
+   * the same sweep: on the soft-blue badge pill it measured 4.41:1 against a 4.5:1
+   * requirement — a near miss, but a miss. #2a61c4 measures 5.12:1 there and 5.82:1 on
+   * white. Like the green, this token is a foreground: ten of its eleven uses are
+   * `text-blue` and the last is a decorative gradient stop.
+   */
+  --color-blue: #2a61c4;
   --color-green: #17c46b;
-  --color-green-deep: #0fa958;
+  /*
+   * The foreground green. Darkened from #0fa958, which failed WCAG AA everywhere it was
+   * used as text: 3.07:1 on white, 2.77:1 on the soft-green badge pill, against the 4.5:1
+   * a body-size string needs. #0b7a3e reads as the same green and measures 5.43 / 4.89 /
+   * 5.18 on white, the pill and the page background.
+   *
+   * This token is the text green — 50 of its 52 uses are `text-green-deep`, and the other
+   * two are gradient chips carrying white icons, which a darker end only helps. It is not
+   * interchangeable with --color-green (fills and chips) or --color-green-bright, which is
+   * deliberately light because it is only ever used on navy. Keep that split: putting a
+   * light green on white is how this failed in the first place.
+   */
+  --color-green-deep: #0b7a3e;
   --color-green-bright: #34d058;
   --color-ink: #0e1b2e;
   --color-body: #4a5b72;

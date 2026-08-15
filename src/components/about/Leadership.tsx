@@ -22,7 +22,8 @@ export function Leadership() {
           </p>
           <div>
             <div className="font-heading text-lg font-extrabold text-navy">{chairman.name}</div>
-            <div className="font-body text-[13px] font-semibold text-green">
+            {/* green-deep, not green: this is read, and #17c46b on this card was 2.30:1. */}
+            <div className="font-body text-[13px] font-semibold text-green-deep">
               Chairman &amp; Founder &middot; {chairman.specialty}
             </div>
           </div>
