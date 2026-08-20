@@ -28,7 +28,15 @@ export const siteConfig = {
   get metaDescription() {
     return `Multi speciality hospital in Egmore, Chennai. ${listedDoctors.length} consultants across ${specialties.length} departments, day-care surgery, sleep studies and an in-house lab. Open Mon to Sat, 10am to 9pm.`;
   },
-  url: "https://www.ajsmc.in",
+  /**
+   * The canonical origin, and the single place it is defined — canonicals, the
+   * sitemap, robots.txt, every JSON-LD block and all OpenGraph metadata derive
+   * from it, so the site can only ever speak with one voice about which
+   * hostname it lives on.
+   *
+   * Bare, not www: www.ajsmc.in 308-redirects here at the edge.
+   */
+  url: "https://ajsmc.in",
   ogImage: "/opengraph-image.png",
   /**
    * UNVERIFIED. Neither the founding year nor the years-of-service figure appears
