@@ -13,7 +13,7 @@ export default function TermsOfServicePage() {
   return (
     <Container as="section" className="max-w-[820px] pb-16 pt-[124px]">
       <h1 className="font-heading text-4xl font-extrabold tracking-tight text-navy">Terms of Service</h1>
-      <p className="mt-3 font-body text-sm text-muted">Last updated: {new Date().getFullYear()}</p>
+      <p className="mt-3 font-body text-sm text-muted">Last updated: 21 August 2026</p>
 
       <div className="mt-8 flex flex-col gap-6 font-body text-[15px] leading-relaxed text-body">
         <p>
@@ -63,9 +63,24 @@ export default function TermsOfServicePage() {
         <section>
           <h2 className="mb-2 font-heading text-xl font-bold text-navy">Accuracy of information</h2>
           <p>
-            While we aim to keep doctor listings, specialties and pricing information up to date,
+            While we aim to keep doctor listings, specialty details and timings up to date,
             AJSMC does not warrant that all content on this site is error-free at all times. Please
             confirm details directly with our team when booking.
+          </p>
+        </section>
+        <section>
+          <h2 className="mb-2 font-heading text-xl font-bold text-navy">Content and ownership</h2>
+          <p>
+            The text, photographs and artwork on this site belong to AJSMC or are used with
+            permission. You are welcome to link to any page; please do not reproduce pages or
+            images elsewhere without asking us first.
+          </p>
+        </section>
+        <section>
+          <h2 className="mb-2 font-heading text-xl font-bold text-navy">Governing law</h2>
+          <p>
+            These terms are governed by the laws of India, and any dispute relating to this
+            website is subject to the jurisdiction of the courts at Chennai, Tamil Nadu.
           </p>
         </section>
         <section>
@@ -78,10 +93,6 @@ export default function TermsOfServicePage() {
             .
           </p>
         </section>
-        <p className="text-xs text-faint">
-          This is a general placeholder document. AJSMC should have this document reviewed by
-          legal counsel before relying on it as complete terms of service.
-        </p>
       </div>
     </Container>
   );

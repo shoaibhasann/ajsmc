@@ -4,9 +4,48 @@
     {
       "name": "ajsmc-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 3000,
       "autoPort": true
+    },
+    {
+      "name": "threads-next",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/shoaib/threads-clone",
+        "run",
+        "dev",
+        "--",
+        "-p",
+        "3100"
+      ],
+      "port": 3100
+    },
+    {
+      "name": "threads-prod",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/shoaib/threads-clone",
+        "start",
+        "--",
+        "-p",
+        "3200"
+      ],
+      "port": 3200
+    },
+    {
+      "name": "threads-inmemory",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": [
+        "-c",
+        "MONGO_URI=mongodb://127.0.0.1:27018/threads npm --prefix /Users/shoaib/threads-clone run dev -- -p 3300"
+      ],
+      "port": 3300
     }
   ]
 }

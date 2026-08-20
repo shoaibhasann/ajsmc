@@ -24,13 +24,21 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!doctor) return {};
 
   const title = `${doctor.name} — ${doctor.specialty} in Chennai | AJSMC Egmore`;
+  const description = `${doctor.name}, ${doctor.role} at ${siteConfig.fullName}, Egmore, Chennai.${
+    doctor.degree ? ` ${doctor.degree}.` : ""
+  } Outpatient consultations ${siteConfig.hoursShort}. Call ${siteConfig.phone} to book.`;
+  // The title already carries the brand, so it opts out of the root `%s | AJSMC`
+  // template — with the template it rendered "... | AJSMC Egmore | AJSMC".
+  // Portrait as the share image where we have one, the site card where we don't;
+  // the twitter block repeats the specifics because the root layout's generic
+  // twitter card would otherwise win over the per-doctor OpenGraph.
+  const shareImage = doctor.image ?? siteConfig.ogImage;
   return {
-    title,
-    description: `${doctor.name}, ${doctor.role} at ${siteConfig.fullName}, Egmore, Chennai.${
-      doctor.degree ? ` ${doctor.degree}.` : ""
-    } Outpatient consultations ${siteConfig.hoursShort}. Call ${siteConfig.phone} to book.`,
+    title: { absolute: title },
+    description,
     alternates: { canonical: `/doctors/${doctor.slug}` },
-    openGraph: { title, type: "profile" },
+    openGraph: { title, description, type: "profile", images: [shareImage] },
+    twitter: { card: "summary_large_image", title, description, images: [shareImage] },
   };
 }
 

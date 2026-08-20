@@ -52,7 +52,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: siteConfig.url,
+    // No `url` here: it would be inherited verbatim by every page, stamping the
+    // home URL into og:url site-wide. Canonicals are set per page instead.
     siteName: siteConfig.fullName,
     title: `${siteConfig.fullName}: Multi Speciality Hospital in Chennai`,
     description: siteConfig.description,

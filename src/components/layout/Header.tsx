@@ -63,15 +63,15 @@ export function Header() {
               ))}
             </nav>
 
-            <a
-              href="#appointment"
+            <Link
+              href="/#appointment"
               className="aj-cta-wave hidden items-center gap-2.5 rounded-full bg-navy py-2 pl-[22px] pr-2 font-body text-[15px] font-bold text-white shadow-[0_12px_26px_-14px_rgba(12,46,110,0.5)] lg:inline-flex"
             >
               <span>Book Appointment</span>
               <span className="aj-cta-dot flex h-9 w-9 items-center justify-center rounded-full bg-green-bright text-[#083b20]">
                 <ArrowUpRight className="h-4 w-4" strokeWidth={2.6} />
               </span>
-            </a>
+            </Link>
 
             <button
               type="button"
@@ -174,8 +174,8 @@ export function Header() {
                 transition={{ delay: 0.28, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 className="relative border-t border-navy/[0.07] bg-white/80 px-6 pb-[calc(env(safe-area-inset-bottom)+24px)] pt-5 backdrop-blur-sm"
               >
-                <a
-                  href="#appointment"
+                <Link
+                  href="/#appointment"
                   onClick={() => setOpen(false)}
                   className="aj-cta-wave flex items-center justify-center gap-2.5 rounded-2xl bg-navy py-4 font-body text-base font-bold text-white shadow-[0_16px_30px_-16px_rgba(12,46,110,0.7)]"
                 >
@@ -183,7 +183,7 @@ export function Header() {
                   <span className="aj-cta-dot flex h-7 w-7 items-center justify-center rounded-full bg-green-bright text-[#083b20]">
                     <ArrowUpRight className="h-[15px] w-[15px]" strokeWidth={2.6} />
                   </span>
-                </a>
+                </Link>
 
                 <a
                   href={siteConfig.phoneHref}

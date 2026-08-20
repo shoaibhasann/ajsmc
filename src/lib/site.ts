@@ -29,7 +29,7 @@ export const siteConfig = {
     return `Multi speciality hospital in Egmore, Chennai. ${listedDoctors.length} consultants across ${specialties.length} departments, day-care surgery, sleep studies and an in-house lab. Open Mon to Sat, 10am to 9pm.`;
   },
   url: "https://www.ajsmc.in",
-  ogImage: "/og-image.jpg",
+  ogImage: "/opengraph-image.png",
   /**
    * UNVERIFIED. Neither the founding year nor the years-of-service figure appears
    * anywhere on ajsmc.in, and they are published here as fact: on the About hero, in
