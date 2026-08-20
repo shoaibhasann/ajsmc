@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/ui/PageHero";
 import { CtaBand } from "@/components/ui/CtaBand";
@@ -6,11 +7,11 @@ import { DoctorsClient } from "@/components/doctors/DoctorsClient";
 import { assets } from "@/lib/assets";
 import { breadcrumbSchema, physiciansSchema } from "@/lib/schema";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Our Doctors in Chennai",
   description: "Meet the specialist consultants at AJ Subaitha Medical Centre, Egmore, Chennai. Ophthalmology, Orthopedics, Pediatrics, Gynaecology, Diabetology, Dermatology, Urology and more, with qualifications listed for each.",
-  alternates: { canonical: "/doctors" },
-};
+  canonical: "/doctors",
+});
 
 export default function DoctorsPage() {
   return (

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/ui/PageHero";
 import { Container } from "@/components/ui/Container";
@@ -9,11 +10,11 @@ import { assets } from "@/lib/assets";
 import { breadcrumbSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact Us in Chennai",
   description: `AJSMC is at No.47 (31), Police Commissioner Office Road, Egmore, Chennai 600008. Call ${siteConfig.phone}, WhatsApp us, or book online. Consultations Monday to Saturday, 10am to 9pm.`,
-  alternates: { canonical: "/contact" },
-};
+  canonical: "/contact",
+});
 
 export default function ContactPage() {
   return (

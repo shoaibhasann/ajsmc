@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { ArticleCard } from "@/components/blog/ArticleCard";
@@ -9,11 +10,11 @@ import { blogListingSchema, breadcrumbSchema } from "@/lib/schema";
 import { blogPosts } from "@/lib/blog";
 import { siteConfig } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Health Library",
   description: `Health guides from the doctors at ${siteConfig.fullName}, Egmore — symptoms, treatments, costs and when to see a specialist in Chennai.`,
-  alternates: { canonical: "/blog" },
-};
+  canonical: "/blog",
+});
 
 export default function BlogIndexPage() {
   return (

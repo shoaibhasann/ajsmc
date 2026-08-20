@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/ui/PageHero";
 import { CtaBand } from "@/components/ui/CtaBand";
@@ -10,11 +11,11 @@ import { assets } from "@/lib/assets";
 import { breadcrumbSchema } from "@/lib/schema";
 import { listedDoctors, siteConfig, specialties } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About Our Hospital in Chennai",
   description: `About AJ Subaitha Medical Centre, a multi speciality hospital in Egmore, Chennai. ${listedDoctors.length} consultants, ${specialties.length} departments, day-care surgery and an in-house lab, with costs quoted upfront.`,
-  alternates: { canonical: "/about" },
-};
+  canonical: "/about",
+});
 
 export default function AboutPage() {
   return (

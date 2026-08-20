@@ -43,7 +43,9 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Everything except Next's own assets, the metadata routes and image files —
-  // those are already lowercase and should never pay for a redirect check.
-  matcher: ["/((?!_next/|.*\\.(?:png|jpg|jpeg|gif|svg|ico|webp|txt|xml)$).*)"],
+  // Everything but Next's own build assets. sitemap.xml and robots.txt were
+  // excluded once, which left them answering 200 on the vercel.app alias while
+  // every HTML route redirected — the lowercase check is a no-op on paths that
+  // are already lowercase, so there is nothing to save by skipping them.
+  matcher: ["/((?!_next/).*)"],
 };

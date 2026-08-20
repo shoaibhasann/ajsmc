@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight, Clock, MapPin, Phone } from "lucide-react";
@@ -36,13 +37,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const consultants = doctorsInSpecialty(specialty.name);
   const title = `${specialty.name} in Chennai — AJSMC, Egmore`;
 
-  return {
+  return pageMetadata({
     title,
     description: `${specialty.name} at ${siteConfig.fullName}, Egmore, Chennai — ${specialty.description.toLowerCase()}. ${
       consultants.length === 1 ? "One consultant" : `${consultants.length} consultants`
     }, outpatient ${siteConfig.hoursShort}. Call ${siteConfig.phone}.`,
-    alternates: { canonical: `/specialties/${slug}` },
-  };
+    canonical: `/specialties/${slug}`,
+  });
 }
 
 export default async function SpecialtyPage({ params }: Params) {

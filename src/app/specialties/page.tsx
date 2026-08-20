@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/ui/PageHero";
 import { CtaBand } from "@/components/ui/CtaBand";
@@ -7,11 +8,11 @@ import { breadcrumbSchema } from "@/lib/schema";
 import { assets } from "@/lib/assets";
 import { listedDoctors, specialties } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Specialities and Departments in Chennai",
   description: `The ${specialties.length} departments at AJSMC Egmore, Chennai: General Medicine, General Surgery, Ophthalmology, Dermatology, Pediatrics, Orthopedics, Urology, Obstetrics and Gynaecology, Diabetology, Reproductive Medicine, Psychology and Pathology.`,
-  alternates: { canonical: "/specialties" },
-};
+  canonical: "/specialties",
+});
 
 export default function SpecialtiesPage() {
   return (
