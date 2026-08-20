@@ -69,12 +69,13 @@ export const metadata: Metadata = {
   verification: {
     google: "FbA8KQ9h-8RlmXyodvdIoEdtqeouwkCHJtIF0k-x1_M",
   },
+  // Only the directives that are not already the default. `index, follow` is what
+  // a crawler assumes when no robots tag is present, so stating it bought nothing
+  // and cost something: it is inherited by every route including the 404, which
+  // Next also stamps with its own `noindex`, leaving two contradictory robots tags
+  // in one head. The preview limits below are genuinely non-default and stay.
   robots: {
-    index: true,
-    follow: true,
     googleBot: {
-      index: true,
-      follow: true,
       "max-image-preview": "large",
       "max-snippet": -1,
     },
