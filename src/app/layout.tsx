@@ -63,6 +63,12 @@ export const metadata: Metadata = {
     title: `${siteConfig.fullName}: Multi Speciality Hospital in Egmore, Chennai`,
     description: siteConfig.description,
   },
+  // Proves ownership of the property to Google Search Console. It has to stay:
+  // Google re-checks the tag periodically and drops verification if it vanishes,
+  // which would take the Search Console data with it.
+  verification: {
+    google: "FbA8KQ9h-8RlmXyodvdIoEdtqeouwkCHJtIF0k-x1_M",
+  },
   robots: {
     index: true,
     follow: true,
