@@ -18,7 +18,8 @@ export function organizationSchema() {
     alternateName: siteConfig.name,
     description: siteConfig.description,
     url: siteConfig.url,
-    logo: `${siteConfig.url}/logo.png`,
+    // The hosted crest (see assets.ts) — /logo.png never existed in this app.
+    logo: "https://res.cloudinary.com/dh4blkvix/image/upload/e_trim/v1784842916/ajsmc/assets/grj5f0tqi2rb4dvlbq7j.png",
     image: `${siteConfig.url}${siteConfig.ogImage}`,
     telephone: siteConfig.mobileHref.replace("tel:", ""),
     email: siteConfig.email,
@@ -208,6 +209,23 @@ export function articleSchema(post: BlogPost) {
     inLanguage: "en-IN",
     datePublished: post.publishedAt,
     dateModified: post.updatedAt ?? post.publishedAt,
+    /*
+     * The cover, as a full ImageObject rather than a bare URL. Google uses the caption and
+     * the stated dimensions when deciding whether to show an image alongside the result, and
+     * `representativeOfPage` marks it as the one that stands for the article rather than one
+     * illustration among several. The alt doubles as the caption because it was written to
+     * carry the article's subject, not to repeat the label printed on the artwork.
+     */
+    ...(post.coverImage?.src && {
+      image: {
+        "@type": "ImageObject",
+        url: post.coverImage.src,
+        caption: post.coverImage.alt,
+        width: 1600,
+        height: 900,
+        representativeOfPage: true,
+      },
+    }),
     ...(reviewer && {
       lastReviewed: post.updatedAt ?? post.publishedAt,
       reviewedBy: {

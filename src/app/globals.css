@@ -517,29 +517,81 @@ select.aj-input {
   color: var(--color-ink);
 }
 
+/*
+ * These articles are mostly comparison tables — which test on which day, what each grade
+ * means — and the table is often the reason someone opened the page. A flat grid of hairline
+ * boxes reads like a spreadsheet dump; this gives it the same card treatment the rest of the
+ * site uses, so the answer looks like the point rather than an appendix.
+ *
+ * Only design-system colours: the navy pair for the header, the page surface for the zebra,
+ * soft-blue for hover.
+ */
+.aj-table-wrap {
+  margin: 26px 0;
+  overflow-x: auto;
+  border: 1px solid rgba(12, 46, 110, 0.09);
+  /* Square, deliberately. A data table reads as a grid of values and a rounded corner
+     softens exactly the edge that is doing the aligning. */
+  border-radius: 0;
+  background-color: #fff;
+  box-shadow: 0 20px 40px -34px rgba(12, 46, 110, 0.55);
+  /* Momentum scrolling on iOS, and a scrollbar that does not sit on the rounded corner. */
+  -webkit-overflow-scrolling: touch;
+}
+
 .aj-prose table {
   width: 100%;
   border-collapse: collapse;
   font-size: 14.5px;
-  display: block;
-  overflow-x: auto;
+  /* min-width, not width: below this the columns crush into unreadable slivers, so the
+     wrapper scrolls instead. */
+  min-width: 560px;
 }
 
-.aj-prose th,
-.aj-prose td {
-  border: 1px solid rgba(12, 46, 110, 0.12);
-  padding: 10px 14px;
-  text-align: left;
-  vertical-align: top;
+.aj-prose thead {
+  background-image: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-mid) 100%);
 }
 
 .aj-prose th {
-  background: var(--color-soft-blue);
+  padding: 13px 16px;
+  text-align: left;
+  vertical-align: top;
   font-family: var(--font-heading);
+  font-size: 13px;
   font-weight: 700;
-  color: var(--color-navy);
+  letter-spacing: 0.01em;
+  color: #fff;
   white-space: nowrap;
 }
+
+.aj-prose td {
+  padding: 13px 16px;
+  text-align: left;
+  vertical-align: top;
+  color: var(--color-body);
+  border-top: 1px solid rgba(12, 46, 110, 0.07);
+}
+
+/* The first column is the key you scan down — the illness, the grade, the age. */
+.aj-prose tbody td:first-child {
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+.aj-prose tbody tr:nth-child(even) {
+  background-color: var(--color-surface);
+}
+
+.aj-prose tbody tr:hover {
+  background-color: var(--color-soft-blue);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .aj-prose tbody tr {
+    transition: background-color 0.15s;
+  }
+}
+
 
 .aj-prose figure {
   margin-top: 1.6em;
