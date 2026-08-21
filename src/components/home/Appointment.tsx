@@ -10,10 +10,11 @@ import { AJ_EASE } from "@/lib/motion";
 import { departments, siteConfig } from "@/lib/site";
 import { HONEYPOT_FIELD } from "@/lib/enquiry";
 import { useEnquiryForm } from "@/lib/useEnquiryForm";
+import { EnquirySent } from "@/components/ui/EnquirySent";
 import { useIsCompact } from "@/lib/useIsCompact";
 
 export function Appointment() {
-  const { status, error, handleSubmit } = useEnquiryForm("home");
+  const { status, error, sent: submitted, handleSubmit, reset } = useEnquiryForm("home");
   const sent = status === "sent";
   const sending = status === "sending";
   const compact = useIsCompact();
@@ -78,17 +79,7 @@ export function Appointment() {
           </p>
 
           {sent ? (
-            <div className="flex items-center gap-3.5 rounded-2xl border border-green/30 bg-soft-green px-6 py-5.5">
-              <span className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full bg-green text-white">
-                ✓
-              </span>
-              <div>
-                <div className="font-heading text-[17px] font-bold text-navy">Thank you!</div>
-                <div className="font-body text-sm font-medium text-body">
-                  Your request has been received. We&apos;ll call you back soon.
-                </div>
-              </div>
-            </div>
+            <EnquirySent sent={submitted} onReset={reset} />
           ) : (
             <form onSubmit={handleSubmit} className="relative">
               {/* Honeypot — see the note in contact/ContactForm.tsx. */}

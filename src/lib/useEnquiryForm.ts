@@ -5,6 +5,9 @@ import { HONEYPOT_FIELD } from "@/lib/enquiry";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
+/** What the patient actually sent, kept so the confirmation can name it back to them. */
+export type SentEnquiry = { name: string; department: string; phone: string };
+
 /**
  * The submit behaviour both booking forms share.
  *
@@ -21,6 +24,10 @@ type Status = "idle" | "sending" | "sent" | "error";
 export function useEnquiryForm(source: "home" | "contact") {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
+  // Captured before form.reset() wipes the fields, so the confirmation can say
+  // "Thank you, <name>" and repeat the department back — reading it off the form
+  // afterwards would only ever find empty inputs.
+  const [sent, setSent] = useState<SentEnquiry | null>(null);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -49,6 +56,11 @@ export function useEnquiryForm(source: "home" | "contact") {
       const body = await res.json().catch(() => null);
 
       if (res.ok && body?.ok) {
+        setSent({
+          name: String(data.get("name") ?? "").trim(),
+          department: String(data.get("department") ?? "").trim(),
+          phone: String(data.get("phone") ?? "").trim(),
+        });
         setStatus("sent");
         form.reset();
         return;
@@ -63,5 +75,15 @@ export function useEnquiryForm(source: "home" | "contact") {
     }
   }
 
-  return { status, error, handleSubmit, reset: () => setStatus("idle") };
+  return {
+    status,
+    error,
+    sent,
+    handleSubmit,
+    reset: () => {
+      setSent(null);
+      setError(null);
+      setStatus("idle");
+    },
+  };
 }

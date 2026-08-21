@@ -602,3 +602,30 @@ select.aj-input {
   font-size: 13px;
   color: var(--color-faint);
 }
+
+/*
+ * The booking confirmation. One orchestrated moment rather than scattered effects:
+ * the card settles, then the tick draws itself a beat later, so the eye lands on the
+ * card first and the tick reads as the answer to it.
+ *
+ * Wrapped in `no-preference` rather than merely reduced at the end, so a visitor who
+ * asked for less motion gets the finished state immediately with nothing to opt out
+ * of — this is a medical form, and someone who set that preference for vestibular
+ * reasons should not have a card swing at them.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .aj-sent {
+    animation: aj-sent-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .aj-sent-mark {
+    animation: aj-sent-mark 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.14s both;
+  }
+  @keyframes aj-sent-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes aj-sent-mark {
+    from { opacity: 0; transform: scale(0.55); }
+    to   { opacity: 1; transform: none; }
+  }
+}
