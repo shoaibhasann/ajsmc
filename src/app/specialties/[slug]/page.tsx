@@ -61,7 +61,7 @@ export default async function SpecialtyPage({ params }: Params) {
       <JsonLd
         data={breadcrumbSchema([
           { name: "Home", path: "/" },
-          { name: "Specialties", path: "/specialties" },
+          { name: "Specialities", path: "/specialties" },
           { name: specialty.name, path: `/specialties/${slug}` },
         ])}
       />
@@ -74,7 +74,7 @@ export default async function SpecialtyPage({ params }: Params) {
           page used to draw for itself. */}
       <PageHero
         crumb={specialty.name}
-        parent={{ name: "Specialties", href: "/specialties" }}
+        parent={{ name: "Specialities", href: "/specialties" }}
         icon={<SpecialtyIcon icon={specialty.icon} />}
         title={`${specialty.name} in ${siteConfig.address.city}`}
         titleScale="compact"

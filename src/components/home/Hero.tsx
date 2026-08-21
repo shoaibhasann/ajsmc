@@ -134,7 +134,7 @@ export function Hero() {
                 <span className="block font-heading text-[17px] font-extrabold text-white">
                   {listedDoctors.length} Experts
                 </span>
-                <span className="block font-body text-[11px] font-medium text-white/70">Every Specialty</span>
+                <span className="block font-body text-[11px] font-medium text-white/70">Every Speciality</span>
               </span>
             </motion.div>
           </div>
@@ -162,7 +162,7 @@ export function Hero() {
               <span className="hidden h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-green to-green-deep align-middle shadow-[0_14px_30px_-12px_rgba(23,196,107,0.7)] sm:inline-flex lg:h-16 lg:w-16">
                 <Stethoscope className="h-7 w-7 text-white" strokeWidth={1.8} />
               </span>
-              <span>Specialty</span>
+              <span>Speciality</span>
             </span>
             <span className="block">One Roof</span>
           </h1>
@@ -193,7 +193,7 @@ export function Hero() {
               href="#specialties"
               className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-navy/15 bg-white/70 py-3.5 px-6 font-body text-[15px] font-bold text-navy backdrop-blur-sm transition-colors hover:border-navy/30 hover:bg-white/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 sm:w-auto sm:py-[13px]"
             >
-              Explore Specialties
+              Explore Specialities
               <ChevronRight className="h-[17px] w-[17px] text-green-deep" strokeWidth={2.6} />
             </a>
           </div>

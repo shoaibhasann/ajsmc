@@ -3,8 +3,8 @@ import type { AssetKey } from "@/lib/assets";
 export const siteConfig = {
   name: "AJSMC",
   fullName: "AJ Subaitha Medical Centre",
-  shortDescription: "Multi-specialty hospital in Egmore, Chennai",
-  tagline: "Expert care, every specialty, one roof.",
+  shortDescription: "Multi-speciality hospital in Egmore, Chennai",
+  tagline: "Expert care, every speciality, one roof.",
   /**
    * Written to be lifted whole. Search engines use it as the fallback snippet and AI
    * answer engines quote a self-contained opening paragraph almost verbatim, so it
@@ -100,7 +100,7 @@ export const siteConfig = {
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
-  { label: "Specialties", href: "/specialties" },
+  { label: "Specialities", href: "/specialties" },
   { label: "Doctors", href: "/doctors" },
   { label: "Health Library", href: "/blog" },
   { label: "Reach Us", href: "/contact" },
@@ -608,7 +608,7 @@ export const faqs = [
     a: "You can book three ways: fill in the appointment form on this website, call 044 2532 2021 or +91 91506 42999, or message the same number on WhatsApp. Walk-in patients are also seen Monday to Saturday between 10am and 9pm, though booking ahead means less waiting.",
   },
   {
-    q: "Which specialties are available at AJSMC?",
+    q: "Which specialities are available at AJSMC?",
     a: `AJSMC has ${specialties.length} departments: General Medicine, General Surgery, Ophthalmology, Dermatology, Pediatrics, Orthopedics, Urology, Obstetrics and Gynaecology, Diabetology, Reproductive Medicine, Psychology and Pathology. ${listedDoctors.length} consultants practise across them, so most conditions can be seen without a referral elsewhere.`,
   },
   {
@@ -681,7 +681,7 @@ export const missionVisionValues = [
   {
     title: "Our Vision",
     description:
-      "To be the multi-specialty centre families in Egmore turn to first, trusted for its doctors, its honesty about cost, and the calm of the place itself.",
+      "To be the multi-speciality centre families in Egmore turn to first, trusted for its doctors, its honesty about cost, and the calm of the place itself.",
     icon: "eye",
     tone: "green",
   },

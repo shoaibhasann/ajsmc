@@ -18,7 +18,7 @@ export function Leadership() {
           <Quote className="my-3 h-10 w-10 text-green/[0.18]" fill="currentColor" strokeWidth={0} />
           <p className="mb-5 max-w-[560px] font-body text-[19px] font-medium leading-relaxed text-ink">
             &ldquo;We built AJSMC so that no family has to choose between quality care and
-            affordability. Every specialty, one roof, treated like our own.&rdquo;
+            affordability. Every speciality, one roof, treated like our own.&rdquo;
           </p>
           <div>
             <div className="font-heading text-lg font-extrabold text-navy">{chairman.name}</div>

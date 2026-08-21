@@ -31,7 +31,7 @@ function useCountUp(target: number, active: boolean, duration = 1500) {
 const stats = [
   { key: "years", target: siteConfig.yearsOfService, label: "Years of Trusted Care" },
   { key: "docs", target: listedDoctors.length, label: "Specialist Doctors" },
-  { key: "specs", target: specialties.length, label: "Specialty Departments" },
+  { key: "specs", target: specialties.length, label: "Speciality Departments" },
 ] as const;
 
 export function AnimatedStats() {

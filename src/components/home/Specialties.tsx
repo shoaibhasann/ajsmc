@@ -12,7 +12,7 @@ export function Specialties() {
     <Container as="section" id="specialties" className="py-16 pb-8">
       <div className="mb-9 flex flex-wrap items-end justify-between gap-6">
         <div>
-          <SectionBadge tone="green">OUR SPECIALTIES</SectionBadge>
+          <SectionBadge tone="green">OUR SPECIALITIES</SectionBadge>
           <h2 className="mt-4.5 font-heading text-[30px] font-extrabold leading-[1.05] tracking-tight text-navy sm:text-[38px] lg:text-[clamp(30px,3.6vw,46px)]">
             {specialties.length} departments, one building
           </h2>

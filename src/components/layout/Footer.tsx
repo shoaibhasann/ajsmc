@@ -9,7 +9,7 @@ import { siteConfig } from "@/lib/site";
 const quickLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
-  { label: "Our Specialties", href: "/#specialties" },
+  { label: "Our Specialities", href: "/#specialties" },
   { label: "Our Doctors", href: "/doctors" },
   { label: "Reach Us", href: "/contact" },
 ];
@@ -42,7 +42,7 @@ export function Footer() {
             <span className="leading-none">
               <span className="block font-heading text-xl font-extrabold text-white">AJSMC</span>
               <span className="mt-0.5 block font-body text-[10px] font-semibold tracking-[0.14em] text-white/55">
-                MULTI&ndash;SPECIALTY
+                MULTI&ndash;SPECIALITY
               </span>
             </span>
           </div>
@@ -80,7 +80,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="mb-4 font-heading text-[15px] font-bold text-white">Specialties</h4>
+          <h4 className="mb-4 font-heading text-[15px] font-bold text-white">Specialities</h4>
           <div className="flex flex-col gap-2.5 font-body text-sm">
             {specialtyLinks.map((s) => (
               <Link key={s} href="/#specialties" className="text-white/65 hover:text-white">

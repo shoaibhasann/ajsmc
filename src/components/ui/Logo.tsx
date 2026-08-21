@@ -48,7 +48,7 @@ export function Logo({
             light ? "text-white/55" : "text-muted",
           )}
         >
-          MULTI&ndash;SPECIALTY
+          MULTI&ndash;SPECIALITY
         </span>
       </span>
     </Link>

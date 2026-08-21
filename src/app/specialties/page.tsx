@@ -20,11 +20,11 @@ export default function SpecialtiesPage() {
       <JsonLd
         data={breadcrumbSchema([
           { name: "Home", path: "/" },
-          { name: "Specialties", path: "/specialties" },
+          { name: "Specialities", path: "/specialties" },
         ])}
       />
       <PageHero
-        crumb="Specialties"
+        crumb="Specialities"
         badge="CARE FOR EVERY PART OF YOU"
         title={`${specialties.length} departments, one building in Egmore`}
         description={`${specialties.length} departments and ${listedDoctors.length} consultants, covering everyday illness through to day-care surgery. Costs are quoted before treatment starts.`}
