@@ -140,9 +140,19 @@ export async function POST(request: Request) {
   try {
     const resend = new Resend(apiKey);
     const { error } = await resend.emails.send({
-      // Must be a domain verified in Resend. `send.` is a subdomain on purpose: it keeps
-      // the root SPF record, which the VPS mailboxes depend on, untouched.
-      from: `${siteConfig.name} Website <enquiry@send.ajsmc.in>`,
+      // The domain verified in Resend, which is the bare one. Sending from
+      // enquiry@send.ajsmc.in was rejected with "This API key is not authorized to send
+      // emails from send.ajsmc.in": the send. subdomain is not a sending identity, it is
+      // where Resend puts the SPF and bounce (MX) records for Amazon SES's MAIL FROM.
+      //
+      // The hospital's own SPF is still untouched, which was the point of that subdomain.
+      // SPF is evaluated against the MAIL FROM domain, send.ajsmc.in, which carries
+      // `include:amazonses.com`; the root keeps `v=spf1 mx ~all` for the VPS mailboxes.
+      // DMARC still passes because DKIM signs as d=ajsmc.in from resend._domainkey and
+      // that aligns with this From domain.
+      //
+      // Nothing receives at this address — replies are steered by Reply-To below.
+      from: `${siteConfig.name} Website <enquiry@ajsmc.in>`,
       to: [siteConfig.email],
       // Reply goes to the patient, not to the website, so the front desk can just hit
       // Reply. Omitted when they did not give an email, rather than sent to a blank.
