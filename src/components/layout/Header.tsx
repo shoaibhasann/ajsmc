@@ -95,8 +95,10 @@ export function Header() {
             // Below lg: square, edge to edge, bottom hairline only, and a top inset for
             // the notch so the bar never sits under the status bar on a modern phone.
             // From lg: the original pill, with its border and lifted shadow back.
-            style={{ paddingTop: "env(safe-area-inset-top)" }}
-            className="flex items-center justify-between gap-6 border-b border-navy/[0.08] bg-white/95 py-2.5 pl-5 pr-3 backdrop-blur-md lg:rounded-full lg:border lg:border-white/60 lg:py-2 lg:pl-6 lg:pr-2 lg:shadow-[0_18px_40px_-22px_rgba(12,46,110,0.55)]">
+            // aj-nav-bar carries the top padding: it has to be a media-queried class
+            // rather than an inline style, because an inline padding-top applies at every
+            // width and would have given the desktop pill 14px above and 8px below.
+            className="aj-nav-bar flex items-center justify-between gap-6 border-b border-navy/[0.08] bg-white/95 pb-3.5 pl-5 pr-3 backdrop-blur-md lg:rounded-full lg:border lg:border-white/60 lg:pb-2 lg:pl-6 lg:pr-2 lg:shadow-[0_18px_40px_-22px_rgba(12,46,110,0.55)]">
             <Logo />
 
             <nav className="hidden items-center gap-8 font-body text-[15px] font-semibold text-[#3A4A63] lg:flex">

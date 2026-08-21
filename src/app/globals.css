@@ -629,3 +629,24 @@ select.aj-input {
     to   { opacity: 1; transform: none; }
   }
 }
+
+/*
+ * Top padding for the header bar.
+ *
+ * A class rather than an inline style, for two reasons. An inline padding-top REPLACES
+ * whatever the utility class sets rather than adding to it, and `env(safe-area-inset-top)`
+ * resolves to 0 on every browser without a notch — so the bar ended up with padding below
+ * the logo and none above it, leaving the crest cropped against the status bar. And an
+ * inline style cannot be scoped to a breakpoint, so it would also have pushed the desktop
+ * pill off-centre.
+ *
+ * The calc keeps the notch clearance and adds real breathing room on top of it.
+ */
+.aj-nav-bar {
+  padding-top: calc(env(safe-area-inset-top) + 14px);
+}
+@media (min-width: 1024px) {
+  .aj-nav-bar {
+    padding-top: 0.5rem; /* matches lg:pb-2, so the pill stays symmetrical */
+  }
+}
