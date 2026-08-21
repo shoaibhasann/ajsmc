@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, ChevronRight, Clock, Menu, Phone, X } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
-import { Container } from "@/components/ui/Container";
 import { heroTransition } from "@/lib/motion";
 import { navLinks, siteConfig } from "@/lib/site";
 
@@ -35,15 +34,33 @@ export function Header() {
       {/* Fixed, not sticky: the pill has to float *over* the hero card rather than
           reserve a row above it, so it takes no space in the document flow.
           Safe to transform because the mobile drawer lives outside this element —
-          a transformed ancestor would otherwise become its containing block. */}
+          a transformed ancestor would otherwise become its containing block.
+
+          Two shapes, one element. On a large screen it is a floating rounded pill
+          inset from every edge, which reads as a considered object over the hero.
+          On a phone that same treatment wastes the scarcest thing there is —
+          horizontal room — and leaves a strip of hero peeking above it that looks
+          like a rendering mistake rather than a choice. Below lg it becomes a
+          full-bleed bar flush to the top edge, held apart from the page by a
+          hairline rather than a shadow. */}
       <motion.header
         initial={{ y: -88, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={heroTransition.navbar}
-        className="fixed inset-x-0 top-0 z-50 pt-3 sm:pt-4"
+        className="fixed inset-x-0 top-0 z-50 lg:pt-4"
       >
-        <Container>
-          <div className="flex items-center justify-between gap-6 rounded-full border border-white/60 bg-white/95 py-2 pl-5 pr-2 shadow-[0_18px_40px_-22px_rgba(12,46,110,0.55)] backdrop-blur-md lg:pl-6">
+        {/* Deliberately not <Container>: it hard-codes px-5 for small screens, and `cn`
+            here is a plain join rather than a tailwind-merge, so an overriding px-0 loses
+            to it on CSS source order rather than winning on class order. Same max-width,
+            same large-screen padding, no padding below lg — which is what makes the bar
+            reach the edges on a phone. */}
+        <div className="mx-auto w-full max-w-[1240px] lg:px-10">
+          <div
+            // Below lg: square, edge to edge, bottom hairline only, and a top inset for
+            // the notch so the bar never sits under the status bar on a modern phone.
+            // From lg: the original pill, with its border and lifted shadow back.
+            style={{ paddingTop: "env(safe-area-inset-top)" }}
+            className="flex items-center justify-between gap-6 border-b border-navy/[0.08] bg-white/95 py-2.5 pl-5 pr-3 backdrop-blur-md lg:rounded-full lg:border lg:border-white/60 lg:py-2 lg:pl-6 lg:pr-2 lg:shadow-[0_18px_40px_-22px_rgba(12,46,110,0.55)]">
             <Logo />
 
             <nav className="hidden items-center gap-8 font-body text-[15px] font-semibold text-[#3A4A63] lg:flex">
@@ -83,7 +100,7 @@ export function Header() {
               <Menu className="h-[22px] w-[22px]" strokeWidth={2.2} />
             </button>
           </div>
-        </Container>
+        </div>
       </motion.header>
 
       {/* Drawer lives OUTSIDE <header>: the header's backdrop-filter would otherwise
