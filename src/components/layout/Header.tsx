@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
@@ -11,13 +11,49 @@ import { navLinks, siteConfig } from "@/lib/site";
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const drawerRef = useRef<HTMLElement | null>(null);
   const pathname = usePathname();
 
-  // Lock body scroll and wire Escape only while the drawer is open.
+  // Lock body scroll, wire Escape, and keep Tab inside the drawer while it is open.
   // (Nav links close the drawer themselves on click, so no route-change effect is needed.)
+  //
+  // The trap is not decoration. The panel is aria-modal, which tells a screen reader to
+  // ignore the page behind it — but aria-modal changes nothing about the Tab order, so
+  // without this a keyboard user tabs straight out of the menu into 50-odd links they
+  // cannot see, behind a backdrop, with no way to tell where focus went. The two have to
+  // agree: if the page is hidden, it must also be unreachable.
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      const panel = drawerRef.current;
+      if (!panel) return;
+      const focusable = panel.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      // Wrap at both ends, and pull focus back in if it has escaped some other way.
+      if (!panel.contains(document.activeElement)) {
+        e.preventDefault();
+        first.focus();
+      } else if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKey);
@@ -119,6 +155,7 @@ export function Header() {
             />
 
             <motion.aside
+              ref={drawerRef}
               role="dialog"
               aria-modal="true"
               aria-label="Site menu"
@@ -145,7 +182,7 @@ export function Header() {
                   onClick={() => setOpen(false)}
                   aria-label="Close menu"
                   autoFocus
-                  className="flex h-[42px] w-[42px] items-center justify-center rounded-xl border border-navy/[0.14] bg-surface text-navy transition-colors hover:bg-soft-blue"
+                  className="flex h-[44px] w-[44px] items-center justify-center rounded-xl border border-navy/[0.14] bg-surface text-navy transition-colors hover:bg-soft-blue"
                 >
                   <X className="h-5 w-5" strokeWidth={2.4} />
                 </button>
