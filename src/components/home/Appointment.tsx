@@ -1,33 +1,23 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Loader2, Mail, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionBadge } from "@/components/ui/SectionBadge";
 import { assets } from "@/lib/assets";
 import { AJ_EASE } from "@/lib/motion";
 import { departments, siteConfig } from "@/lib/site";
+import { HONEYPOT_FIELD } from "@/lib/enquiry";
+import { useEnquiryForm } from "@/lib/useEnquiryForm";
 import { useIsCompact } from "@/lib/useIsCompact";
 
 export function Appointment() {
-  const [sent, setSent] = useState(false);
+  const { status, error, handleSubmit } = useEnquiryForm("home");
+  const sent = status === "sent";
+  const sending = status === "sending";
   const compact = useIsCompact();
 
-  /*
-   * KNOWN, AND DELIBERATE FOR NOW: this sends nothing anywhere. No fetch, no form action,
-   * no API route, and the inputs carry no name and no state binding, so what a patient
-   * types is never read. The confirmation shown afterwards says the request was received.
-   *
-   * This is the site's main booking path, and it is the same stub as in
-   * contact/ContactForm.tsx — see the fuller note there. Flagged and left at the client's
-   * instruction; fix both together.
-   */
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSent(true);
-  }
 
   return (
     <Container as="section" id="appointment" className="py-16 pb-[76px] pt-8">
@@ -100,16 +90,20 @@ export function Appointment() {
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="relative">
+              {/* Honeypot — see the note in contact/ContactForm.tsx. */}
+              <div aria-hidden className="absolute left-[-9999px] h-px w-px overflow-hidden">
+                <input type="text" name={HONEYPOT_FIELD} tabIndex={-1} autoComplete="off" />
+              </div>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <Field label="Full Name">
-                  <input type="text" required placeholder="Your name" className="aj-input" />
+                  <input type="text" name="name" required disabled={sending} placeholder="Your name" className="aj-input" />
                 </Field>
                 <Field label="Phone Number">
-                  <input type="tel" required placeholder="+91" className="aj-input" />
+                  <input type="tel" name="phone" required disabled={sending} placeholder="+91" className="aj-input" />
                 </Field>
                 <Field label="Department">
-                  <select required className="aj-input" defaultValue="">
+                  <select name="department" required disabled={sending} className="aj-input" defaultValue="">
                     <option value="" disabled>
                       Select a department
                     </option>
@@ -121,17 +115,22 @@ export function Appointment() {
                   </select>
                 </Field>
                 <Field label="Preferred Date">
-                  <input type="date" required className="aj-input" />
+                  <input type="date" name="preferredDate" required disabled={sending} className="aj-input" />
                 </Field>
               </div>
               <div className="mt-6 flex flex-wrap items-center gap-5">
                 <button
                   type="submit"
-                  className="aj-cta-wave inline-flex items-center gap-2.5 rounded-full bg-navy py-[9px] pl-6 pr-[9px] font-body text-[15px] font-bold text-white shadow-[0_16px_30px_-16px_rgba(12,46,110,0.7)]"
+                  disabled={sending}
+                  className="aj-cta-wave inline-flex items-center gap-2.5 rounded-full bg-navy py-[9px] pl-6 pr-[9px] font-body text-[15px] font-bold text-white shadow-[0_16px_30px_-16px_rgba(12,46,110,0.7)] disabled:opacity-70"
                 >
-                  <span>Request Appointment</span>
+                  <span>{sending ? "Sending…" : "Request Appointment"}</span>
                   <span className="aj-cta-dot flex h-[38px] w-[38px] items-center justify-center rounded-full bg-green-bright text-[#083b20]">
-                    <ArrowUpRight className="h-4 w-4" strokeWidth={2.6} />
+                    {sending ? (
+                      <Loader2 className="h-4 w-4 animate-spin" strokeWidth={2.6} />
+                    ) : (
+                      <ArrowUpRight className="h-4 w-4" strokeWidth={2.6} />
+                    )}
                   </span>
                 </button>
                 <span className="font-body text-sm font-medium text-muted">
@@ -141,6 +140,18 @@ export function Appointment() {
                   </a>
                 </span>
               </div>
+              {error && (
+                <p
+                  role="alert"
+                  className="mt-4 rounded-2xl border border-[#a02929]/25 bg-[#a02929]/[0.06] px-4 py-3 font-body text-sm font-medium text-[#a02929]"
+                >
+                  {error} Please call{" "}
+                  <a href={siteConfig.phoneHref} className="font-bold underline">
+                    {siteConfig.phone}
+                  </a>{" "}
+                  and we will take your booking directly.
+                </p>
+              )}
             </form>
           )}
         </motion.div>

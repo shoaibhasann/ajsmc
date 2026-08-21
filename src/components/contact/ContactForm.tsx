@@ -1,29 +1,16 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Loader2 } from "lucide-react";
 import { departments, siteConfig } from "@/lib/site";
+import { HONEYPOT_FIELD } from "@/lib/enquiry";
+import { useEnquiryForm } from "@/lib/useEnquiryForm";
 import { SectionBadge } from "@/components/ui/SectionBadge";
 
 export function ContactForm() {
-  const [sent, setSent] = useState(false);
+  const { status, error, handleSubmit } = useEnquiryForm("contact");
+  const sent = status === "sent";
+  const sending = status === "sending";
 
-  /*
-   * KNOWN, AND DELIBERATE FOR NOW: this sends nothing anywhere.
-   *
-   * There is no fetch, no form action, no API route, and the inputs carry no name and no
-   * state binding — what a patient types is never read. The success panel below still tells
-   * them "Your message has been received. We'll call you back soon.", so anyone who submits
-   * this form is waiting for a call that no one knows to make.
-   *
-   * Flagged and left as-is at the client's instruction. Whoever picks this up: the routes
-   * discussed were a WhatsApp deep link to the number already advertised for booking, or an
-   * API route posting to helpdesk@ajsmc.in. The same stub is in home/Appointment.tsx.
-   */
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSent(true);
-  }
 
   return (
     <div className="rounded-[26px] border aj-card p-8 shadow-[0_30px_60px_-40px_rgba(12,46,110,0.5)] sm:p-9">
@@ -49,23 +36,28 @@ export function ContactForm() {
           </div>
         </div>
       ) : (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="relative">
+          {/* Honeypot. aria-hidden and off-screen rather than display:none, because some
+              bots skip fields that are not rendered at all. A person never reaches it. */}
+          <div aria-hidden className="absolute left-[-9999px] h-px w-px overflow-hidden">
+            <input type="text" name={HONEYPOT_FIELD} tabIndex={-1} autoComplete="off" />
+          </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <label className="block">
               <span className="mb-1.5 block font-body text-xs font-semibold text-ink">Full Name</span>
-              <input type="text" required placeholder="Your name" className="aj-input" />
+              <input type="text" name="name" required disabled={sending} placeholder="Your name" className="aj-input" />
             </label>
             <label className="block">
               <span className="mb-1.5 block font-body text-xs font-semibold text-ink">Phone Number</span>
-              <input type="tel" required placeholder="+91" className="aj-input" />
+              <input type="tel" name="phone" required disabled={sending} placeholder="+91" className="aj-input" />
             </label>
             <label className="block">
               <span className="mb-1.5 block font-body text-xs font-semibold text-ink">Email</span>
-              <input type="email" required placeholder="you@example.com" className="aj-input" />
+              <input type="email" name="email" disabled={sending} placeholder="you@example.com" className="aj-input" />
             </label>
             <label className="block">
               <span className="mb-1.5 block font-body text-xs font-semibold text-ink">Department</span>
-              <select required defaultValue="" className="aj-input">
+              <select name="department" required disabled={sending} defaultValue="" className="aj-input">
                 <option value="" disabled>
                   Select a department
                 </option>
@@ -79,16 +71,21 @@ export function ContactForm() {
           </div>
           <label className="mt-4 block">
             <span className="mb-1.5 block font-body text-xs font-semibold text-ink">Message</span>
-            <textarea rows={4} placeholder="How can we help?" className="aj-input resize-y" />
+            <textarea rows={4} name="message" disabled={sending} placeholder="How can we help?" className="aj-input resize-y" />
           </label>
           <div className="mt-5.5 flex flex-wrap items-center gap-5">
             <button
               type="submit"
-              className="aj-cta-wave inline-flex items-center gap-2.5 rounded-full bg-navy py-[9px] pl-6 pr-[9px] font-body text-[15px] font-bold text-white shadow-[0_16px_30px_-16px_rgba(12,46,110,0.7)]"
+              disabled={sending}
+              className="aj-cta-wave inline-flex items-center gap-2.5 rounded-full bg-navy py-[9px] pl-6 pr-[9px] font-body text-[15px] font-bold text-white shadow-[0_16px_30px_-16px_rgba(12,46,110,0.7)] disabled:opacity-70"
             >
-              <span>Send Message</span>
+              <span>{sending ? "Sending…" : "Send Message"}</span>
               <span className="aj-cta-dot flex h-[38px] w-[38px] items-center justify-center rounded-full bg-green-bright text-[#083b20]">
-                <ArrowUpRight className="h-4 w-4" strokeWidth={2.6} />
+                {sending ? (
+                  <Loader2 className="h-4 w-4 animate-spin" strokeWidth={2.6} />
+                ) : (
+                  <ArrowUpRight className="h-4 w-4" strokeWidth={2.6} />
+                )}
               </span>
             </button>
             <span className="font-body text-sm font-medium text-muted">
@@ -98,6 +95,18 @@ export function ContactForm() {
               </a>
             </span>
           </div>
+          {error && (
+            <p
+              role="alert"
+              className="mt-4 rounded-2xl border border-[#a02929]/25 bg-[#a02929]/[0.06] px-4 py-3 font-body text-sm font-medium text-[#a02929]"
+            >
+              {error} Please call{" "}
+              <a href={siteConfig.phoneHref} className="font-bold underline">
+                {siteConfig.phone}
+              </a>{" "}
+              and we will take your booking directly.
+            </p>
+          )}
         </form>
       )}
     </div>
