@@ -78,10 +78,9 @@ export function Appointment() {
             confirm the slot, and you will know the consultation fee before you arrive.
           </p>
 
-          {sent ? (
-            <EnquirySent sent={submitted} onReset={reset} />
-          ) : (
-            <form onSubmit={handleSubmit} className="relative">
+          {sent && <EnquirySent sent={submitted} onClose={reset} />}
+
+          <form onSubmit={handleSubmit} className="relative">
               {/* Honeypot — see the note in contact/ContactForm.tsx. */}
               <div aria-hidden className="absolute left-[-9999px] h-px w-px overflow-hidden">
                 <input type="text" name={HONEYPOT_FIELD} tabIndex={-1} autoComplete="off" />
@@ -144,7 +143,6 @@ export function Appointment() {
                 </p>
               )}
             </form>
-          )}
         </motion.div>
       </div>
     </Container>

@@ -604,46 +604,39 @@ select.aj-input {
 }
 
 /*
- * The booking confirmation. One orchestrated moment rather than scattered effects:
- * the card settles, then the tick draws itself a beat later, so the eye lands on the
- * card first and the tick reads as the answer to it.
+ * The booking confirmation dialog.
  *
- * Wrapped in `no-preference` rather than merely reduced at the end, so a visitor who
- * asked for less motion gets the finished state immediately with nothing to opt out
- * of — this is a medical form, and someone who set that preference for vestibular
- * reasons should not have a card swing at them.
+ * One orchestrated moment: the veil fades, the panel rises a few pixels behind it, and
+ * the tick lands last — so the eye reads the card first and the tick as its answer.
+ * Small distances on purpose; this appears after a form submission, not as an event of
+ * its own.
+ *
+ * Everything sits inside `no-preference`, so a visitor who asked for less motion gets
+ * the finished state with nothing moving. The auto-dismiss timer is cancelled for them
+ * in the component for the same reason — timed content is a large part of why that
+ * preference gets set.
  */
 @media (prefers-reduced-motion: no-preference) {
-  .aj-sent {
-    animation: aj-sent-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-  .aj-sent-mark {
-    animation: aj-sent-mark 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.14s both;
-  }
-  @keyframes aj-sent-in {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: none; }
-  }
-  @keyframes aj-sent-mark {
-    from { opacity: 0; transform: scale(0.55); }
-    to   { opacity: 1; transform: none; }
-  }
-}
+  .aj-dlg-veil { animation: aj-dlg-veil 0.22s ease-out both; }
+  .aj-dlg      { animation: aj-dlg-in 0.34s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .aj-dlg-mark { animation: aj-dlg-mark 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both; }
 
-/*
- * Top padding for the header bar.
- *
- * A class rather than an inline style, for two reasons. An inline padding-top REPLACES
- * whatever the utility class sets rather than adding to it, and `env(safe-area-inset-top)`
- * resolves to 0 on every browser without a notch — so the bar ended up with padding below
- * the logo and none above it, leaving the crest cropped against the status bar. And an
- * inline style cannot be scoped to a breakpoint, so it would also have pushed the desktop
- * pill off-centre.
- *
- * The calc keeps the notch clearance and adds real breathing room on top of it.
- */
-.aj-nav-bar {
-  padding-top: calc(env(safe-area-inset-top) + 14px);
+  .aj-dlg-wrap.is-closing .aj-dlg-veil { animation: aj-dlg-veil 0.18s ease-in both reverse; }
+  .aj-dlg-wrap.is-closing .aj-dlg      { animation: aj-dlg-out 0.18s ease-in both; }
+
+  @keyframes aj-dlg-veil { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes aj-dlg-in {
+    from { opacity: 0; transform: translateY(12px) scale(0.97); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes aj-dlg-out {
+    from { opacity: 1; transform: none; }
+    to   { opacity: 0; transform: translateY(6px) scale(0.985); }
+  }
+  @keyframes aj-dlg-mark {
+    from { opacity: 0; transform: scale(0.5); }
+    to   { opacity: 1; transform: none; }
+  }
 }
 @media (min-width: 1024px) {
   .aj-nav-bar {

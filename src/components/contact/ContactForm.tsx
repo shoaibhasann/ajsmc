@@ -24,10 +24,9 @@ export function ContactForm() {
         care, no heavy charges.
       </p>
 
-      {sent ? (
-        <EnquirySent sent={submitted} onReset={reset} />
-      ) : (
-        <form onSubmit={handleSubmit} className="relative">
+      {sent && <EnquirySent sent={submitted} onClose={reset} />}
+
+      <form onSubmit={handleSubmit} className="relative">
           {/* Honeypot. aria-hidden and off-screen rather than display:none, because some
               bots skip fields that are not rendered at all. A person never reaches it. */}
           <div aria-hidden className="absolute left-[-9999px] h-px w-px overflow-hidden">
@@ -98,8 +97,7 @@ export function ContactForm() {
               and we will take your booking directly.
             </p>
           )}
-        </form>
-      )}
+      </form>
     </div>
   );
 }
