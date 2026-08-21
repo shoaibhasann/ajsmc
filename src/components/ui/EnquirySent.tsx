@@ -136,7 +136,9 @@ export function EnquirySent({ sent, onClose }: { sent: SentEnquiry | null; onClo
           type="button"
           onClick={dismiss}
           aria-label="Close"
-          className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full text-muted transition-colors hover:bg-surface hover:text-navy"
+          // 44px, not the 36 it measured at: the one control here that a thumb has to
+          // find, and the smallest. The icon stays 18px; only the target grows.
+          className="absolute right-2 top-2 flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-surface hover:text-navy"
         >
           <X className="h-[18px] w-[18px]" strokeWidth={2.3} />
         </button>
