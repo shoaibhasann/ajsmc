@@ -1,6 +1,7 @@
-import { Check } from "lucide-react";
+import { Check, TriangleAlert } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionBadge } from "@/components/ui/SectionBadge";
+import { siteConfig } from "@/lib/site";
 import type { SpecialtyContent } from "@/lib/specialty-content";
 
 /**
@@ -52,9 +53,20 @@ export function SpecialtyCovers({
 export function WhenToSee({
   specialtyName,
   items,
+  urgent,
 }: {
   specialtyName: string;
   items: string[];
+  /**
+   * Red flags, rendered apart from the list above and styled as an alarm.
+   *
+   * They used to sit in `items`, which put a green tick and the words "worth an appointment"
+   * next to cauda equina and acute urinary retention. AJSMC has no casualty unit, no
+   * inpatient beds and nothing open after 9pm or on a Sunday, so booking is the one thing a
+   * person with these symptoms must not do — hence the separate block, the alarm colour, and
+   * 108 as the action instead of the appointment form.
+   */
+  urgent?: string[];
 }) {
   return (
     <section className="bg-soft-blue/40 py-14 lg:py-16">
@@ -78,6 +90,33 @@ export function WhenToSee({
             </li>
           ))}
         </ul>
+
+        {urgent && urgent.length > 0 && (
+          <div className="mt-9 rounded-[20px] border border-[#b42318]/25 bg-[#fff4f2] p-5 sm:p-6">
+            <div className="flex items-start gap-3">
+              <span className="mt-px flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-full bg-[#b42318] text-white">
+                <TriangleAlert className="h-[15px] w-[15px]" strokeWidth={2.6} />
+              </span>
+              <div>
+                <h3 className="font-heading text-[17px] font-extrabold leading-tight text-[#8a1c12]">
+                  Do not wait for an appointment
+                </h3>
+                <ul className="mt-2.5 space-y-1.5">
+                  {urgent.map((item) => (
+                    <li key={item} className="font-body text-[15px] font-semibold leading-relaxed text-[#7a1810]">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-3 font-body text-[14.5px] leading-relaxed text-[#7a1810]/90">
+                  Call <strong>108</strong> or go straight to the nearest hospital with a
+                  24-hour emergency department. {siteConfig.name} has no casualty unit and is
+                  open only {siteConfig.hoursShort}.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
       </Container>
     </section>
   );

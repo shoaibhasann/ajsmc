@@ -34,6 +34,18 @@ export type SpecialtyContent = {
   covers: { title: string; body: string }[];
   /** Symptom-level prompts. What a person is actually feeling when they search. */
   whenToSee: string[];
+  /**
+   * Red flags: symptoms that need care today, not an appointment.
+   *
+   * These are kept out of `whenToSee` on purpose. That list renders under "These are the
+   * ones worth an appointment" with a green tick beside each item, and a green tick is the
+   * wrong signal for cauda equina, acute urinary retention, a detaching retina or bleeding
+   * in pregnancy. AJSMC has no casualty unit, no inpatient beds and no cover after 9pm or
+   * on a Sunday, so an appointment is the wrong destination for every one of these and the
+   * hours spent waiting for the clinic to open are the hours that cost the sight or the
+   * limb or the life. They render separately, in alarm styling, pointing at 108.
+   */
+  urgent?: string[];
   faqs: { q: string; a: string }[];
 };
 
@@ -68,8 +80,8 @@ export const specialtyContent: Record<string, SpecialtyContent> = {
       "Redness, pain, watering or discharge that has not settled",
       "You have diabetes and have not had your eyes checked this year",
       "Frequent headaches with eye strain, or holding things closer to read",
-      "Sudden loss of vision, flashes or a curtain across your sight — treat this as urgent",
     ],
+    urgent: ["Sudden loss of vision, flashes of light, or a curtain or shadow across your sight"],
     faqs: [
       {
         q: "Is cataract surgery at AJSMC a day-care procedure?",
@@ -163,9 +175,9 @@ export const specialtyContent: Record<string, SpecialtyContent> = {
     ],
   },
 
-  Pediatrics: {
+  Paediatrics: {
     summary:
-      "Pediatrics at AJ Subaitha Medical Centre in Egmore, Chennai covers newborn checks, the full childhood vaccination schedule, growth and development monitoring, and treatment for fever, cough, loose motions and the other illnesses children pick up. Outpatient consultations run Monday to Saturday, 10am to 9pm.",
+      "Paediatrics at AJ Subaitha Medical Centre in Egmore, Chennai covers newborn checks, the full childhood vaccination schedule, growth and development monitoring, and treatment for fever, cough, loose motions and the other illnesses children pick up. Outpatient consultations run Monday to Saturday, 10am to 9pm.",
     covers: [
       {
         title: "Newborn checks",
@@ -221,9 +233,9 @@ export const specialtyContent: Record<string, SpecialtyContent> = {
     ],
   },
 
-  Orthopedics: {
+  Orthopaedics: {
     summary:
-      "Orthopedics at AJ Subaitha Medical Centre in Egmore, Chennai treats bone, joint and muscle problems including fractures, back pain, knee and shoulder pain, arthritis and sports injuries, and provides guidance on joint replacement surgery. Outpatient consultations run Monday to Saturday, 10am to 9pm.",
+      "Orthopaedics at AJ Subaitha Medical Centre in Egmore, Chennai treats bone, joint and muscle problems including fractures, back pain, knee and shoulder pain, arthritis and sports injuries, and provides guidance on joint replacement surgery. Outpatient consultations run Monday to Saturday, 10am to 9pm.",
     covers: [
       {
         title: "Fractures",
@@ -257,8 +269,8 @@ export const specialtyContent: Record<string, SpecialtyContent> = {
       "Knee or shoulder pain that has lasted weeks, or wakes you at night",
       "Morning stiffness in joints that takes a while to loosen",
       "A previous injury that keeps recurring",
-      "Any change in bladder or bowel control with back pain — treat this as urgent",
     ],
+    urgent: ["Back pain with any change in bladder or bowel control, or numbness between the legs"],
     faqs: [
       {
         q: "Do I need an X-ray before seeing an orthopaedic consultant?",
@@ -266,7 +278,7 @@ export const specialtyContent: Record<string, SpecialtyContent> = {
       },
       {
         q: "Does AJSMC treat fractures?",
-        a: `Yes. Orthopedics at AJSMC covers fractures along with back pain, knee and shoulder pain, arthritis and sports injuries. Note that AJSMC does not run a casualty or trauma unit — for a serious accident or a major injury, call 108 or go directly to the nearest hospital with a 24-hour emergency department.`,
+        a: `Yes. Orthopaedics at AJSMC covers fractures along with back pain, knee and shoulder pain, arthritis and sports injuries. Note that AJSMC does not run a casualty or trauma unit — for a serious accident or a major injury, call 108 or go directly to the nearest hospital with a 24-hour emergency department.`,
       },
       {
         q: "When does knee pain need surgery?",
@@ -323,8 +335,8 @@ export const specialtyContent: Record<string, SpecialtyContent> = {
       "A weak stream, difficulty starting, or getting up repeatedly at night",
       "A feeling that the bladder never empties fully",
       "Fever with back pain and urinary symptoms",
-      "Being unable to pass urine at all — treat this as urgent",
     ],
+    urgent: ["Being unable to pass urine at all, with a painful or swollen lower abdomen"],
     faqs: [
       {
         q: "Do all kidney stones need surgery?",
@@ -392,13 +404,13 @@ export const specialtyContent: Record<string, SpecialtyContent> = {
     ],
     whenToSee: [
       "A positive pregnancy test — the first scan and dating matter",
-      "Bleeding or severe pain during pregnancy — treat this as urgent",
       "Periods that are very heavy, very painful, irregular or have stopped",
       "Difficulty conceiving after a year of trying, or six months if you are over 35",
       "Discharge with itching, burning, odour or pain",
       "Bleeding between periods, after intercourse, or after menopause",
       "Menopausal symptoms disrupting sleep, mood or daily life",
     ],
+    urgent: ["Bleeding or severe abdominal pain during pregnancy"],
     faqs: [
       {
         q: "Does AJSMC provide pregnancy care through to delivery?",

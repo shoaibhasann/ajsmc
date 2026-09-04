@@ -91,7 +91,13 @@ export default async function SpecialtyPage({ params }: Params) {
       {content && (
         <SpecialtyCovers specialtyName={specialty.name} covers={content.covers} />
       )}
-      {content && <WhenToSee specialtyName={specialty.name} items={content.whenToSee} />}
+      {content && (
+        <WhenToSee
+          specialtyName={specialty.name}
+          items={content.whenToSee}
+          urgent={content.urgent}
+        />
+      )}
 
       {/* Department copy on the left, the consultants beside it on the right. Below lg the
           grid collapses to the two stacked rows it reads as on a phone.
@@ -104,7 +110,7 @@ export default async function SpecialtyPage({ params }: Params) {
         <div>
           <h2 className="font-heading text-[24px] font-extrabold tracking-tight text-navy sm:text-[28px]">
             {/* "a/an" cannot be hardcoded across 11 department names, so the article is
-                avoided entirely rather than reading "a Orthopedics consultant". */}
+                avoided entirely rather than reading "a Orthopaedics consultant". */}
             Seeing a consultant in {specialty.name} at AJSMC
           </h2>
           <div className="mt-5 flex flex-col gap-3 font-body text-[15px] text-body">
