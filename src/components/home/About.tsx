@@ -109,8 +109,13 @@ export function About() {
             </span>
             <span className="leading-tight">
               <span className="block font-body text-xs font-semibold text-muted">For Any Questions</span>
-              <a href={siteConfig.mobileHref} className="block font-heading text-[17px] font-extrabold text-navy">
-                {siteConfig.mobile}
+              {/* The switchboard, not the mobile. This was the one tel: link on the site
+                  pointing at +91 91506 42999 — the number advertised for WhatsApp — while
+                  every other call-us link, and the number the front desk answers, is the
+                  landline. A visitor tapping the phone icon on the home page should reach
+                  the same place as one tapping it anywhere else. */}
+              <a href={siteConfig.phoneHref} className="block font-heading text-[17px] font-extrabold text-navy">
+                {siteConfig.phone}
               </a>
             </span>
           </div>

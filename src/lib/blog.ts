@@ -313,7 +313,7 @@ export const blogPosts: BlogPost[] = [
     // Paste the Cloudinary URL between the quotes. The article publishes without
     // it; the cover simply appears once the src is filled in.
     coverImage: {
-      src: "https://res.cloudinary.com/dh4blkvix/image/upload/v1787241607/ajsmc/blog/x5dn54nkqfmqcsezqszg.png",
+      src: "https://res.cloudinary.com/dh4blkvix/image/upload/c_fill,g_auto,ar_16:9/v1787241607/ajsmc/blog/x5dn54nkqfmqcsezqszg.png",
       alt: "Two empty glass chairs facing each other behind a privacy screen, illustrating a first counselling session and what stays confidential",
     },
   },

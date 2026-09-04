@@ -21,7 +21,11 @@ export function organizationSchema() {
     // The hosted crest (see assets.ts) — /logo.png never existed in this app.
     logo: "https://res.cloudinary.com/dh4blkvix/image/upload/e_trim/v1784842916/ajsmc/assets/grj5f0tqi2rb4dvlbq7j.png",
     image: `${siteConfig.url}${siteConfig.ogImage}`,
-    telephone: siteConfig.mobileHref.replace("tel:", ""),
+    // The switchboard. This read the mobile, which is the WhatsApp line, while the
+    // Physician and department blocks below both publish the landline — so the one
+    // number Google is most likely to surface for the hospital disagreed with the rest
+    // of the same page's structured data.
+    telephone: siteConfig.phone,
     email: siteConfig.email,
     foundingDate: siteConfig.founded,
     address: {
