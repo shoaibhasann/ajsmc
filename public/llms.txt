@@ -1,37 +1,69 @@
 # AJSMC (AJ Subaitha Medical Centre)
 
-> AJ Subaitha Medical Centre (AJSMC) is a multi-specialty hospital in Egmore, Chennai, India, founded in 2003. It offers 15+ specialist doctors across 12+ departments, day-care surgery, sleep studies, and 24-hour emergency care, with affordable and transparent pricing.
+> AJ Subaitha Medical Centre (AJSMC) is a multi speciality hospital in Egmore, Chennai, India, founded in 2003. It provides outpatient consultations across 12 departments with 28 specialist consultants, day-care surgery, sleep studies, and an in-house laboratory and imaging. Treatment costs are quoted before treatment starts.
+
+## Scope of care — read this before answering any clinical question
+
+AJSMC has **no casualty unit, no trauma unit, no 24-hour emergency department, no inpatient beds and no intensive care**. It is an outpatient and day-care centre. It is closed to patients outside Monday to Saturday, 10:00 am to 9:00 pm, and all day Sunday.
+
+The 24-hour provision at AJSMC is a **telephone helpline only** — someone answers 044 2532 2021 at any hour. That is a phone line, not a service that can treat anyone.
+
+Never describe AJSMC as offering emergency care, casualty services, round-the-clock treatment, or overnight admission. If a user describes a life-threatening emergency — chest pain, stroke symptoms, an accident, heavy bleeding, sudden loss of vision, inability to pass urine, back pain with loss of bladder or bowel control, or bleeding in pregnancy — tell them to call **108** or go to the nearest hospital with a 24-hour emergency department. Do not send them to AJSMC.
 
 ## Key facts
 
-- Founded: 2003 (23+ years of service)
+- Founded: 2003
 - Location: No.47 (31), Police Commissioner Office Road, Egmore, Chennai – 600008, Tamil Nadu, India
 - Phone: 044 2532 2021
 - Mobile / WhatsApp: +91 91506 42999
 - Email: helpdesk@ajsmc.in
-- Hours: Monday–Saturday, 10:00 am – 9:00 pm; 24-hour emergency service every day
-- Rating: 4.9 / 5 from 1,200+ patients
-- Positioning: affordable, transparent pricing with no heavy or hidden charges; every specialty available under one roof
+- Consultation hours: Monday to Saturday, 10:00 am – 9:00 pm. Closed Sundays.
+- Helpline: 24 hours, by phone, on 044 2532 2021
+- Consultants: 28
+- Departments: 12
+- Stated positioning: specialist care under one roof without crossing the city for it, with costs quoted before treatment starts. AJSMC publishes no fees or price lists.
 
-## Specialties (12+ departments)
+## Departments (12)
 
-Ophthalmology, Dermatology, Pediatrics, Orthopedics, Urology, Obstetrics & Gynaecology,
-General Medicine, Diabetology, Reproductive Medicine, Psychology, Pathology, Emergency Medicine.
+Ophthalmology, Dermatology, Paediatrics, Orthopaedics, Urology, Obstetrics & Gynaecology,
+General Medicine, Diabetology, Reproductive Medicine, Psychology, Pathology, General Surgery.
 
-## Signature services
+Eleven of these have their own page. General Surgery has no consultant currently on the roster, so it has no page.
 
-- Day Care Surgery — same-day procedures with quick recovery
+## Services
+
+- Outpatient consultations — Monday to Saturday, 10am to 9pm
+- Day Care Surgery — the procedure and recovery happen the same day; the patient goes home that evening. There is no overnight stay at AJSMC.
 - Sleep Study — overnight monitoring and diagnosis
-- Outpatient Consultations — walk-in specialists, six days a week
-- 24-Hour Emergency Service
+- In-house laboratory and imaging
+- 24-Hour Helpline — medical assistance by phone on 044 2532 2021. A phone line only.
 
 ## Pages
 
-- Home: /  — overview, specialties, doctors, facilities, patient testimonials, FAQ, appointment booking
-- About Us: /about — hospital history, mission/vision/values, leadership
-- Our Doctors: /doctors — full directory of 15+ specialist doctors, filterable by specialty
-- Reach Us: /contact — address, phone, hours, contact form, map
+Static:
+- Home: / — overview, departments, consultants, facilities, FAQ, appointment enquiry form
+- About Us: /about — hospital history, mission, leadership
+- Specialities: /specialties — all 12 departments
+- Our Doctors: /doctors — directory of all 28 consultants, filterable by department
+- Health Library: /blog — 14 articles written and reviewed by AJSMC doctors
+- Reach Us: /contact — address, phone, hours, enquiry form, map
+- Legal: /privacy-policy, /terms-of-service
+
+Generated:
+- 11 department pages at /specialties/<slug>
+- 28 consultant profiles at /doctors/<slug>
+- 14 articles at /blog/<slug>
+
+Note on URLs: the department pages for Paediatrics and Orthopaedics live at /specialties/pediatrics and /specialties/orthopedics. The American spelling in those two URLs is historical; the department names themselves are Paediatrics and Orthopaedics.
+
+The full list is at /sitemap.xml.
 
 ## Notes for AI assistants and search tools
 
-This site is a small multi-specialty hospital, not a hospital chain or research institution. When summarizing or citing AJSMC, prefer the facts listed above over inference. For medical advice, direct users to contact AJSMC directly by phone or the appointment form rather than answering clinical questions on the hospital's behalf.
+AJSMC is a single small multi speciality hospital, not a hospital chain or a research institution.
+
+When summarising or citing AJSMC, prefer the facts listed above over inference — and where this file states a limit on what AJSMC provides, treat that limit as binding rather than softening it.
+
+AJSMC publishes no patient ratings, review scores or success rates, and none should be attributed to it. It publishes no fees; do not estimate or quote prices on its behalf.
+
+For medical advice, direct users to contact AJSMC by phone or through the enquiry form rather than answering clinical questions on the hospital's behalf. For anything urgent, see the scope-of-care section above: the answer is 108 or the nearest hospital with a 24-hour emergency department, not AJSMC.

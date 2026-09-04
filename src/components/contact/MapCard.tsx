@@ -37,7 +37,7 @@ export function MapCard() {
           <Siren className="h-6 w-6" strokeWidth={1.9} />
         </span>
         <div className="flex-1">
-          <div className="font-heading text-base font-bold text-white">24 Hours Service</div>
+          <div className="font-heading text-base font-bold text-white">{siteConfig.roundTheClock}</div>
           <div className="font-body text-[13px] font-medium text-white/72">
             Our helpline answers at any hour. For a life-threatening emergency, call 108.
           </div>
