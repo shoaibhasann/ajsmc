@@ -71,7 +71,7 @@ export const articleFaqs: Record<string, { q: string; a: string }[]> = {
     { q: "What if my child is unwell on the day the dose is due?",
       a: "Call 044 2532 2021 and describe it rather than deciding either way at home. A dose delayed by a few days is not a schedule restarted, which the article explains in the missed-dose section." },
     { q: "Which department handles vaccination at AJSMC?",
-      a: "Pediatrics, Monday to Saturday, 10am to 9pm at Police Commissioner Office Road, Egmore. Bring the vaccination card or any record you have so the consultant can see what has been given and what is due." },
+      a: "Paediatrics, Monday to Saturday, 10am to 9pm at Police Commissioner Office Road, Egmore. Bring the vaccination card or any record you have so the consultant can see what has been given and what is due." },
   ],
   "vomiting-loose-motion": [
     { q: "Can I use a sports drink instead of ORS?",
@@ -83,7 +83,7 @@ export const articleFaqs: Record<string, { q: string; a: string }[]> = {
     { q: "Can the whole family catch this?",
       a: "Many of these infections spread within a household through hands and shared food. Handwashing and separate towels do more than anything bought at a pharmacy." },
     { q: "Which department at AJSMC should I book?",
-      a: "General Medicine for adults, Pediatrics for a child, Monday to Saturday, 10am to 9pm. Stool and blood tests ordered on the day are processed in the laboratory here." },
+      a: "General Medicine for adults, Paediatrics for a child, Monday to Saturday, 10am to 9pm. Stool and blood tests ordered on the day are processed in the laboratory here." },
   ],
   "high-sugar-screening": [
     { q: "Can I eat normally before coming for the confirmatory test?",

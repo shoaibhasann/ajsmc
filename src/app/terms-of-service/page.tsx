@@ -23,7 +23,7 @@ export default function TermsOfServicePage() {
         <section>
           <h2 className="mb-2 font-heading text-xl font-bold text-navy">Website use</h2>
           <p>
-            This website provides general information about AJSMC&apos;s specialties, doctors and
+            This website provides general information about AJSMC&apos;s specialities, doctors and
             facilities. Content is provided for informational purposes and does not constitute
             medical advice or a diagnosis.
           </p>
@@ -63,7 +63,7 @@ export default function TermsOfServicePage() {
         <section>
           <h2 className="mb-2 font-heading text-xl font-bold text-navy">Accuracy of information</h2>
           <p>
-            While we aim to keep doctor listings, specialty details and timings up to date,
+            While we aim to keep doctor listings, speciality details and timings up to date,
             AJSMC does not warrant that all content on this site is error-free at all times. Please
             confirm details directly with our team when booking.
           </p>

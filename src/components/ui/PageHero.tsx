@@ -113,7 +113,7 @@ export function PageHero({
          *
          * Desktop only, from lg up. It costs about 62px of the heading's line, and the
          * heading is the part carrying the information — the icon only decorates it. At
-         * 768px that 62px is the difference between "Orthopedics in Chennai" sitting on
+         * 768px that 62px is the difference between "Orthopaedics in Chennai" sitting on
          * one line and wrapping to two; at 375px the heading wraps either way, so there
          * it simply takes width from a line that has none to spare.
          *

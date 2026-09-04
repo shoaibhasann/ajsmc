@@ -9,7 +9,7 @@ import { breadcrumbSchema, physiciansSchema } from "@/lib/schema";
 
 export const metadata: Metadata = pageMetadata({
   title: "Our Doctors in Chennai",
-  description: "Meet the specialist consultants at AJ Subaitha Medical Centre, Egmore, Chennai. Ophthalmology, Orthopedics, Pediatrics, Gynaecology, Diabetology, Dermatology, Urology and more, with qualifications listed for each.",
+  description: "Meet the specialist consultants at AJ Subaitha Medical Centre, Egmore, Chennai. Ophthalmology, Orthopaedics, Paediatrics, Gynaecology, Diabetology, Dermatology, Urology and more, with qualifications listed for each.",
   canonical: "/doctors",
 });
 

@@ -17,8 +17,8 @@ const quickLinks = [
 const specialtyLinks = [
   "Ophthalmology",
   "Dermatology",
-  "Pediatrics",
-  "Orthopedics",
+  "Paediatrics",
+  "Orthopaedics",
   "Gynaecology",
   "Diabetology",
 ];
