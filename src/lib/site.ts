@@ -145,7 +145,7 @@ export const specialties: Specialty[] = [
       "Treatment for acne, eczema, psoriasis, fungal infections, pigmentation and hair fall, along with cosmetic procedures for skin and hair. We treat both adults and children.",
   },
   {
-    name: "Pediatrics",
+    name: "Paediatrics",
     description: "Vaccination & child health",
     icon: "baby",
     tone: "green",
@@ -153,7 +153,7 @@ export const specialties: Specialty[] = [
       "Newborn checks, the full vaccination schedule, growth and development monitoring, and treatment for fever, cough, loose motions and the other illnesses children pick up.",
   },
   {
-    name: "Orthopedics",
+    name: "Orthopaedics",
     description: "Knee pain, fractures & joint care",
     icon: "bone",
     tone: "blue",
@@ -202,7 +202,7 @@ export const specialties: Specialty[] = [
   },
   {
     name: "Psychology",
-    description: "Counseling & mental wellness",
+    description: "Counselling & mental wellness",
     icon: "brain",
     tone: "blue",
     context:
@@ -301,9 +301,9 @@ export const doctors: Doctor[] = [
   {
     slug: "a-muhammed-shadique",
     name: "Dr. A. Muhammed Shadique",
-    specialty: "Pediatrics",
-    role: "Consultant Pediatrician",
-    degree: "MD, DNB (Pediatrics), MNAMS",
+    specialty: "Paediatrics",
+    role: "Consultant Paediatrician",
+    degree: "MD, DNB (Paediatrics), MNAMS",
     reg: "TNMC 111008",
     image: "https://res.cloudinary.com/dh4blkvix/image/upload/v1784903958/ajsmc/assets/jsc0et14fk4teqysm75f.png",
   },
@@ -353,9 +353,9 @@ export const doctors: Doctor[] = [
   {
     slug: "d-naveen-kumar",
     name: "Dr. D. Naveen Kumar",
-    specialty: "Orthopedics",
-    role: "Consultant Orthopedics · Joint Replacement Fellowship (FIJR)",
-    degree: "MBBS, MS (Orthopedics)",
+    specialty: "Orthopaedics",
+    role: "Consultant Orthopaedics · Joint Replacement Fellowship (FIJR)",
+    degree: "MBBS, MS (Orthopaedics)",
     image: "https://res.cloudinary.com/dh4blkvix/image/upload/v1785246201/ajsmc/assets/gbkvwjkpngo4azu4sx1x.png",
   },
   {
@@ -374,15 +374,15 @@ export const doctors: Doctor[] = [
   {
     slug: "md-nizamuddin-khan",
     name: "Dr. MD Nizamuddin Khan",
-    specialty: "Orthopedics",
-    role: "Consultant · Orthopedics",
+    specialty: "Orthopaedics",
+    role: "Consultant · Orthopaedics",
   },
   {
     slug: "balachander-rajendiran",
     name: "Dr. Balachander Rajendiran",
-    specialty: "Orthopedics",
-    role: "Consultant · Orthopedics",
-    degree: "MBBS, MS (Orthopedics)",
+    specialty: "Orthopaedics",
+    role: "Consultant · Orthopaedics",
+    degree: "MBBS, MS (Orthopaedics)",
     image: "https://res.cloudinary.com/dh4blkvix/image/upload/v1785245844/ajsmc/assets/itvhkoufhhoxzbgblovb.png",
   },
   {
@@ -453,7 +453,7 @@ export const doctors: Doctor[] = [
     slug: "chynna-christina",
     name: "Ms. Chynna Christina",
     specialty: "Psychology",
-    role: "Counseling Psychologist",
+    role: "Counselling Psychologist",
     degree: "MSc (Applied Psychology)",
     image: "https://res.cloudinary.com/dh4blkvix/image/upload/v1785226888/ajsmc/assets/yklhnk53wytzloi2h6xi.png",
   },
@@ -474,8 +474,25 @@ export const listedDoctors: Doctor[] = [
   ...doctors.filter((d) => !d.image),
 ];
 
+/**
+ * Department slugs that do NOT follow from the department name.
+ *
+ * Paediatrics and Orthopaedics were published in American spelling and indexed that way —
+ * they are live in Google, in the sitemap, and were pushed to IndexNow at launch. Renaming
+ * the departments to the house British spelling changed what a reader sees; it must not
+ * change where the page lives. Keeping the slugs here means the visible name and the URL
+ * can disagree on purpose, with the disagreement written down in one place instead of
+ * discovered later as two dead URLs.
+ */
+const SLUG_OVERRIDES: Record<string, string> = {
+  Paediatrics: "pediatrics",
+  Orthopaedics: "orthopedics",
+};
+
 /** URL slug for a department: "Obstetrics & Gynaecology" -> "obstetrics-gynaecology". */
 export function specialtySlug(name: string): string {
+  const pinned = SLUG_OVERRIDES[name];
+  if (pinned) return pinned;
   return name
     .toLowerCase()
     .replace(/&/g, " ")
@@ -502,12 +519,12 @@ export const doctorSpecialtyFilters = [
   "Reproductive Medicine",
   "General Medicine",
   "Ophthalmology",
-  "Pediatrics",
+  "Paediatrics",
   "Dermatology",
   "Obstetrics & Gynaecology",
   "ENT",
   "Urology",
-  "Orthopedics",
+  "Orthopaedics",
   "Oncology",
   "Neurology",
   "Gastroenterology",
@@ -609,11 +626,11 @@ export const faqs = [
   },
   {
     q: "Which specialities are available at AJSMC?",
-    a: `AJSMC has ${specialties.length} departments: General Medicine, General Surgery, Ophthalmology, Dermatology, Pediatrics, Orthopedics, Urology, Obstetrics and Gynaecology, Diabetology, Reproductive Medicine, Psychology and Pathology. ${listedDoctors.length} consultants practise across them, so most conditions can be seen without a referral elsewhere.`,
+    a: `AJSMC has ${specialties.length} departments: General Medicine, General Surgery, Ophthalmology, Dermatology, Paediatrics, Orthopaedics, Urology, Obstetrics and Gynaecology, Diabetology, Reproductive Medicine, Psychology and Pathology. ${listedDoctors.length} consultants practise across them, so most conditions can be seen without a referral elsewhere.`,
   },
   {
     q: "Is AJSMC open 24 hours?",
-    a: "The AJSMC helpline runs 24 hours and inpatients are supported round the clock, so someone answers on 044 2532 2021 at any hour. Doctor consultations are Monday to Saturday, 10am to 9pm. AJSMC does not run a casualty or trauma unit. In a life-threatening emergency such as an accident, chest pain, stroke symptoms or heavy bleeding, call 108 or go directly to the nearest hospital with a 24-hour emergency department.",
+    a: "The AJSMC helpline runs 24 hours, so someone answers on 044 2532 2021 at any hour. Consultations are Monday to Saturday, 10am to 9pm. AJSMC does not run a casualty or trauma unit. In a life-threatening emergency such as an accident, chest pain, stroke symptoms or heavy bleeding, call 108 or go directly to the nearest hospital with a 24-hour emergency department.",
   },
   {
     q: "What is day-care surgery?",

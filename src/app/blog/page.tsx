@@ -12,7 +12,7 @@ import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Health Library",
-  description: `Health guides from the doctors at ${siteConfig.fullName}, Egmore — symptoms, treatments, costs and when to see a specialist in Chennai.`,
+  description: `Health guides from the doctors at ${siteConfig.fullName}, Egmore — symptoms, treatments and when to see a specialist in Chennai.`,
   canonical: "/blog",
 });
 
@@ -31,7 +31,7 @@ export default function BlogIndexPage() {
         crumb="Health Library"
         badge="WRITTEN & REVIEWED BY OUR DOCTORS"
         title="Health guides from our specialists"
-        description="Plain answers to the questions patients ask us most — what a symptom means, when it needs a doctor, what treatment involves, and what it costs at AJSMC."
+        description="Plain answers to the questions patients ask us most — what a symptom means, when it needs a doctor, and what treatment involves."
         image={assets.aboutHeroBg}
         decoration={assets.blogHeroDecor}
       />

@@ -29,7 +29,7 @@ function useCountUp(target: number, active: boolean, duration = 1500) {
 }
 
 const stats = [
-  { key: "years", target: siteConfig.yearsOfService, label: "Years of Trusted Care" },
+  { key: "years", target: siteConfig.yearsOfService, label: "Years of Trusted Care", plus: true },
   { key: "docs", target: listedDoctors.length, label: "Specialist Doctors" },
   { key: "specs", target: specialties.length, label: "Speciality Departments" },
 ] as const;
@@ -54,7 +54,7 @@ export function AnimatedStats() {
       />
       <Container className="relative grid grid-cols-2 gap-6 py-[52px] sm:grid-cols-4">
         {stats.map((stat, i) => (
-          <Stat key={stat.key} index={i} target={stat.target} label={stat.label} active={inView} showSeparator={i < stats.length - 1} />
+          <Stat key={stat.key} index={i} target={stat.target} label={stat.label} plus={"plus" in stat} active={inView} showSeparator={i < stats.length - 1} />
         ))}
         <div className="text-center [text-shadow:0_2px_16px_rgba(7,32,79,0.9),0_1px_2px_rgba(7,32,79,0.7)]">
           <div className="font-heading text-[34px] font-extrabold tracking-tight text-green-bright sm:text-[44px] lg:text-[52px]">
@@ -71,12 +71,21 @@ function Stat({
   index,
   target,
   label,
+  plus,
   active,
   showSeparator,
 }: {
   index: number;
   target: number;
   label: string;
+  /**
+   * Whether the figure is a floor rather than an exact count. Years of service is one —
+   * the hospital has been open at least that long. Doctors and departments are not: the
+   * roster and the department list are the source of those two numbers, so "28+" claimed
+   * more consultants than the page below it goes on to name, and contradicted the FAQ
+   * answer on this same page that says AJSMC has 12 departments and then lists twelve.
+   */
+  plus: boolean;
   active: boolean;
   showSeparator: boolean;
 }) {
@@ -90,7 +99,8 @@ function Stat({
       className="relative text-center [text-shadow:0_2px_16px_rgba(7,32,79,0.9),0_1px_2px_rgba(7,32,79,0.7)]"
     >
       <div className="font-heading text-[34px] font-extrabold tracking-tight text-white sm:text-[44px] lg:text-[52px]">
-        {value}+
+        {value}
+        {plus ? "+" : null}
       </div>
       <div className="mt-1 font-body text-sm font-semibold text-white/85">{label}</div>
       {showSeparator && (

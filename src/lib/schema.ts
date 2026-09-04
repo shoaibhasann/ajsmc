@@ -57,7 +57,11 @@ export function organizationSchema() {
     // Google's review-snippet policy — the penalty for getting caught is a manual
     // action on the whole domain, not just a lost star rating. If AJSMC wants stars in
     // search, the route is a verified Google Business Profile, not this field.
-    priceRange: "$$",
+    //
+    // No priceRange either. It was "$$", a price band nobody at the hospital chose and
+    // nothing on the site supports — the same unbacked claim as a self-typed star rating,
+    // just machine-readable. The site publishes no fees anywhere by standing decision, so
+    // it cannot publish a band summarising them. Nothing requires the field.
   };
 }
 
