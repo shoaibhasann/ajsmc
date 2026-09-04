@@ -125,7 +125,7 @@ export function ArticleLayout({
          * below that the same component is rendered inline further down, in the flow, where
          * a phone can actually use it.
          */}
-        <div className="mx-auto grid max-w-[1080px] grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,268px)] lg:items-start lg:gap-12">
+        <div className="mx-auto max-w-[1080px]">
           <div className="min-w-0">
             {post.coverImage?.src && (
               <figure className="mb-9 overflow-hidden rounded-[24px] border border-navy/[0.09]">
@@ -177,7 +177,7 @@ export function ArticleLayout({
             )}
 
             {/* In the flow on a phone, between the reviewer credit and the first heading. */}
-            <div className="mb-9 lg:hidden">
+            <div className="mb-9 mx-auto max-w-[740px]">
               <ArticleToc toc={toc} />
             </div>
 
@@ -226,9 +226,6 @@ export function ArticleLayout({
             </div>
           </div>
 
-          <aside className="hidden lg:block lg:sticky lg:top-[104px]">
-            <ArticleToc toc={toc} />
-          </aside>
         </div>
       </Container>
 

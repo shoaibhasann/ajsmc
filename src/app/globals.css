@@ -420,6 +420,14 @@ select.aj-input {
   font-size: 16.5px;
   line-height: 1.75;
   color: var(--color-body);
+  /* A reading measure, not the width of the page. The contents-page used to sit in a
+     sticky rail beside the article, which cost the column 268px and left one table in
+     five short of the width it needed — so a reader on a large screen had to scroll a
+     table sideways on a desktop, which is the wrong way round. The rail is gone and the
+     contents list runs in the flow now, but the prose is still held to something you can
+     read a line of; tables break out of it below. */
+  max-width: 740px;
+  margin-inline: auto;
 }
 
 .aj-prose > * + * {
@@ -641,5 +649,26 @@ select.aj-input {
 @media (min-width: 1024px) {
   .aj-nav-bar {
     padding-top: 0.5rem; /* matches lg:pb-2, so the pill stays symmetrical */
+  }
+}
+
+/*
+ * Tables step outside the reading measure.
+ *
+ * Prose is capped at 740px because that is about as wide as a line can get and still be
+ * comfortable. A table has no such limit — it wants the width its columns need, and the
+ * widest one on this site (the smear-test comparison) asks for 979px. Holding it to the
+ * text column is what forced a horizontal scrollbar onto a desktop reader.
+ *
+ * The negative margin is symmetrical about the column's centre, so the table stays
+ * centred on the text while overhanging both edges. It never exceeds the viewport, and
+ * below the breakpoint it simply stays inside the column and scrolls as before, which is
+ * the right behaviour on a phone.
+ */
+@media (min-width: 1024px) {
+  .aj-prose .aj-table-wrap {
+    --aj-table-w: min(1080px, calc(100vw - 80px));
+    width: var(--aj-table-w);
+    margin-inline: calc(50% - var(--aj-table-w) / 2);
   }
 }
