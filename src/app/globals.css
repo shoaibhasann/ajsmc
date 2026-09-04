@@ -426,7 +426,11 @@ select.aj-input {
      table sideways on a desktop, which is the wrong way round. The rail is gone and the
      contents list runs in the flow now, but the prose is still held to something you can
      read a line of; tables break out of it below. */
-  max-width: 740px;
+  /* 640px is about 73 characters a line at this size. It was 740, which measured 85 —
+     past the 45-75 range a line can be before the eye starts losing its place on the
+     return sweep, and on a page this long that compounds. Measured with a canvas ruler
+     in the page's own font rather than estimated from a character count. */
+  max-width: 640px;
   /* Left-aligned in its container, not centred. Centring the text while tables ran the
      full width gave the article two different left edges — 350px and 180px on a 1440
      screen — so the eye had to re-find the start of the line every time a table went by.
@@ -435,7 +439,12 @@ select.aj-input {
 }
 
 .aj-prose > * + * {
-  margin-top: 1.15em;
+  /* Paragraphs sat 19px apart against a 28.9px line height — the gap between two
+     paragraphs was smaller than the gap between two lines inside one, so blocks ran
+     together instead of separating. This puts roughly a line of space between them,
+     which is what makes a paragraph read as a unit. Headings keep their own larger
+     margins below, so the h2-to-body relationship is unchanged. */
+  margin-top: 1.55em;
 }
 
 .aj-prose h2 {
