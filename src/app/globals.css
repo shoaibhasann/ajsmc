@@ -427,7 +427,11 @@ select.aj-input {
      contents list runs in the flow now, but the prose is still held to something you can
      read a line of; tables break out of it below. */
   max-width: 740px;
-  margin-inline: auto;
+  /* Left-aligned in its container, not centred. Centring the text while tables ran the
+     full width gave the article two different left edges — 350px and 180px on a 1440
+     screen — so the eye had to re-find the start of the line every time a table went by.
+     One rail: text and tables begin at the same place and only their right edges differ. */
+  margin-inline: 0;
 }
 
 .aj-prose > * + * {
@@ -669,6 +673,9 @@ select.aj-input {
   .aj-prose .aj-table-wrap {
     --aj-table-w: min(1080px, calc(100vw - 80px));
     width: var(--aj-table-w);
-    margin-inline: calc(50% - var(--aj-table-w) / 2);
+    /* Grows rightwards only, off the shared left edge. `100%` here is the prose measure,
+       so this resolves to a negative right margin of exactly the overhang. */
+    margin-left: 0;
+    margin-right: calc(100% - var(--aj-table-w));
   }
 }

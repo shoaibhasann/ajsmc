@@ -177,7 +177,7 @@ export function ArticleLayout({
             )}
 
             {/* In the flow on a phone, between the reviewer credit and the first heading. */}
-            <div className="mb-9 mx-auto max-w-[740px]">
+            <div className="mb-9 max-w-[740px]">
               <ArticleToc toc={toc} />
             </div>
 
