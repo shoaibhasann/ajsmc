@@ -426,16 +426,20 @@ select.aj-input {
      table sideways on a desktop, which is the wrong way round. The rail is gone and the
      contents list runs in the flow now, but the prose is still held to something you can
      read a line of; tables break out of it below. */
-  /* 640px is about 73 characters a line at this size. It was 740, which measured 85 —
-     past the 45-75 range a line can be before the eye starts losing its place on the
-     return sweep, and on a page this long that compounds. Measured with a canvas ruler
-     in the page's own font rather than estimated from a character count. */
-  max-width: 640px;
-  /* Left-aligned in its container, not centred. Centring the text while tables ran the
-     full width gave the article two different left edges — 350px and 180px on a 1440
-     screen — so the eye had to re-find the start of the line every time a table went by.
-     One rail: text and tables begin at the same place and only their right edges differ. */
-  margin-inline: 0;
+  /* 780px, centred, at the client's direction: a wider column narrows the step between
+     the text and the tables, so the tables read as part of the article rather than as
+     panels bolted onto it.
+     The cost, recorded here because it is real and was measured, not assumed: this puts
+     the line past the 45-75 range a line can comfortably be, so the eye has further to
+     travel on the return sweep. 640px measured 74, 720 measures 83, 780 measures 90 — all three were built and
+     looked at before 780 was chosen.
+     Narrowing it again also widens the step down from the tables, which is the trade
+     this number sits in the middle of. */
+  max-width: 780px;
+  /* Centred. The zigzag this reintroduces is deliberately softened rather than removed:
+     the table cap below came down from 1080 to 1020, so the overhang is 120px a side
+     instead of 170. */
+  margin-inline: auto;
 }
 
 .aj-prose > * + * {
@@ -680,11 +684,11 @@ select.aj-input {
  */
 @media (min-width: 1024px) {
   .aj-prose .aj-table-wrap {
-    --aj-table-w: min(1080px, calc(100vw - 80px));
+    /* 1020, not 1080. The widest table on the site needs 979px, so this clears it with
+       room to spare while keeping the step down to the text column as small as it can be. */
+    --aj-table-w: min(1020px, calc(100vw - 80px));
     width: var(--aj-table-w);
-    /* Grows rightwards only, off the shared left edge. `100%` here is the prose measure,
-       so this resolves to a negative right margin of exactly the overhang. */
-    margin-left: 0;
-    margin-right: calc(100% - var(--aj-table-w));
+    /* Symmetrical about the column's centre, so the table stays centred on the text. */
+    margin-inline: calc(50% - var(--aj-table-w) / 2);
   }
 }
