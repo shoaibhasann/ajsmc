@@ -25,8 +25,8 @@ export function Story() {
         />
         <div className="absolute bottom-5 left-5 flex gap-3">
           <div className="rounded-2xl bg-white/90 px-[18px] py-3.5 shadow-[0_20px_40px_-22px_rgba(12,46,110,0.5)] backdrop-blur-md">
-            <div className="font-heading text-2xl font-extrabold text-navy">{siteConfig.yearsOfService}+</div>
-            <div className="font-body text-[11px] font-medium text-muted">Years</div>
+            <div className="font-heading text-2xl font-extrabold text-navy">{siteConfig.founded}</div>
+            <div className="font-body text-[11px] font-medium text-muted">Centre opened</div>
           </div>
           <div className="rounded-2xl bg-navy/[0.92] px-[18px] py-3.5 shadow-[0_20px_40px_-22px_rgba(12,46,110,0.5)] backdrop-blur-md">
             <div className="font-heading text-2xl font-extrabold text-green-bright">{listedDoctors.length}</div>
@@ -38,14 +38,19 @@ export function Story() {
       <div>
         <SectionBadge tone="solid">OUR STORY</SectionBadge>
         <h2 className="mt-4.5 font-heading text-[28px] font-extrabold leading-[1.08] tracking-tight text-navy sm:text-[34px] lg:text-[clamp(28px,3.4vw,42px)]">
-          Two decades of care you can rely on
+          Fifty years of practice, in one building since 2023
         </h2>
         <p className="mt-4.5 font-body text-[15px] leading-[1.75] text-body">
-          AJ Subaitha Medical Centre was built around a simple idea: a family should not have
-          to travel across Chennai, or pay heavily, to see a good specialist. So we put them
-          in one building. Today {listedDoctors.length} consultants practise here across{" "}
-          {specialties.length} departments, on Police Commissioner Office Road in the heart
-          of Egmore.
+          It starts in {siteConfig.practiceSince}, in Madurai, where Dr. A. Ameer Jahan opened
+          Ameeri Speciality Clinic. A practice in Delhi followed, then one in Chennai, and all
+          three still run. In {siteConfig.founded} the Chennai practice became AJ Subaitha
+          Medical Centre — the same care, with the departments, the theatre and the laboratory
+          brought into one building on Police Commissioner Office Road in Egmore.
+        </p>
+        <p className="mt-3.5 font-body text-[15px] leading-[1.75] text-body">
+          The idea behind it did not change: a family should not have to travel across Chennai,
+          or pay heavily, to see a good specialist. Today {listedDoctors.length} consultants
+          practise here across {specialties.length} departments.
         </p>
         <p className="mt-3.5 font-body text-[15px] leading-[1.75] text-body">
           That covers most of what a family needs in a year. Everyday consultations and

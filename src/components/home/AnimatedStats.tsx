@@ -29,7 +29,6 @@ function useCountUp(target: number, active: boolean, duration = 1500) {
 }
 
 const stats = [
-  { key: "years", target: siteConfig.yearsOfService, label: "Years of Trusted Care", plus: true },
   { key: "docs", target: listedDoctors.length, label: "Specialist Doctors" },
   { key: "specs", target: specialties.length, label: "Speciality Departments" },
 ] as const;
@@ -52,9 +51,9 @@ export function AnimatedStats() {
         aria-hidden
         className="absolute inset-0 bg-gradient-to-r from-navy/[0.58] via-navy/[0.46] to-navy-mid/[0.52]"
       />
-      <Container className="relative grid grid-cols-2 gap-6 py-[52px] sm:grid-cols-4">
+      <Container className="relative grid grid-cols-2 gap-6 py-[52px] sm:grid-cols-3">
         {stats.map((stat, i) => (
-          <Stat key={stat.key} index={i} target={stat.target} label={stat.label} plus={"plus" in stat} active={inView} showSeparator={i < stats.length - 1} />
+          <Stat key={stat.key} index={i} target={stat.target} label={stat.label} plus={false} active={inView} showSeparator={i < stats.length - 1} />
         ))}
         <div className="text-center [text-shadow:0_2px_16px_rgba(7,32,79,0.9),0_1px_2px_rgba(7,32,79,0.7)]">
           <div className="font-heading text-[34px] font-extrabold tracking-tight text-green-bright sm:text-[44px] lg:text-[52px]">
@@ -79,11 +78,12 @@ function Stat({
   target: number;
   label: string;
   /**
-   * Whether the figure is a floor rather than an exact count. Years of service is one —
-   * the hospital has been open at least that long. Doctors and departments are not: the
-   * roster and the department list are the source of those two numbers, so "28+" claimed
-   * more consultants than the page below it goes on to name, and contradicted the FAQ
-   * answer on this same page that says AJSMC has 12 departments and then lists twelve.
+   * Whether the figure is a floor rather than an exact count. Nothing in this band is one
+   * any more: both remaining figures come from the roster and the department list, so "28+"
+   * claimed more consultants than the page below goes on to name and contradicted the FAQ
+   * on this same page. The years figure that used to sit here was removed outright — it
+   * belonged to the chairman's practice, which began in 1975, not to the centre, which
+   * opened in 2023, and a bare number in a stats band cannot say which it means.
    */
   plus: boolean;
   active: boolean;

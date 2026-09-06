@@ -92,8 +92,8 @@ export function Hero() {
                 clip them. */}
             {[
               {
-                value: `${siteConfig.yearsOfService}+ Years`,
-                label: "Trusted Care",
+                value: `${listedDoctors.length} Specialists`,
+                label: "Under one roof",
                 className: "-left-6 top-[10%]",
                 delay: 0,
                 iconBg: "bg-soft-green text-green-deep",

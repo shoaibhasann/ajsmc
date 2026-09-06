@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BadgeCheck, ChevronRight, Clock, MapPin, Phone } from "lucide-react";
+import { ChevronRight, Clock, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { BookCta } from "@/components/ui/BookCta";
 import { DoctorPhoto } from "@/components/ui/DoctorPhoto";
@@ -117,12 +117,17 @@ export default async function DoctorPage({ params }: Params) {
                   </p>
                 )}
 
-                {doctor.reg && (
-                  <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-navy/[0.12] bg-white/70 px-4 py-2 font-body text-[13px] font-semibold text-navy backdrop-blur-sm">
-                    <BadgeCheck className="h-4 w-4 text-green-deep" strokeWidth={2.2} />
-                    Registered with the Tamil Nadu Medical Council · {doctor.reg}
-                  </p>
-                )}
+                {/* The Tamil Nadu Medical Council number used to be shown here as a badge.
+                    The hospital asked in September 2026 for name and speciality only, and it
+                    is right that nothing requires a registration number on a website. The
+                    numbers stay in the data for the eleven consultants who supplied them, and
+                    are still emitted as `identifier` in the Physician schema, where they help
+                    a search engine verify a real registered doctor without putting an
+                    inconsistent badge in front of a patient — eleven of twenty-eight carried
+                    one, so the badge advertised the gap as much as the credential.
+
+                    Article bylines are untouched. There the number is the author's credential
+                    on medical content, which is a different thing from a directory entry. */}
 
                 {/* On glass, like the summary card on a department page. These two lines sit
                     furthest right, where the scrim has faded, and at 14.5px they were the only
