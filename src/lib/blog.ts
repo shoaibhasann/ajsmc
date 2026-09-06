@@ -338,6 +338,90 @@ export const blogPosts: BlogPost[] = [
       alt: "A glass hourglass whose falling sand is a slow stream of spheres, with a DNA helix rising behind it, illustrating what actually slows biological ageing",
     },
   },
+  {
+    slug: "pre-marital-check-up",
+    title:
+      "Pre-marital screening in India: the carrier test only works if both partners take it",
+    description:
+      "Thalassaemia carrier screening is the one pre-marital test whose result changes decisions, and only when both partners are tested. What the panel contains, what Indian guidelines actually say, and why no HIV test can be demanded of you.",
+    category: "General Health",
+    publishedAt: "2026-09-06",
+    reviewedBy: "a-ameer-jahan",
+    readingMinutes: 15,
+    primaryKeyword: "pre-marital screening India",
+    keyTakeaway:
+      "Beta-thalassaemia carrier screening changes what a couple can decide, and it is informative only when both partners are tested, because a carrier is healthy and the one-in-four risk in each pregnancy exists only when two carriers have children together.",
+    // Paste the Cloudinary URL between the quotes. The article publishes without
+    // it; the cover simply appears once the src is filled in.
+    coverImage: {
+      src: "https://res.cloudinary.com/dh4blkvix/image/upload/v1788718601/ajsmc/blog/im8fa0rri5orav7ayqyc.png",
+      alt:
+        "Two glass droplets each holding a faint helix, linked by a glass ring, with four small spheres above and one tinted amber, illustrating that carrier screening only means anything when both partners are tested",
+    },
+  },
+  {
+    slug: "semen-analysis-explained",
+    title:
+      "Male infertility tests: what the WHO 2021 semen figures do and do not mean",
+    description:
+      "The WHO 2021 semen figures are fifth centiles from men whose partners conceived within a year, not a pass mark. This page gives the full table, how it differs from the 2010 edition, and which further tests are actually indicated.",
+    category: "Men's Health",
+    publishedAt: "2026-09-06",
+    reviewedBy: "a-ameer-jahan",
+    readingMinutes: 19,
+    primaryKeyword: "male infertility tests",
+    keyTakeaway:
+      "The WHO sixth edition (2021) semen figures — volume 1.4 ml, concentration 16 million/ml, total sperm number 39 million, total motility 42%, progressive motility 30%, vitality 54% and normal forms 4% — are fifth centiles from men whose partners conceived naturally within twelve months, and WHO states that this fifth percentile does not represent a limit between fertile and infertile men.",
+    // Paste the Cloudinary URL between the quotes. The article publishes without
+    // it; the cover simply appears once the src is filled in.
+    coverImage: {
+      src: "https://res.cloudinary.com/dh4blkvix/image/upload/v1788718880/ajsmc/blog/t0q5rilmwdereausoxpo.png",
+      alt:
+        "A glass sample vial beneath a suspended lens with a graduated glass scale behind it marked in soft bands, illustrating that the WHO semen reference limits are centiles rather than a pass mark",
+    },
+  },
+  {
+    slug: "female-infertility-tests",
+    title:
+      "Female Infertility Testing: When 12 Months Is Too Long to Wait, and What Each Test Can Tell You",
+    description:
+      "Evaluation begins at 12 months of trying, at 6 months from age 35, and immediately where a cause is already known. What the ovulation, tubal, uterine and ovarian reserve tests can and cannot settle, under NICE NG257 (2026).",
+    category: "Women's Health",
+    publishedAt: "2026-09-06",
+    reviewedBy: "a-ameer-jahan",
+    readingMinutes: 19,
+    primaryKeyword: "female infertility tests when to start",
+    keyTakeaway:
+      "Testing for female infertility should begin after 12 months of regular unprotected intercourse, after 6 months if the woman is 35 or older, and immediately where a cause is already known or suspected, such as absent periods, previous pelvic infection or known tubal disease.",
+    // Paste the Cloudinary URL between the quotes. The article publishes without
+    // it; the cover simply appears once the src is filled in.
+    coverImage: {
+      src: "https://res.cloudinary.com/dh4blkvix/image/upload/v1788718957/ajsmc/blog/hjq7qo2nf7gxcb1lind1.png",
+      alt:
+        "A curving row of glass spheres graduating from blue to green, one lit early in the arc and the last lit at its end, beside a glass hourglass whose falling sand is a stream of beads, illustrating when female fertility testing should begin",
+    },
+  },
+  {
+    slug: "sti-testing-window-period",
+    title:
+      "STI Testing: How Long After Exposure Each Test Becomes Reliable",
+    description:
+      "Window periods for STI tests, assay by assay: NACO puts the HIV antibody window at three weeks to three months, while CDC gives 10 to 33 days for a nucleic acid test and up to 90 days for antibody and rapid tests. The interval belongs to the test, not the infection.",
+    category: "Infectious Diseases",
+    publishedAt: "2026-09-06",
+    reviewedBy: "a-ameer-jahan",
+    readingMinutes: 21,
+    primaryKeyword: "STI test window period",
+    keyTakeaway:
+      "Every STI test has a window period, the interval between infection and the point at which that particular test can detect it, so a negative result is only meaningful once the window for the specific assay used has closed — which is why the test report, not the number of weeks elapsed, decides what a negative result rules out.",
+    // Paste the Cloudinary URL between the quotes. The article publishes without
+    // it; the cover simply appears once the src is filled in.
+    coverImage: {
+      src: "https://res.cloudinary.com/dh4blkvix/image/upload/v1788719018/ajsmc/blog/mro8ugcmtq3b0g7ivryr.png",
+      alt:
+        "Four glass test tubes on a glass rail, the first two clouded so nothing in them can be read and the last two clear, the final one lit from within around a helix, illustrating how long after exposure each STI test becomes reliable",
+    },
+  }
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
