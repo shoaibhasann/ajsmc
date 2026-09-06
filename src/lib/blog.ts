@@ -75,7 +75,6 @@ export const blogPosts: BlogPost[] = [
     primaryKeyword: "monsoon fever Chennai dengue typhoid difference",
     keyTakeaway:
       "Fever alone does not separate these four illnesses — the day of illness does. India's national guidelines say to defer testing on day 1 and 2 of fever, because a test run too early is negative whether or not you have the infection.",
-    featured: true,
     // Paste the Cloudinary URL between the quotes. The article publishes without
     // it; the cover simply appears once the src is filled in.
     coverImage: {
@@ -133,7 +132,6 @@ export const blogPosts: BlogPost[] = [
     primaryKeyword: "when does child fever need a doctor",
     keyTakeaway:
       "Any baby under 3 months with a temperature of 38.0 °C or higher needs to be seen the same day, whatever else is happening. Above that age it is how the child looks and behaves between temperature spikes, not the number itself, that decides.",
-    featured: true,
     // Paste the Cloudinary URL between the quotes. The article publishes without
     // it; the cover simply appears once the src is filled in.
     coverImage: {
@@ -330,7 +328,6 @@ export const blogPosts: BlogPost[] = [
     primaryKeyword: "how to slow ageing evidence",
     keyTakeaway:
       "Nothing available to any human being has been shown to undo ageing, and no drug, supplement, drip or hormone has been shown in a trial to slow human ageing itself. What the evidence does support is changing how fast decline happens.",
-    featured: true,
     // Paste the Cloudinary URL between the quotes. The article publishes without
     // it; the cover simply appears once the src is filled in.
     coverImage: {
