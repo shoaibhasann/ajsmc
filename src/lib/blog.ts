@@ -414,6 +414,7 @@ export const blogPosts: BlogPost[] = [
     primaryKeyword: "STI test window period",
     keyTakeaway:
       "Every STI test has a window period, the interval between infection and the point at which that particular test can detect it, so a negative result is only meaningful once the window for the specific assay used has closed — which is why the test report, not the number of weeks elapsed, decides what a negative result rules out.",
+    featured: true,
     // Paste the Cloudinary URL between the quotes. The article publishes without
     // it; the cover simply appears once the src is filled in.
     coverImage: {
@@ -423,6 +424,22 @@ export const blogPosts: BlogPost[] = [
     },
   }
 ];
+
+/**
+ * Reading order for the listing: anything flagged `featured` first, then newest first.
+ *
+ * `blogPosts` is maintained in the order articles were written, and the listing used to
+ * render it straight through. That put the four newest pieces below fourteen older ones,
+ * so someone opening /blog met three-week-old content and had to scroll past everything to
+ * reach what had just been published. `featured` was declared on the type and set on three
+ * posts, and nothing read it — it did nothing at all until this sort existed.
+ *
+ * Dates are compared as ISO strings, which sorts correctly for this format.
+ */
+export const listedPosts: BlogPost[] = [...blogPosts].sort((a, b) => {
+  if (a.featured !== b.featured) return a.featured ? -1 : 1;
+  return b.publishedAt.localeCompare(a.publishedAt);
+});
 
 export function getPost(slug: string): BlogPost | undefined {
   return blogPosts.find((p) => p.slug === slug);

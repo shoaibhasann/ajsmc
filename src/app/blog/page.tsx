@@ -7,7 +7,7 @@ import { assets } from "@/lib/assets";
 import { BookCta } from "@/components/ui/BookCta";
 import { JsonLd } from "@/components/JsonLd";
 import { blogListingSchema, breadcrumbSchema } from "@/lib/schema";
-import { blogPosts } from "@/lib/blog";
+import { listedPosts } from "@/lib/blog";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
@@ -25,7 +25,7 @@ export default function BlogIndexPage() {
           { name: "Health Library", path: "/blog" },
         ])}
       />
-      <JsonLd data={blogListingSchema(blogPosts)} />
+      <JsonLd data={blogListingSchema(listedPosts)} />
 
       <PageHero
         crumb="Health Library"
@@ -37,7 +37,7 @@ export default function BlogIndexPage() {
       />
 
       <Container as="section" className="py-12 lg:py-16">
-        {blogPosts.length === 0 ? (
+        {listedPosts.length === 0 ? (
           <p className="mx-auto max-w-[560px] text-center font-body text-[15px] leading-relaxed text-muted">
             Our first health guides are being reviewed by our specialists and will appear here
             shortly. In the meantime, our team is available six days a week — call{" "}
@@ -48,7 +48,7 @@ export default function BlogIndexPage() {
           </p>
         ) : (
           <div className="grid grid-cols-1 gap-5.5 sm:grid-cols-2 lg:grid-cols-3">
-            {blogPosts.map((post) => (
+            {listedPosts.map((post) => (
               <ArticleCard key={post.slug} post={post} />
             ))}
           </div>
