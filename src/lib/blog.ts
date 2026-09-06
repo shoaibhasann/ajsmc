@@ -44,6 +44,19 @@ export type BlogPost = {
   coverImage?: { src: string; alt: string };
   /** Surfaces the post in the featured slot on the listing page. */
   featured?: boolean;
+  /**
+   * Set while an article is live but its named reviewer has not yet read it.
+   *
+   * `reviewedBy` drives a green "Medically reviewed" badge on the page and a `reviewedBy`
+   * physician in the MedicalWebPage schema. Both assert that a named, registered doctor has
+   * checked the medical content, which is the single strongest trust signal on a YMYL page
+   * and the thing Google weighs most heavily on health sites. Asserting it before it has
+   * happened is worse than not asserting it at all.
+   *
+   * While this is true the badge and the schema field are both withheld. Clear the flag the
+   * day the reviewer signs off, and both come back with nothing else to change.
+   */
+  awaitingReview?: boolean;
 };
 
 export type BlogCategory =
@@ -343,6 +356,8 @@ export const blogPosts: BlogPost[] = [
       "Thalassaemia carrier screening is the one pre-marital test whose result changes decisions, and only when both partners are tested. What the panel contains, what Indian guidelines actually say, and why no HIV test can be demanded of you.",
     category: "General Health",
     publishedAt: "2026-09-06",
+    // Dr. Ameer Jahan has not read these yet. Clear this the day he signs off.
+    awaitingReview: true,
     reviewedBy: "a-ameer-jahan",
     readingMinutes: 15,
     primaryKeyword: "pre-marital screening India",
@@ -364,6 +379,8 @@ export const blogPosts: BlogPost[] = [
       "The WHO 2021 semen figures are fifth centiles from men whose partners conceived within a year, not a pass mark. This page gives the full table, how it differs from the 2010 edition, and which further tests are actually indicated.",
     category: "Men's Health",
     publishedAt: "2026-09-06",
+    // Dr. Ameer Jahan has not read these yet. Clear this the day he signs off.
+    awaitingReview: true,
     reviewedBy: "a-ameer-jahan",
     readingMinutes: 19,
     primaryKeyword: "male infertility tests",
@@ -385,6 +402,8 @@ export const blogPosts: BlogPost[] = [
       "Evaluation begins at 12 months of trying, at 6 months from age 35, and immediately where a cause is already known. What the ovulation, tubal, uterine and ovarian reserve tests can and cannot settle, under NICE NG257 (2026).",
     category: "Women's Health",
     publishedAt: "2026-09-06",
+    // Dr. Ameer Jahan has not read these yet. Clear this the day he signs off.
+    awaitingReview: true,
     reviewedBy: "a-ameer-jahan",
     readingMinutes: 19,
     primaryKeyword: "female infertility tests when to start",
@@ -406,6 +425,8 @@ export const blogPosts: BlogPost[] = [
       "Window periods for STI tests, assay by assay: NACO puts the HIV antibody window at three weeks to three months, while CDC gives 10 to 33 days for a nucleic acid test and up to 90 days for antibody and rapid tests. The interval belongs to the test, not the infection.",
     category: "Infectious Diseases",
     publishedAt: "2026-09-06",
+    // Dr. Ameer Jahan has not read these yet. Clear this the day he signs off.
+    awaitingReview: true,
     reviewedBy: "a-ameer-jahan",
     readingMinutes: 21,
     primaryKeyword: "STI test window period",
@@ -442,8 +463,14 @@ export function getPost(slug: string): BlogPost | undefined {
   return blogPosts.find((p) => p.slug === slug);
 }
 
+/**
+ * The reviewer to credit, or undefined while `awaitingReview` is set.
+ *
+ * One gate for both surfaces — the badge in ArticleLayout and `reviewedBy` in the schema
+ * both call this, so a pending article cannot claim a review on one and not the other.
+ */
 export function getReviewer(post: BlogPost): Doctor | undefined {
-  if (!post.reviewedBy) return undefined;
+  if (!post.reviewedBy || post.awaitingReview) return undefined;
   return doctors.find((d) => d.slug === post.reviewedBy);
 }
 
