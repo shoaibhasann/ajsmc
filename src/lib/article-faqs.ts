@@ -35,7 +35,7 @@ export const articleFaqs: Record<string, { q: string; a: string }[]> = {
     { q: "Can children get dengue with a normal platelet count?",
       a: "Yes. A normal count does not exclude dengue at any age, which is why the warning signs are watched rather than the number alone." },
     { q: "Where should I go if warning signs appear at night?",
-      a: "Straight to a hospital with a 24-hour emergency department, or call 108. AJSMC is an outpatient centre in Egmore with no casualty unit and no inpatient beds, and it is closed outside Monday to Saturday, 10am to 9pm." },
+      a: "Straight to a hospital with a 24-hour emergency department, or call 108. AJSMC is an outpatient and day-care centre in Egmore with no casualty unit and no doctor on the premises overnight, and its beds take planned, stable admissions rather than anyone whose condition may worsen. Consultations run Monday to Saturday, 10am to 9pm." },
   ],
   leptospirosis: [
     { q: "Can leptospirosis be caught from drinking water?",

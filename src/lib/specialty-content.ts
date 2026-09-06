@@ -40,7 +40,7 @@ export type SpecialtyContent = {
    * These are kept out of `whenToSee` on purpose. That list renders under "These are the
    * ones worth an appointment" with a green tick beside each item, and a green tick is the
    * wrong signal for cauda equina, acute urinary retention, a detaching retina or bleeding
-   * in pregnancy. AJSMC has no casualty unit, no inpatient beds and no cover after 9pm or
+   * in pregnancy. AJSMC has no casualty unit, no doctor on the premises overnight and no cover after 9pm or
    * on a Sunday, so an appointment is the wrong destination for every one of these and the
    * hours spent waiting for the clinic to open are the hours that cost the sight or the
    * limb or the life. They render separately, in alarm styling, pointing at 108.

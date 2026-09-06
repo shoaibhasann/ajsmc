@@ -61,10 +61,10 @@ export function WhenToSee({
    * Red flags, rendered apart from the list above and styled as an alarm.
    *
    * They used to sit in `items`, which put a green tick and the words "worth an appointment"
-   * next to cauda equina and acute urinary retention. AJSMC has no casualty unit, no
-   * inpatient beds and nothing open after 9pm or on a Sunday, so booking is the one thing a
-   * person with these symptoms must not do — hence the separate block, the alarm colour, and
-   * 108 as the action instead of the appointment form.
+   * next to cauda equina and acute urinary retention. AJSMC has no casualty unit, no doctor
+   * on the premises overnight and nothing open after 9pm or on a Sunday, so booking is the
+   * one thing a person with these symptoms must not do — hence the separate block, the
+   * alarm colour, and 108 as the action instead of the appointment form.
    */
   urgent?: string[];
 }) {
@@ -110,8 +110,9 @@ export function WhenToSee({
                 </ul>
                 <p className="mt-3 font-body text-[14.5px] leading-relaxed text-[#7a1810]/90">
                   Call <strong>108</strong> or go straight to the nearest hospital with a
-                  24-hour emergency department. {siteConfig.name} has no casualty unit and is
-                  open only {siteConfig.hoursShort}.
+                  24-hour emergency department. {siteConfig.name} has no casualty unit and no
+                  doctor on the premises overnight, and consultations run only{" "}
+                  {siteConfig.hoursShort}. To tell us afterwards, ring {siteConfig.mobileAlt}.
                 </p>
               </div>
             </div>

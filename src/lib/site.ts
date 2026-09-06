@@ -39,23 +39,51 @@ export const siteConfig = {
   url: "https://ajsmc.in",
   ogImage: "/opengraph-image.png",
   /**
-   * UNVERIFIED. Neither the founding year nor the years-of-service figure appears
-   * anywhere on ajsmc.in, and they are published here as fact: on the About hero, in
-   * the hero badge, in the animated counter, and as `foundingDate` in the Hospital
-   * schema. Confirm both with the hospital, or drop them. An invented founding date is
-   * the kind of detail that quietly undermines a medical site's credibility, and
-   * Google reads YMYL trust signals closely.
+   * Confirmed by the hospital, September 2026: the centre opened in 2023, having run as
+   * a clinic before that. It replaces a published 2003, which was wrong, and a "23 years"
+   * figure that turned out to be the chairman's own time in medicine rather than the age
+   * of the centre — a conflation worth naming here so it is not reintroduced.
+   *
+   * Corroborated independently: ajsmc.in was registered on 7 February 2024 and the
+   * earliest archived snapshot of the site is April 2024. A centre founded in 2003 would
+   * have left twenty years of web history behind it, and there is none.
+   *
+   * Published on the About hero, in the hero badge, in the animated counter, and as
+   * `foundingDate` in the Hospital schema, so all four move together from this one field.
    *
    * The doctor and department counts are no longer duplicated here. Everything counts
    * `listedDoctors.length` and `specialties.length` directly, so the numbers on the
    * page cannot drift from what the page actually shows.
    */
-  founded: "2003",
-  yearsOfService: 23,
+  founded: "2023",
+  /**
+   * The practice behind the centre, which is a different date from the centre itself and
+   * must never be collapsed into it.
+   *
+   * Dr. A. Ameer Jahan opened his first clinic — Ameeri Speciality Clinic — in Madurai in
+   * 1975, later added one in Delhi and one in Chennai, and all three still run. The Chennai
+   * clinic became AJ Subaitha Medical Centre, a multi speciality centre, in 2023.
+   *
+   * So AJSMC as an institution is `founded`, 2023, and that is what goes in `foundingDate`.
+   * 1975 is his practice, not this building's age, and it is stated in prose where there is
+   * room to say whose it is. It was previously published as a bare "23+ Years" on the home
+   * page, which belonged to neither date and is why this comment exists.
+   */
+  practiceSince: "1975",
   phone: "044 2532 2021",
   phoneHref: "tel:04425322021",
   mobile: "+91 91506 42999",
   mobileHref: "tel:+919150642999",
+  /**
+   * The second mobile the hospital asked to publish, September 2026. Both sit ALONGSIDE 108
+   * in emergency guidance and never in place of it: 108 is the free state ambulance service
+   * and dispatches a vehicle, a mobile does not. AJSMC's own answer to what happens in an
+   * emergency is "immediate referral to a higher centre", so guidance that sent a collapsing
+   * patient to ring this number instead of calling an ambulance would point them at the one
+   * building everybody agrees they should not be in.
+   */
+  mobileAlt: "+91 91506 15999",
+  mobileAltHref: "tel:+919150615999",
   whatsapp: "+91 91506 42999",
   whatsappHref:
     "https://wa.me/919150642999?text=Hi%20AJSMC%2C%20I%27d%20like%20to%20book%20an%20appointment.",
@@ -80,6 +108,20 @@ export const siteConfig = {
    * going to a hospital with a casualty department can die of the difference. Every
    * public string about hours comes from this field. Keep it as service language.
    */
+  /**
+   * Confirmed by the hospital, September 2026, replacing "no inpatient beds" everywhere.
+   *
+   * There are ten beds. A nurse is on site overnight and no doctor is. Monitoring is
+   * available and it is used for planned, stable admissions — the hospital's own words are
+   * "we are not admitting any patient who is likely to deteriorate", and anyone who does
+   * deteriorate is referred straight out to a higher centre. Resuscitation equipment is on
+   * site and a cardiologist is on call. There is no dialysis yet.
+   *
+   * That is a monitored ward for stable patients. It is NOT intensive care and must never be
+   * called that: critical care means resident medical cover round the clock, and there is
+   * none. It is not a casualty or emergency department either, which the hospital confirms.
+   */
+  bedsNote: "ten beds for planned, stable admissions, with a nurse on site overnight and no doctor on the premises",
   roundTheClock: "24-Hour Helpline",
   roundTheClockNote: "24/7 medical assistance by phone",
   // Official Google listing share link — opens the hospital's place page/directions.
@@ -450,6 +492,13 @@ export const doctors: Doctor[] = [
     role: "Consultant · Nephrology",
   },
   {
+    slug: "abishek",
+    name: "Dr. Abishek",
+    specialty: "General Surgery",
+    role: "Consultant",
+    degree: "MBBS, MD (General Surgery)",
+  },
+  {
     slug: "chynna-christina",
     name: "Ms. Chynna Christina",
     specialty: "Psychology",
@@ -553,12 +602,14 @@ export type SignatureService = {
 export const signatureServices: SignatureService[] = [
   {
     /**
-     * Named for the test, not the symptom, and deliberately so. There is no cardiologist
-     * among the consultants and no casualty unit, so this card must not read as an
-     * invitation to anyone with chest pain — the FAQ on this same site correctly tells
-     * that patient to call 108. What AJSMC does run is an outpatient ECG and blood
-     * pressure check under General Medicine, which is what this now describes. Do not
-     * put "chest pain" back into this card without a cardiologist on the roster.
+     * Named for the test, not the symptom, and deliberately so. No cardiologist is listed
+     * among the consultants — the hospital has one on call, which is a different thing —
+     * and there is no casualty unit, so this card must not read as an invitation to anyone
+     * with chest pain. The FAQ on this same site correctly tells that patient to call 108,
+     * and an on-call cardiologist does not change that: the patient still needs a hospital
+     * that can admit and intervene. What AJSMC does run is an outpatient ECG and blood
+     * pressure check under General Medicine, which is what this now describes. Do not put
+     * "chest pain" back into this card.
      */
     name: "Heart Checks",
     description: "ECG, blood pressure and lipid profile, read by a physician",
