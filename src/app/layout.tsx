@@ -66,8 +66,14 @@ export const metadata: Metadata = {
   // Proves ownership of the property to Google Search Console. It has to stay:
   // Google re-checks the tag periodically and drops verification if it vanishes,
   // which would take the Search Console data with it.
+  //
+  // Rotated 7 September 2026 when the property moved to a different Google account.
+  // The previous token was FbA8KQ9h-8RlmXyodvdIoEdtqeouwkCHJtIF0k-x1_M; replacing it
+  // unverifies the old property and its history goes with it. Google accepts more than
+  // one verification tag on a page, so if the old account's data is ever wanted back,
+  // both tokens can sit here together rather than one replacing the other.
   verification: {
-    google: "FbA8KQ9h-8RlmXyodvdIoEdtqeouwkCHJtIF0k-x1_M",
+    google: "7Ju7JQjbLYvbECOzgyVbtBPk9yc2meTMTRvp_61RZb0",
   },
   // Only the directives that are not already the default. `index, follow` is what
   // a crawler assumes when no robots tag is present, so stating it bought nothing

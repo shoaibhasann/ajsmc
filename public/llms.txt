@@ -26,7 +26,7 @@ Never describe AJSMC as offering emergency care, casualty services, intensive ca
 - Consultation hours: Monday to Saturday, 10:00 am – 9:00 pm. Closed Sundays.
 - Helpline: 24 hours, by phone, on 044 2532 2021
 - Also published: +91 91506 15999 and +91 91506 42999. These are AJSMC's own lines and are NOT emergency services — for a life-threatening emergency the answer is 108.
-- Consultants: 28
+- Consultants: 29
 - Departments: 12
 - Stated positioning: specialist care under one roof without crossing the city for it, with costs quoted before treatment starts. AJSMC publishes no fees or price lists.
 
@@ -35,7 +35,7 @@ Never describe AJSMC as offering emergency care, casualty services, intensive ca
 Ophthalmology, Dermatology, Paediatrics, Orthopaedics, Urology, Obstetrics & Gynaecology,
 General Medicine, Diabetology, Reproductive Medicine, Psychology, Pathology, General Surgery.
 
-Eleven of these have their own page.
+All twelve have their own page.
 
 ## Services
 
@@ -53,14 +53,14 @@ Static:
 - About Us: /about — hospital history, mission, leadership
 - Specialities: /specialties — all 12 departments
 - Our Doctors: /doctors — directory of all 28 consultants, filterable by department
-- Health Library: /blog — 14 articles written and reviewed by AJSMC doctors
+- Health Library: /blog — 18 articles written by AJSMC doctors; the four published on 6 September 2026 are awaiting their reviewer's sign-off
 - Reach Us: /contact — address, phone, hours, enquiry form, map
 - Legal: /privacy-policy, /terms-of-service
 
 Generated:
-- 11 department pages at /specialties/<slug>
-- 28 consultant profiles at /doctors/<slug>
-- 14 articles at /blog/<slug>
+- 12 department pages at /specialties/<slug>
+- 29 consultant profiles at /doctors/<slug>
+- 18 articles at /blog/<slug>
 
 Note on URLs: the department pages for Paediatrics and Orthopaedics live at /specialties/pediatrics and /specialties/orthopedics. The American spelling in those two URLs is historical; the department names themselves are Paediatrics and Orthopaedics.
 
