@@ -12,8 +12,14 @@ import { doctors, siteConfig, specialtySlug, specialtiesWithPages } from "@/lib/
  * discounts it site-wide once it is not, so a build timestamp does not merely fail
  * to help these pages, it devalues the honest dates on the articles too. Bump this
  * when the copy actually changes.
+ *
+ * 6 September 2026: the founding year and Our Story on /about and the home page, the
+ * registration badge on all 29 consultant profiles, the red-flag wording on the department
+ * pages, and Dr. Abishek joining the roster. It had been left at 21 August through all of
+ * that, so 47 URLs were telling crawlers nothing had moved since then. Leaving it stale is
+ * the same failure as a build timestamp, pointing the other way.
  */
-const CONTENT_REVISED = new Date("2026-08-21T00:00:00.000Z");
+const CONTENT_REVISED = new Date("2026-09-06T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["", "/about", "/specialties", "/doctors", "/blog", "/contact"];
