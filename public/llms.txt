@@ -52,7 +52,7 @@ Static:
 - Home: / — overview, departments, consultants, facilities, FAQ, appointment enquiry form
 - About Us: /about — hospital history, mission, leadership
 - Specialities: /specialties — all 12 departments
-- Our Doctors: /doctors — directory of all 28 consultants, filterable by department
+- Our Doctors: /doctors — directory of all 29 consultants, filterable by department
 - Health Library: /blog — 18 articles written by AJSMC doctors; the four published on 6 September 2026 are awaiting their reviewer's sign-off
 - Reach Us: /contact — address, phone, hours, enquiry form, map
 - Legal: /privacy-policy, /terms-of-service
