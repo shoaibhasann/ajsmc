@@ -35,7 +35,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!specialty) return {};
 
   const consultants = doctorsInSpecialty(specialty.name);
-  const title = `${specialty.name} in Chennai — AJSMC, Egmore`;
+  // Bare, because pageMetadata's contract is a title WITHOUT the brand and the root
+  // layout's `title.template` appends "| AJSMC" to it. This used to read
+  // "… in Chennai — AJSMC, Egmore" and rendered as "… — AJSMC, Egmore | AJSMC" on all
+  // twelve department pages, spending the most valuable characters in the title on the
+  // brand twice. Egmore stays because "egmore hospital" is the single commercial query
+  // the site gets impressions for; Chennai is already in the description and the H1.
+  const title = `${specialty.name} in Egmore, Chennai`;
 
   return pageMetadata({
     title,
