@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { HeroSurface } from "@/components/ui/HeroSurface";
 import { SectionBadge } from "@/components/ui/SectionBadge";
 import { ArticleCta } from "@/components/blog/ArticleCta";
+import { ArticleMidCta } from "@/components/blog/ArticleMidCta";
 import { JsonLd } from "@/components/JsonLd";
 import { assets } from "@/lib/assets";
 import { ArticleToc } from "@/components/blog/ArticleToc";
@@ -13,6 +14,7 @@ import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { articleFaqs } from "@/lib/article-faqs";
 import { articleFaqSchema, articleSchema } from "@/lib/schema";
 import { formatPostDate, getRelatedPosts, getReviewer, type BlogPost } from "@/lib/blog";
+import { splitForCta } from "@/lib/article-html";
 import type { ArticleFaq, TocEntry } from "@/lib/article-html";
 import { siteConfig } from "@/lib/site";
 
@@ -181,7 +183,23 @@ export function ArticleLayout({
               <ArticleToc toc={toc} />
             </div>
 
-            <article className="aj-prose" dangerouslySetInnerHTML={{ __html: html }} />
+            {/* Split so a booking prompt can sit mid-read. splitForCta returns an empty
+                second half for short pieces, and this renders exactly as before for those. */}
+            {(() => {
+              const [first, rest] = splitForCta(html);
+              if (!rest) {
+                return <article className="aj-prose" dangerouslySetInnerHTML={{ __html: html }} />;
+              }
+              return (
+                <>
+                  <article className="aj-prose" dangerouslySetInnerHTML={{ __html: first }} />
+                  <div className="mx-auto max-w-[780px]">
+                    <ArticleMidCta />
+                  </div>
+                  <article className="aj-prose" dangerouslySetInnerHTML={{ __html: rest }} />
+                </>
+              );
+            })()}
 
             {sources && sources.length > 0 && (
               <section className="mt-12 rounded-[20px] border border-navy/[0.08] bg-surface p-5 sm:p-6">

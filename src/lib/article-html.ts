@@ -131,6 +131,30 @@ export function loadArticle(slug: string): { html: string; toc: TocEntry[]; faqs
 }
 
 /** Slugs of every published article file, for generateStaticParams and sanity checks. */
+/**
+ * Splits an article in two at a heading, so a call to action can sit in the middle.
+ *
+ * These pieces run long — the vaccination chart is 25,000px on a phone, about thirty-one
+ * screens — and until now the only booking control inside one was at the very bottom, at
+ * 21,209px. A reader who decided halfway through that they wanted an appointment had
+ * nothing to act on without scrolling to the end.
+ *
+ * The cut lands on the <h2> nearest the midpoint rather than at the midpoint itself, so it
+ * never interrupts a section, a table or a sentence. Short pieces are left whole: under
+ * roughly twelve thousand characters the foot of the page is not far enough away to be a
+ * problem, and a break would just be noise.
+ */
+export function splitForCta(html: string): [string, string] {
+  if (html.length < 12000) return [html, ""];
+  const mid = Math.floor(html.length / 2);
+  const heads = [...html.matchAll(/<h2\b/g)].map((m) => m.index ?? 0).filter((i) => i > 0);
+  if (heads.length < 3) return [html, ""];
+  const cut = heads.reduce((best, i) => (Math.abs(i - mid) < Math.abs(best - mid) ? i : best), heads[0]);
+  // Refuse a cut in the first or last fifth: a break that early or late is worse than none.
+  if (cut < html.length * 0.2 || cut > html.length * 0.8) return [html, ""];
+  return [html.slice(0, cut), html.slice(cut)];
+}
+
 export function articleSlugs(): string[] {
   const dir = path.join(process.cwd(), "content", "articles");
   return fs
