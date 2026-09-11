@@ -24,9 +24,13 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    // "Chennai" carries the volume; "Egmore" is the qualifier that wins the local
-    // pack and tells a patient whether we are reachable. City first, locality second.
-    default: "Multi Speciality Hospital in Chennai | AJSMC, Egmore",
+    // Egmore moved ahead of the brand on 11 September 2026, against the reasoning that
+    // used to sit here — that Chennai carries the volume, so city first and locality
+    // second. Search Console disagreed. "egmore hospital" is the third-largest query
+    // the site gets, 241 impressions in 24 days at position 8.3, and it has never once
+    // been clicked. Egmore was last in this title, after the brand, where a scanning
+    // eye does not reach. It now reads as the phrase people actually type.
+    default: "Multi Speciality Hospital in Egmore, Chennai | AJSMC",
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.metaDescription,
@@ -55,7 +59,7 @@ export const metadata: Metadata = {
     // No `url` here: it would be inherited verbatim by every page, stamping the
     // home URL into og:url site-wide. Canonicals are set per page instead.
     siteName: siteConfig.fullName,
-    title: `${siteConfig.fullName}: Multi Speciality Hospital in Chennai`,
+    title: `${siteConfig.fullName}: Multi Speciality Hospital in Egmore, Chennai`,
     description: siteConfig.description,
   },
   twitter: {
