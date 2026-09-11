@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, Clock, MapPin, MessageCircle, Phone } from "lucide-react";
+import { WhatsAppLink } from "@/components/WhatsAppLink";
 import { siteConfig } from "@/lib/site";
 
 /**
@@ -54,15 +55,13 @@ export function ArticleCta({ department }: { department?: string }) {
             </span>
           </Link>
 
-          <a
-            href={siteConfig.whatsappHref}
-            target="_blank"
-            rel="noopener noreferrer"
+          <WhatsAppLink
+            from="article-foot"
             className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-5 py-3 font-body text-[14.5px] font-bold text-white transition-colors hover:bg-white/20"
           >
             <MessageCircle className="h-[17px] w-[17px] text-green-bright" strokeWidth={2.2} />
             WhatsApp
-          </a>
+          </WhatsAppLink>
 
           <a
             href={siteConfig.phoneHref}

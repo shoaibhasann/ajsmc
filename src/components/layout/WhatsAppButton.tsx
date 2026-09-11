@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { track } from "@vercel/analytics";
 import { siteConfig } from "@/lib/site";
 
 export function WhatsAppButton() {
@@ -10,6 +11,15 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with AJSMC on WhatsApp"
+      onClick={() => {
+        // The only always-visible control on a long article, so this is the tap most
+        // likely to be a real enquiry — and the one that never reaches the inbox.
+        try {
+          track("whatsapp_click", { from: "float" });
+        } catch {
+          // Counting is not worth breaking a link over.
+        }
+      }}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 0.6, type: "spring", stiffness: 200, damping: 16 }}

@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { JsonLd } from "@/components/JsonLd";
 import { organizationSchema } from "@/lib/schema";
+import { Analytics } from "@vercel/analytics/react";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -113,6 +114,10 @@ export default function RootLayout({
           <Footer />
           <WhatsAppButton />
         </MotionProvider>
+        {/* Page views, plus the custom `whatsapp_click` event fired by WhatsAppLink.
+            Needs Web Analytics switched on for the project in the Vercel dashboard —
+            the script mounts either way, but events are dropped until it is. */}
+        <Analytics />
       </body>
     </html>
   );

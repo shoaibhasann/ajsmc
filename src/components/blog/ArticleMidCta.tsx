@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, MessageCircle } from "lucide-react";
+import { WhatsAppLink } from "@/components/WhatsAppLink";
 import { siteConfig } from "@/lib/site";
 
 /**
@@ -36,15 +37,13 @@ export function ArticleMidCta() {
           <span>Book</span>
           <ArrowUpRight className="h-[15px] w-[15px]" strokeWidth={2.7} />
         </Link>
-        <a
-          href={siteConfig.whatsappHref}
-          target="_blank"
-          rel="noopener noreferrer"
+        <WhatsAppLink
+          from="article-mid"
           aria-label="Message AJSMC on WhatsApp"
           className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-navy/15 text-navy transition-colors hover:bg-white"
         >
           <MessageCircle className="h-[18px] w-[18px]" strokeWidth={2.2} />
-        </a>
+        </WhatsAppLink>
       </div>
     </aside>
   );

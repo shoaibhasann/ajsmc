@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Check, MessageCircle, Phone, X } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { siteConfig } from "@/lib/site";
 import type { SentEnquiry } from "@/lib/useEnquiryForm";
 
@@ -181,6 +182,13 @@ export function EnquirySent({ sent, onClose }: { sent: SentEnquiry | null; onClo
             href={siteConfig.whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => {
+              try {
+                track("whatsapp_click", { from: "sent-dialog" });
+              } catch {
+                // Counting is not worth breaking a link over.
+              }
+            }}
             className="inline-flex items-center gap-2 rounded-full border border-navy/15 px-5 py-2.5 font-body text-[14.5px] font-bold text-navy transition-colors hover:bg-surface"
           >
             <MessageCircle className="h-4 w-4" strokeWidth={2.4} />
