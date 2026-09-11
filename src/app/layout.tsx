@@ -6,7 +6,6 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { JsonLd } from "@/components/JsonLd";
 import { organizationSchema } from "@/lib/schema";
-import { Analytics } from "@vercel/analytics/react";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -114,10 +113,17 @@ export default function RootLayout({
           <Footer />
           <WhatsAppButton />
         </MotionProvider>
-        {/* Page views, plus the custom `whatsapp_click` event fired by WhatsAppLink.
-            Needs Web Analytics switched on for the project in the Vercel dashboard —
-            the script mounts either way, but events are dropped until it is. */}
-        <Analytics />
+        {/* Vercel's <Analytics /> used to mount here. It is out because Web Analytics is
+            not switched on for this project, and the component injects
+            /_vercel/insights/script.js on every page load regardless — a request per
+            visit, on a site where four visitors in five are on a phone, in exchange for
+            events that are accepted with a 200 and then discarded.
+
+            The instrumentation itself is untouched. Every WhatsApp link still calls
+            `track("whatsapp_click", { from })`, and `track` is a no-op while the script
+            is absent. To turn it all back on: enable Web Analytics in the dashboard, put
+            the import and <Analytics /> back, and the counts start the same day. Nothing
+            else needs finding or rewriting. */}
       </body>
     </html>
   );
