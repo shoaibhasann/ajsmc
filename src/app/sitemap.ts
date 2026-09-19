@@ -18,8 +18,12 @@ import { doctors, siteConfig, specialtySlug, specialtiesWithPages } from "@/lib/
  * pages, and Dr. Abishek joining the roster. It had been left at 21 August through all of
  * that, so 47 URLs were telling crawlers nothing had moved since then. Leaving it stale is
  * the same failure as a build timestamp, pointing the other way.
+ *
+ * 19 September 2026: the General Surgery department page, which had been a shell since the
+ * page started building — its content entry was never written when the department got its
+ * first consultant, so it rendered no summary, no scope, no red-flag block and no FAQ.
  */
-const CONTENT_REVISED = new Date("2026-09-06T00:00:00.000Z");
+const CONTENT_REVISED = new Date("2026-09-19T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["", "/about", "/specialties", "/doctors", "/blog", "/contact"];

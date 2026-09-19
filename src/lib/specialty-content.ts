@@ -758,4 +758,76 @@ export const specialtyContent: Record<string, SpecialtyContent> = {
       },
     ],
   },
+  "General Surgery": {
+    summary:
+      "General Surgery at AJ Subaitha Medical Centre in Egmore, Chennai covers surgical consultation and treatment for common conditions such as hernia, appendicitis, gallstones, piles and lumps. Many of these are done as day-care procedures, so you come in and go home the same day. AJSMC does not run a casualty or trauma unit, so a surgical emergency belongs at a hospital with a 24-hour emergency department. Outpatient consultations run Monday to Saturday, 10am to 9pm.",
+    covers: [
+      {
+        title: "Hernia",
+        body: "A hernia is a weak point in the abdominal wall that lets tissue push through, usually seen as a bulge in the groin or near the navel that appears on standing, coughing or lifting and settles when you lie down. In an adult it does not close on its own and a belt does not repair it, so the question is when to repair rather than whether. Most repairs are planned and unhurried. What changes that is a bulge that becomes hard or tender or will not push back in, because that means the tissue inside it is trapped, and that is an emergency rather than an appointment.",
+      },
+      {
+        title: "Appendicitis",
+        body: "The appendix becomes inflamed and the pain typically starts around the navel before settling low on the right side, often with nausea, loss of appetite and fever. Some people have grumbling bouts over weeks that are worth seeing a surgeon about in clinic. An attack that is severe, steadily worsening or leaves the abdomen too tender to touch is a different matter — that needs a hospital with a 24-hour emergency department and an emergency theatre, which AJSMC does not have. Call 108 or go straight to the nearest hospital with one.",
+      },
+      {
+        title: "Gallstones",
+        body: "Gallstones form in the gall bladder and often sit there causing nothing for years. When they do cause trouble it is usually pain under the right ribs or at the top of the abdomen, coming on after a heavy or oily meal, sometimes with nausea. Which of the two you have is settled by what the stones are actually doing to you, with an ultrasound to confirm they are there and to show their size and position. Stones causing no symptoms are not automatically removed; stones causing repeated attacks usually are. Pain with fever, or with yellowing of the eyes or skin, is the version that does not wait for a clinic.",
+      },
+      {
+        title: "Piles and back passage problems",
+        body: "Haemorrhoids are swollen veins at the back passage, and they show up as bright red bleeding when passing stool, itching, discomfort or a lump. Fissures and other causes produce much the same complaints, so what you have is established by examination rather than by the symptom. Most cases are managed without an operation. Bleeding is worth being examined properly even when piles seem the obvious answer, because a few other conditions bleed the same way and are far better found early.",
+      },
+      {
+        title: "Lumps and swellings",
+        body: "Lumps under the skin — in the neck, the armpit, the groin or anywhere else — are common and most are harmless. They are still examined rather than watched indefinitely, particularly a lump that is new, growing, hard, fixed in place or painless. Examination, and where needed a scan or a biopsy, is what separates the ordinary ones from the ones that matter — the two cannot be told apart by feel alone.",
+      },
+      {
+        title: "Day-care surgery",
+        body: "Several of the planned procedures here are done as day care: you come in that morning, have the procedure, recover here and go home the same evening rather than staying overnight. Your surgeon will tell you beforehand whether your case suits day care, what preparation is needed, who should come with you, and what the days afterwards will involve. Some operations need facilities AJSMC does not have, and in that case you will be told so and referred rather than fitted in.",
+      },
+    ],
+    whenToSee: [
+      "A bulge in the groin or near the navel that appears when you stand, cough or lift",
+      "Repeated bouts of pain low on the right side of the abdomen that come and settle",
+      "Pain under the right ribs after heavy or oily meals, with nausea",
+      "Bleeding when passing stool, or pain, itching or a lump at the back passage",
+      "A lump anywhere under the skin that is new, growing, hard or fixed in place",
+      "A wound, ulcer or sore that is taking far too long to heal",
+      "Gallstones or a hernia found on a scan done for something else",
+    ],
+    urgent: [
+      "A hernia bulge that has become hard or tender, will not push back in, or comes with vomiting",
+      "Severe abdominal pain, or pain getting steadily worse — particularly with fever, or an abdomen too tender to touch",
+      "Yellowing of the eyes or skin, especially with abdominal pain, fever or dark urine",
+      "Vomiting blood, passing black tarry stools, or heavy bleeding from the back passage",
+      "A wound with redness spreading out from it, with fever or feeling unwell",
+    ],
+    faqs: [
+      {
+        q: "What does day-care surgery mean at AJSMC?",
+        a: `It means the procedure and your recovery happen on the same day, so you go home that evening instead of staying overnight. Several general surgical procedures at AJSMC in Egmore, Chennai are done this way. Whether yours suits day care is decided after examination, not in advance — your surgeon will tell you what preparation is needed and who should come with you. Call ${PHONE} to arrange a consultation.`,
+      },
+      {
+        q: "Can I stay overnight after an operation?",
+        a: "AJSMC has ten beds, and they are for planned, stable admissions only. A nurse is on site overnight; no doctor is on the premises overnight. That shapes who can be admitted here — anyone likely to deteriorate is not admitted, and anyone who does deteriorate is referred straight out to a higher centre. If your case needs a night with a doctor in the building, your surgeon will say so and arrange for it to be done elsewhere rather than keep it here.",
+      },
+      {
+        q: "What happens at a first surgical consultation?",
+        a: `The surgeon takes your history, examines you, and works out what the problem actually is — a bulge, a lump or abdominal pain each have several possible causes that feel much the same. Tests may follow; AJSMC has an in-house laboratory, so blood tests ordered on the day are processed in the building. Surgery is discussed only once there is a diagnosis, and it is a discussion rather than a decision handed to you. Outpatient consultations run ${HOURS}.`,
+      },
+      {
+        q: "What if my problem turns out to be an emergency?",
+        a: `Then AJSMC is the wrong place and you should not wait for an appointment. There is no casualty unit, no trauma unit and no critical care here. For severe or worsening abdominal pain, a hernia that has become hard or tender and will not go back, vomiting blood or passing black stools, call 108 or go straight to the nearest hospital with a 24-hour emergency department. The helpline on ${PHONE} is answered at any hour if you need to ask, but do not let the call delay you.`,
+      },
+      {
+        q: "Who will I see in General Surgery?",
+        a: `A consultant surgeon, within the outpatient hours, ${HOURS}. The departments sit in one building, so an opinion from general medicine or diabetology, and any laboratory test ordered on the day, can usually be arranged in the same visit. Call ${PHONE} to check clinic timings before you come, because each consultant keeps their own.`,
+      },
+      {
+        q: "What should I bring to a surgical appointment?",
+        a: "Bring any previous scans, ultrasound or endoscopy reports — the images themselves where you have them, not only the printed report — along with any record of an earlier operation, and the actual strips of any medicines you take. If you are on something that thins the blood, say so early rather than late, because it changes how any procedure is planned.",
+      },
+    ],
+  },
 };
