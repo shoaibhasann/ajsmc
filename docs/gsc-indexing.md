@@ -105,6 +105,20 @@ The registration badge came off every one of these. Lowest priority: the sitemap
 - [ ] https://ajsmc.in/doctors/sivaramakrishnan-s
 - [ ] https://ajsmc.in/doctors/syed-ismail
 
+## 19 September 2026 — General Surgery
+
+The department page had been a shell since it started building: no content entry existed, so
+it rendered no summary, no scope, no red-flag block and no FAQ, and it was the only one of the
+twelve without FAQPage schema. Now written. CONTENT_REVISED moved to 19 September, which puts
+all 47 static, consultant and department URLs back inside the IndexNow window — they were
+submitted the same day.
+
+Google needs the department page resubmitted by hand; the rest will follow the sitemap.
+
+- [ ] https://ajsmc.in/specialties/general-surgery
+- [ ] https://ajsmc.in/specialties
+- [ ] Resubmit https://ajsmc.in/sitemap.xml
+
 ---
 
 ## Checks worth running afterwards
