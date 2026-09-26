@@ -78,6 +78,16 @@ export const metadata: Metadata = {
   // both tokens can sit here together rather than one replacing the other.
   verification: {
     google: "7Ju7JQjbLYvbECOzgyVbtBPk9yc2meTMTRvp_61RZb0",
+    // Bing Webmaster Tools, added 26 September 2026. It goes under `other` because
+    // Next names only google, yandex and yahoo directly, and Bing's tag is msvalidate.01.
+    //
+    // Worth having even though IndexNow already pushes every changed URL to Bing: the
+    // submissions are accepted without it, but the reporting — what Bing has actually
+    // indexed, and which of those submissions landed — only opens up once the site is
+    // verified in Webmaster Tools.
+    other: {
+      "msvalidate.01": "26DA10D535ECF46D53F368F820AA4CD8",
+    },
   },
   // Only the directives that are not already the default. `index, follow` is what
   // a crawler assumes when no robots tag is present, so stating it bought nothing
