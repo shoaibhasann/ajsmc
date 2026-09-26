@@ -9,14 +9,16 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-// Every claim on this page was checked against what the site actually does before
-// launch: no analytics package, no cookies set by the app, no account system, no
-// advertising trackers. If any of those change, this page must change with them.
+// Every claim on this page is checked against what the site actually does. As of
+// 26 September 2026: Google Analytics 4 is loaded in production and sets its own
+// cookies; there is no account system and no advertising tracker. The events it records
+// are listed in lib/analytics and components/AnalyticsEvents, and no form content is
+// sent. If any of that changes, this page must change with it — in the same commit.
 export default function PrivacyPolicyPage() {
   return (
     <Container as="section" className="max-w-[820px] pb-16 pt-[124px]">
       <h1 className="font-heading text-4xl font-extrabold tracking-tight text-navy">Privacy Policy</h1>
-      <p className="mt-3 font-body text-sm text-muted">Last updated: 21 August 2026</p>
+      <p className="mt-3 font-body text-sm text-muted">Last updated: 26 September 2026</p>
 
       <div className="prose-aj mt-8 flex flex-col gap-6 font-body text-[15px] leading-relaxed text-body">
         <p>
@@ -35,10 +37,41 @@ export default function PrivacyPolicyPage() {
             us by phone or WhatsApp instead, we receive the details you choose to share there.
           </p>
           <p className="mt-3">
-            This site has no user accounts and sets no advertising or analytics cookies. Like
-            almost every website, our hosting infrastructure keeps standard technical logs
-            (such as IP address and pages requested) for security and operations; these are
-            retained briefly and are not used to profile you.
+            This site has no user accounts and no advertising trackers. Like almost every
+            website, our hosting infrastructure keeps standard technical logs (such as IP
+            address and pages requested) for security and operations; these are retained
+            briefly and are not used to profile you.
+          </p>
+        </section>
+        <section>
+          <h2 className="mb-2 font-heading text-xl font-bold text-navy">Analytics</h2>
+          <p>
+            We use Google Analytics to understand how many people use this website and
+            whether it helps them reach us. It records which pages are visited, the kind of
+            device and approximate location (city or region, not an address), and whether a
+            visitor used one of the ways to contact us — the phone number, WhatsApp, the map
+            or directions link, or the enquiry form. For an enquiry form, it records that the
+            form was sent and which department was chosen.
+          </p>
+          <p className="mt-3">
+            It does not receive your name, your phone number, your email address or anything
+            you write in the message box. Those go only to our front desk, as described above.
+          </p>
+          <p className="mt-3">
+            Google Analytics sets cookies in your browser (named <code>_ga</code> and{" "}
+            <code>_ga_</code> followed by an identifier) so that it can tell a returning
+            visitor from a new one. The data is kept for the period set in our Analytics
+            account — by default, two months for event-level data. You can block these cookies
+            in your browser settings, or install Google&rsquo;s{" "}
+            <a
+              href="https://tools.google.com/dlpage/gaoptout"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-navy"
+            >
+              Analytics opt-out browser add-on
+            </a>
+            ; the website works the same either way.
           </p>
         </section>
         <section>
@@ -54,8 +87,9 @@ export default function PrivacyPolicyPage() {
           <p>
             The website runs on reputable infrastructure providers (web hosting and email
             delivery), which process data only as needed to operate the site and deliver your
-            enquiry to our front desk. Links on this site that open WhatsApp or Google Maps
-            take you to those services, which have their own privacy policies.
+            enquiry to our front desk. Google processes the analytics data described above on
+            our behalf. Links on this site that open WhatsApp or Google Maps take you to those
+            services, which have their own privacy policies.
           </p>
         </section>
         <section>
@@ -90,8 +124,8 @@ export default function PrivacyPolicyPage() {
           <h2 className="mb-2 font-heading text-xl font-bold text-navy">Changes to this policy</h2>
           <p>
             If we change how this website handles personal information — for example, by adding
-            analytics or online payments — this page will be updated first, with a new date at
-            the top.
+            online payments or a new analytics tool — this page will be updated first, with a
+            new date at the top.
           </p>
         </section>
         <section>

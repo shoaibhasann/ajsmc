@@ -6,6 +6,8 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { JsonLd } from "@/components/JsonLd";
 import { organizationSchema } from "@/lib/schema";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { AnalyticsEvents } from "@/components/AnalyticsEvents";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -123,18 +125,27 @@ export default function RootLayout({
           <Footer />
           <WhatsAppButton />
         </MotionProvider>
+        {/* Counts phone, WhatsApp and map taps site-wide — see AnalyticsEvents. */}
+        {process.env.NODE_ENV === "production" && <AnalyticsEvents />}
         {/* Vercel's <Analytics /> used to mount here. It is out because Web Analytics is
             not switched on for this project, and the component injects
             /_vercel/insights/script.js on every page load regardless — a request per
             visit, on a site where four visitors in five are on a phone, in exchange for
             events that are accepted with a 200 and then discarded.
 
-            The instrumentation itself is untouched. Every WhatsApp link still calls
-            `track("whatsapp_click", { from })`, and `track` is a no-op while the script
-            is absent. To turn it all back on: enable Web Analytics in the dashboard, put
-            the import and <Analytics /> back, and the counts start the same day. Nothing
-            else needs finding or rewriting. */}
+            Every conversion event goes through trackEvent in lib/analytics, which calls
+            Vercel's `track` alongside Google Analytics; `track` is a no-op while this
+            script is absent. To add Vercel back: enable Web Analytics in the dashboard and
+            put the import and <Analytics /> back. Nothing else needs finding. */}
       </body>
+      {/* Google Analytics 4, added 26 September 2026 so the hospital can see whether the
+          site produces enquiries at all. Production only: `next dev` would otherwise
+          fill the property with local test traffic.
+
+          Adding it made one sentence on /privacy-policy untrue — "sets no advertising or
+          analytics cookies" — so that page changed in the same commit. Anything added
+          here later owes that page the same. */}
+      {process.env.NODE_ENV === "production" && <GoogleAnalytics gaId="G-ZB5QKZRW9W" />}
     </html>
   );
 }

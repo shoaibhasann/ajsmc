@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { HONEYPOT_FIELD } from "@/lib/enquiry";
+import { trackEvent } from "@/lib/analytics";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -56,6 +57,17 @@ export function useEnquiryForm(source: "home" | "contact") {
       const body = await res.json().catch(() => null);
 
       if (res.ok && body?.ok) {
+        // Counted only here, on a confirmed success — never on the attempt, so a failed
+        // send or a validation error is not reported as a lead. The honeypot also answers
+        // ok for a bot, which means a trapped bot is counted too; that is rare enough to
+        // live with, and cheaper than teaching the client which submissions were fake.
+        //
+        // Department and which form, nothing else. Not the name, the phone number or the
+        // message: see the note in lib/analytics.
+        trackEvent("enquiry_form_submit", {
+          form_location: source,
+          department: String(data.get("department") ?? "").trim() || "(none)",
+        });
         setSent({
           name: String(data.get("name") ?? "").trim(),
           department: String(data.get("department") ?? "").trim(),

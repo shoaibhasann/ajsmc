@@ -227,7 +227,10 @@ export function ArticleLayout({
              * runs 24 hours", which is the helpline, not an emergency service, and on a page
              * a frightened person may be reading at 2am that difference is the whole point.
              */}
-            <p className="mt-8 rounded-[16px] border aj-card p-4 font-body text-[12.5px] leading-relaxed text-muted">
+            <p
+              data-cta="article-disclaimer"
+              className="mt-8 rounded-[16px] border aj-card p-4 font-body text-[12.5px] leading-relaxed text-muted"
+            >
               This article is for general information and is not a substitute for a
               consultation. AJSMC does not run a casualty or trauma unit — in a
               life-threatening emergency call 108 or go directly to the nearest hospital with a

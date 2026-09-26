@@ -17,7 +17,12 @@ import { siteConfig } from "@/lib/site";
  */
 export function ArticleCta({ department }: { department?: string }) {
   return (
-    <div className="relative overflow-hidden rounded-[26px] bg-navy p-7 shadow-[0_30px_60px_-34px_rgba(12,46,110,0.75)] sm:p-9">
+    // data-cta labels every contact link inside this block for AnalyticsEvents — the
+    // phone and directions links as well as WhatsApp, which also carries its own.
+    <div
+      data-cta="article-foot"
+      className="relative overflow-hidden rounded-[26px] bg-navy p-7 shadow-[0_30px_60px_-34px_rgba(12,46,110,0.75)] sm:p-9"
+    >
       {/* Same brand ramp the navy service cards use, plus a soft green bloom in the corner
           so the block reads as brand rather than as a plain dark box. */}
       <span
