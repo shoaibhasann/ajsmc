@@ -64,7 +64,15 @@ export function useEnquiryForm(source: "home" | "contact") {
         //
         // Department and which form, nothing else. Not the name, the phone number or the
         // message: see the note in lib/analytics.
-        trackEvent("enquiry_form_submit", {
+        //
+        // Named `form_submit` because that is the key event registered in the GA4 property
+        // (26 September 2026). It is also the name GA4's own enhanced measurement uses for
+        // "Form interactions", which fires on the browser's submit event — before the server
+        // has answered, so on failures too, and a second time on every success. That option
+        // must stay switched off in the web stream's enhanced measurement settings, or this
+        // key event double-counts. This call is the only source of form_submit the site
+        // should have.
+        trackEvent("form_submit", {
           form_location: source,
           department: String(data.get("department") ?? "").trim() || "(none)",
         });
